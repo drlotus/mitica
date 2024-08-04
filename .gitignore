@@ -132,7 +132,7 @@ googlemock/gtest
 *.pdf
 *.txt
 *.csv
-*.dat
+
 *.cmake
 *.png
 /benchmark
