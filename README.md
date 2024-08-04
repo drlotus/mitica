@@ -1,53 +1,223 @@
-## Instructions to set up the hydrodynamics + polarization toolchain.
+# Particlization Calc
 
-Generally, the chain consists of two separate codes: hydrodynamic simulation (vHLLE) which produces the freeze-out/particlization hypersurface,
-and this code, which computes the Cooper-Frye-like integrals on the particlization hypersurface in order to compute the polarization of Lambda hyperons or any other hadrons.
+## Overview
 
-### 1. Get the vHLLE code
-by following the instructions at:
-https://github.com/yukarpenko/vhlle
+This is an extensive modification of Iuri Karpenko's particlization code, specialized for calculating the final hadrons polarization. The modifications aim to simplify the code and add the required flexibility for implementing different frameworks.
 
-README.txt, part "I. GETTING and BUILDING vHLLE on Linux"
+## Key Features
 
-!! A non-main branch of the code is used to compute polarization. Therefore, after setting up vHLLE, checkout into polarization_dbeta_dec2021 branch. To do that, in vhlle/ directory run `git checkout polarization_dbeta_dec2021` . Re-compile the code with `make clean && make` .
+- **Validation Interface**: Provides a structured interface for testing computed results against expected analytical solutions.
+- **Automated Testing and Benchmarking**: Comprehensive unit tests using Google Test, as well as benchmarking using Google Benchmarks, to ensure the correctness and efficiency of computations.
+- **Flexible Structure**: Provides interfaces for different parts of the process such that each part can be reimplemented without too much effort. Additionally, by using templates, most of the code is independent of how the fluid's cells are implemented.
+- **Separation of Calculator**: Using the factory pattern, the program's main engine accepts different calculators for various purposes and formalisms.
 
-### 2. Getting the 'particlizationCalc' code
-get it from this repository:
-https://github.com/yukarpenko/particlizationCalc
 
-Clone the repository, cd into the created particlizationCalc/ directory,
-checkout into 'polar_xi' branch (`git checkout polar_xi`)
+## Installation
 
-Finally, compile the code:
-`mkdir obj; make`  -> which should create a binary named "calc".
+### CMake
 
-**Remarks for Apple users:** \
-To compile the code on OSX, some requirements must be satisfied before running `make`. For the following steps it is assumed that Homebrew has already been installed on the system.
-1. Natively, the clang compiler does not have access to the OpenMP header file which is needed in the code. To install the library, execute `brew install libomp`. By default, this will create the `omp.h` file in a directory similar to `/opt/homebrew/Cellar/libomp/15.0.7/include/`.
-2. To make the OpenMP header file accessible to the compiler, the path to `omp.h` must be set as a CPATH environment variable by running `export CPATH=[path_to_omp.h]`, so for the example path above `export CPATH=/opt/homebrew/Cellar/libomp/15.0.7/include/` (it can be checked that the variable has been set correctly by running `env`)
-3. Now, the code can be compiled by running `make` in the particlizationCalc/ directory
+The project can be compiled using CMake. Use the provided bash scripts for Mac and Linux:
 
-### 3. Running the chain
-a) run vHLLE for example with: \
-`cd vhlle/` \
-`./hlle_visc -system RHIC200 -params params/glissRHIC/gliss2RHIC.20-50 -ISinput ic/glissando/sources.RHIC.20-50.dat -outputDir output/rhic200.20-50` \
-The hydro simulation above will produce a bunch of output files in the directory specified after the  -outputDir argument. One of the files, which is needed for the next step is "beta.dat"
+- **Mac**: `build_darwin.bash`
+- **Linux**: `build_linux.bash`
 
-  b) compute the spectrum+polarization of produced Lambda hyperons \
-  `cd particlizationCalc/` \
-  `mkdir output` \
-  `./calc ../vhlle/output/rhic200.20-50/beta.dat output/rhic200.20-50`
- 
-### 4. Working with the output
-The resulting output file `output/rhic200.20-50` contains a map of numerator and denominator of Eq. 10 in arXiv:1610.04717, in (px,py), or more precisely (pT,phi_p) plane at mid-rapidity. \
-The format of the columns is the following: \
-col. 0    1     2      3    4    5    6    7     8     9     10 \
-     pT phi_p  dN/dpt  s^0  s^1  s^2  s^3  xi^0  xi^1  xi^2  xi^3 \
-s^mu is the numerator of Eq. (10) in 1610.04717,  dN/dpt is its denominator - all at a given pT and phi.
+These scripts build the main project as well as benchmarks and tests.
 
-In order to compute the transverse momentum-differential polarization, one should essentially divide s^mu by dN/dpt. The repository contains a Python3 script `output/showPolar-xi.py` which does this.
-The Python script also does the boost of the polarization vector (in practice, a boost of s^mu) to the rest frame of Lambda -> because it is the quantity which should be compared to experimental data, see Eq. 12 in the same paper.
-To run the script type: `cd output; python3 showPolar-xi.py rhic200.20-50`. The argument to the Python script is the relative path to the output file of particlizaitonCalc code. You'll need pyton3, numpy-python3, matplotlib-python3 installed for the script to run.
- 
-An update: recently, we have published an updated formalism to compute the Lambda polarization: arXiv:2103.14621, which includes an extra term - see Eq. 3 therein.
-Therefore, the output from step 3 contains separately the "standard" polarization term from 1610.04717, and also the polarization stemming from the new term - therefore there are columns (xi^0, xi^1, xi^2, xi^3) in the output. So in practice the total polarization would be equal to (s^i + xi^i)/(dN/dpt).
+## Boost
+
+It is easy to install
+- **Mac** `brew install boost`
+- **Ubuntu** `sudo apt-get install libboost-all-dev`
+
+## Google Benchmark
+
+Benchmark files are located in the `./test` directory. To install Google Benchmark, follow the [installation instructions](https://github.com/google/benchmark#installation).
+
+### Adding a Benchmark
+
+To add a benchmark, create a method in one of the `bench_*.cpp` files:
+
+```cpp
+static void bm_foo(benchmark::State &state)
+{
+    for (auto _ : state)
+    {
+        // do something
+    }
+}
+
+BENCHMARK(bm_foo);
+```
+
+Then update `CMakeLists.txt`:
+
+<pre>
+<code>
+add_executable(
+    bench_your_name
+    test/bench_your_name.cpp
+    src/...
+)
+target_link_libraries(bench_your_name PUBLIC benchmark::benchmark)
+#if you need OpenMP
+if(OpenMP_CXX_FOUND)
+    # If OpenMP is found, add the OpenMP flags to the compiler options
+    target_compile_options(bench_your_name PUBLIC ${OpenMP_CXX_FLAGS})
+    # Link the OpenMP library to the test executable
+    target_link_libraries(bench_your_name PUBLIC OpenMP::OpenMP_CXX)
+endif()
+</code>
+</pre>
+
+## Google Test
+Test files are located in the ./test directory. Install Google Test following the [quickstart guide](http://google.github.io/googletest/quickstart-cmake.html).
+
+### Adding a test
+Create a test file in the `./test` folder:
+```cpp
+namespace
+{
+    class FooTest : public my_test
+    {
+    protected:
+    void SetUp() override
+        {
+        }
+```
+<pre>
+<code>
+add_executable(
+    test_utils
+    test/test_utils.cpp 
+    src/utils.cpp   
+)
+target_link_libraries(
+    test_utils
+    GTest::gtest_main
+)
+include(GoogleTest)
+gtest_discover_tests(test_utils)
+</code>
+</pre>
+
+
+# Namespaces
+
+### `namespace utils` 
+1. **Enums**: Program options (program\_modes, accept\_modes, polarization\_modes, program\_options). 
+2. **Random Generators**: Simple random generators in C++ style. 
+3. **Constants**: Constants from the old `const.h`.
+4. **Error Templates**: `absolute_error` and `relative_error` templates. 
+5. **Command Reader**: `read_cmd` for reading command arguments. 
+6. **Progress Bar**: `show_progress` for long operations.
+7. **Linspace**: Generates a range for various parameters. 
+8. **Four-vector and Tensor**: Simple four-vector (`std::array`) and rank-2 Minkowski tensor.
+
+### `namespace utils::geometry`
+1. Encapsulates a Minkowski four-vector `four_vector` that maintains its index structure and enables vector operations.
+2. A rank-2 tensor wrapper: not implemented.
+
+### `namespace hydro`
+1. `hydro::I_cell< V, T >`: interface for a hypersurface cell with V being the four vetor type and T being the rank-2 tensor type.
+2. `hydro::I_solution< C, V, T >`: interface for an analytical solution for testing purpsoes. `C` is the cell type that must be inherited from `I_cell`, `V` is the four vector's type, and `T` is the rank-2 tensor's type.
+Two implementations can be found in ./test folder: the ideal Bjorken flow `ibjorken` and the rigidly rotating cylinder `rigid_cylinder`:
+```cpp
+class ibjorken : public hydro::I_solution<vhlle::fcell, ug::four_vector, utils::r2_tensor>
+{
+    ...
+}
+class rigid_cylinder : public hydro::I_solution<vhlle::fcell, ug::four_vector, utils::r2_tensor>
+{
+    ...
+}
+```
+3. `hydro::hypersurface< C >`: a wrapper for the surface. In particular, it reads the surface data from a file using `read (const std::string &i_file, utils::accept_modes mode)`. It uses paralleization if the code is compiled with OpenMP.
+4. `hydro::surface_stat< C >`: struct that stores statistical data of the surface.
+5. `hydro::solution_factory< C, V, T >`: singleton factory that is used for registeration and creation of analytical solutions.
+An example of the usage in `./test/test_bjorken.cpp` is:
+```cpp
+namespace ug = utils::geometry;
+...
+std::shared_ptr<hydro::solution_factory<vhlle::fcell, ug::four_vector, utils::r2_tensor>> factory =
+            hydro::solution_factory<vhlle::fcell, ug::four_vector, utils::r2_tensor>::factory();
+factory->regsiter_solution(ibjorken::get_name(),
+                                       [...]()
+                                       {
+                                           return std::make_unique<ibjorken>(
+                                               ibjorken(...));
+                                       });
+...
+auto bjorken = factory->create(ibjorken::get_name());
+bjorken->populate();
+...
+```
+6. `vhlle::fcell`: a concrete implementation of `I_cell`.
+7. Legacy: `element`, `fsurface`, `hypersurface`, `hypersurface_wrapper`, `surface_info`, `t_surface_info`: kept only for testing
+
+### `namespace powerhouse`
+1. `powerhouse::I_calculator`: Interface for calculation. Implemented in `powerhouse::examiner`, and `test/mock_calculator`.
+2. Polarization caclulators are not implemented yet. 
+3. Yield calculators are not implemented yet.
+4. `powerhouse::I_engine`: A singlton factory that takes care of the calculations:
+```cpp
+...
+auto engine = powerhouse::I_engine<vhlle::fcell>::get(settings);
+engine->init(hypersurface);
+...
+engine->run();
+...
+engine->write();
+```
+5. `powerhouse::calculator_factory< C >`: singleton factory that is used for registeration and creation of calculators. Calculators are registered, in `main.cpp`, as:
+```cpp
+powerhouse::calculator_factory<vhlle::fcell>::factory()
+        ->register_calculator(settings,
+                              []()
+                              {
+                                  return std::make_unique<powerhouse::examiner>();
+                              });
+```
+It is also used in `I_engine`:
+```cpp
+if (!_calculator)
+{
+    std::lock_guard lock(_mutex);
+    _calculator = calculator_factory<C>::factory()->create_calculator(_settings);
+}
+```
+6. `I_particle`: Interface for a particle which is implemtned in `pdg_particle` (a slight modification of Andrea Palermo's code). In `I_engine::init`:
+```cpp
+if (!_particle_house)
+{
+    std::lock_guard lock(_mutex);
+    _particle_house.reset(t_particle_house); // _particle_house is a pointer to I_particle
+}
+```
+7. `I_output` Generic calculation output. Impelemented in `exam_output`. `polarization_output` and `yield_output` are placeholders for further deveoplemtns.
+
+## Program modes
+
+### Help:
+
+<code>
+./build/calc --help
+</code>
+
+### Examine:
+
+<code>
+./build/calc -i input/input_file_name -o output/output_file_name -e [accept mode]
+</code>
+
+### Yield: 
+
+<code>
+./build/calc -i input/input_file_name -o output/output_file_name -y [accept mode] [-pn particle name | -pdg particle id]
+</code>
+
+### Polarization: (not implemented yet)
+
+<code>
+./build/calc -i input/input_file_name -o output/output_file_name -p [accept mode] [polarization mode] [-pn particle name | -pdg particle id]
+</code>
+
