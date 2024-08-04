@@ -1,0 +1,517 @@
+\hypertarget{classhydro_1_1fcell}{}\doxysection{hydro\+::fcell Class Reference}
+\label{classhydro_1_1fcell}\index{hydro::fcell@{hydro::fcell}}
+Inheritance diagram for hydro\+::fcell\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhydro_1_1fcell}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_aba701796d1211699a8482a281bd343f2}\label{classhydro_1_1fcell_aba701796d1211699a8482a281bd343f2}} 
+{\bfseries fcell} (\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} coords, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} thermo, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} dsigma, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} u, utils\+::r2\+\_\+tensor dbeta, utils\+::r2\+\_\+tensor du)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a411ea426666a2c858b977335ae3db1ad}\label{classhydro_1_1fcell_a411ea426666a2c858b977335ae3db1ad}} 
+{\bfseries fcell} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&other)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_af02f34d9ca9140bb5c3e1f85753f35a2}\label{classhydro_1_1fcell_af02f34d9ca9140bb5c3e1f85753f35a2}} 
+\mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \& {\bfseries operator=} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&other)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a2c8b67c49ec82c0ddc3dadfaae06749e}\label{classhydro_1_1fcell_a2c8b67c49ec82c0ddc3dadfaae06749e}} 
+double {\bfseries tau} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_aba25bb5109c405c2607490505ce7584c}\label{classhydro_1_1fcell_aba25bb5109c405c2607490505ce7584c}} 
+double {\bfseries t} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a5b4bbfdea5cb139659a6f703e06fef99}\label{classhydro_1_1fcell_a5b4bbfdea5cb139659a6f703e06fef99}} 
+double {\bfseries x} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a8c570327a2ed0519ff751de429842c87}\label{classhydro_1_1fcell_a8c570327a2ed0519ff751de429842c87}} 
+double {\bfseries y} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a3050aa4c1a20c115ef5f8d3dd44ce55c}\label{classhydro_1_1fcell_a3050aa4c1a20c115ef5f8d3dd44ce55c}} 
+double {\bfseries eta} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_aa866bb333a981da6165b96c49f226c80}\label{classhydro_1_1fcell_aa866bb333a981da6165b96c49f226c80}} 
+double {\bfseries z} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a9692eb05018f62568a10305828cf2b56}\label{classhydro_1_1fcell_a9692eb05018f62568a10305828cf2b56}} 
+double {\bfseries T} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a47a86fdd27575770ef67aa6c8bf3dddd}\label{classhydro_1_1fcell_a47a86fdd27575770ef67aa6c8bf3dddd}} 
+double {\bfseries muq} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a8f35fbe666520aef30479b227ef2c246}\label{classhydro_1_1fcell_a8f35fbe666520aef30479b227ef2c246}} 
+double {\bfseries mub} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_ad54601539b2217118f284bb94dae9417}\label{classhydro_1_1fcell_ad54601539b2217118f284bb94dae9417}} 
+double {\bfseries mus} () const
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1fcell_a78d57f3dbe2ca0255f8f32088595a423}{milne\+\_\+coords}} () const override
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1fcell_abaab17f84df9a25c1e9c2be7294a1671}{thermodynamics}} () const override
+\begin{DoxyCompactList}\small\item\em Cell\textquotesingle{}s thermodynamics in the form (T, \textbackslash{}mu\+\_\+B, \textbackslash{}mu\+\_\+Q, \textbackslash{}mu\+\_\+S) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a863e46311dbe3a0931b7a346602c114f}\label{classhydro_1_1fcell_a863e46311dbe3a0931b7a346602c114f}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries mink\+\_\+coords} () const
+\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_a6cc1f3001bb6178d62d2d7f00a79e28f}{du\+\_\+ll}} () const override
+\begin{DoxyCompactList}\small\item\em \textbackslash{}partial\+\_\+\textbackslash{}mu u\+\_\+\textbackslash{}nu \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_a0b333ff0ec39eb883ddf1fc95e08f125}{dbeta\+\_\+ll}} () const override
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_acb8f6f1a3cc6d4e83ad2434eb5758d31}\label{classhydro_1_1fcell_acb8f6f1a3cc6d4e83ad2434eb5758d31}} 
+void {\bfseries print} ()
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1fcell_ad29bb0716c1e788a4dd1d85922ae2a57}{four\+\_\+vel}} () const override
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1fcell_a67f0b3cb02d4900aea2f8484795ca465}{dsigma}} () const override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_ac77fbece1e9663748db9f829a6e60d57}{u\+\_\+dot\+\_\+n}} () override
+\begin{DoxyCompactList}\small\item\em scalar product of the four velocity and the surface vector \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_aaa75638c2981ed9725add6cd3e433fed}{normal\+\_\+sq}} () override
+\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_ade44c63c03653a35cb54226c4d7d3362}{delta\+\_\+ll}} ()
+\begin{DoxyCompactList}\small\item\em Projector with indices up. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_aab9052ba1861b7398efd6f5f8d155ad4}\label{classhydro_1_1fcell_aab9052ba1861b7398efd6f5f8d155ad4}} 
+utils\+::r2\+\_\+tensor {\bfseries delta\+\_\+uu} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a46a2371351d7710fe835ba832c779833}\label{classhydro_1_1fcell_a46a2371351d7710fe835ba832c779833}} 
+utils\+::r2\+\_\+tensor {\bfseries delta\+\_\+ul} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_a8ce164f3c73e66493429b0ac31c12795}\label{classhydro_1_1fcell_a8ce164f3c73e66493429b0ac31c12795}} 
+utils\+::r2\+\_\+tensor {\bfseries gradu\+\_\+ll} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_ad113354377507d860c172debfa7bae77}\label{classhydro_1_1fcell_ad113354377507d860c172debfa7bae77}} 
+double {\bfseries gradu\+\_\+ll} (int mu, int nu)
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_aee98774703f0d122b5f2e270c47ab828}{r2proj\+\_\+uu\+\_\+ll}} (int mu, int nu, int a, int b)
+\begin{DoxyCompactList}\small\item\em Rank-\/4 project with mu and nu up, a and b down. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1fcell_ab2c47fdf066ce5357601526b2e7e69c5}{acceleration}} () override
+\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_a8ca7dc1791669aa8cac8b6776920df00}{shear\+\_\+ll}} () override
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1fcell_a19d3732ea5834f3adad0b1a2a9a63a71}{fluid\+\_\+vort\+\_\+vec}} () override
+\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_a568a1b1e307583bdefce1bf96b4e9177}{fluid\+\_\+vort\+\_\+ll}} () override
+\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_af9c27572962c3bf39c5bc3602ee202bf}{thermal\+\_\+vort\+\_\+ll}} () override
+\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1fcell_aa610726e2e59720f11d4ba30fe3ce563}{thermal\+\_\+shear\+\_\+ll}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_abad0161c402371ffc47343eaed42f889}{theta}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_a44ff166973c3f2e2c472fb61df95e87d}{b\+\_\+theta}} () override
+\item 
+std\+::ostream \& \mbox{\hyperlink{classhydro_1_1fcell_a7f997a0d87e412a6f9931c702e59b53e}{write\+\_\+back}} (std\+::ostream \&output, const char delim) override
+\item 
+std\+::ostream \& \mbox{\hyperlink{classhydro_1_1fcell_a73426fd1f6f827d2d05a6425076a2088}{write\+\_\+info}} (std\+::ostream \&output, const char delim) override
+\item 
+bool \mbox{\hyperlink{classhydro_1_1fcell_ae0b71d5ecd0b58388c20e27e29f095f3}{is\+\_\+spacelike}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_a191139674cc80f594f88546502650848}{sigma\+\_\+norm}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_a0967b697784e8d1a27e64a613a9a8f64}{fvort\+\_\+norm}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_a4f8930b21352432d396863d8cc24e905}{tvort\+\_\+norm}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_a73066ce701d262cd6ece121b7f49bf05}{tshear\+\_\+norm}} () override
+\item 
+double \mbox{\hyperlink{classhydro_1_1fcell_a05e0c08ab7a016ce69dd035972cac690}{acc\+\_\+norm}} () override
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a1c2279d68de7a6e72c739fd85f2d2fb7}\label{classhydro_1_1_i__cell_a1c2279d68de7a6e72c739fd85f2d2fb7}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries milne\+\_\+coords} () const=0
+\item 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1_i__cell_ac5a7b540b8823703d5e17afe15bc11a2}{thermodynamics}} () const=0
+\begin{DoxyCompactList}\small\item\em Cell\textquotesingle{}s thermodynamics in the form (T, \textbackslash{}mu\+\_\+B, \textbackslash{}mu\+\_\+Q, \textbackslash{}mu\+\_\+S) \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__cell_a05e51408c1ddcc3c4619f29c45e2cadc}{du\+\_\+ll}} () const=0
+\begin{DoxyCompactList}\small\item\em \textbackslash{}partial\+\_\+\textbackslash{}mu u\+\_\+\textbackslash{}nu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aa43c7e9694b51dfdd56183e1afe8a62d}\label{classhydro_1_1_i__cell_aa43c7e9694b51dfdd56183e1afe8a62d}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries dbeta\+\_\+ll} () const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a348040ffdef20dc369f788a73dc33e9f}\label{classhydro_1_1_i__cell_a348040ffdef20dc369f788a73dc33e9f}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries four\+\_\+vel} () const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_ae8b70d83094c7a5768fc16af37c10e4e}\label{classhydro_1_1_i__cell_ae8b70d83094c7a5768fc16af37c10e4e}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries dsigma} () const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a4f724788eef6491dc096cd08233f322b}\label{classhydro_1_1_i__cell_a4f724788eef6491dc096cd08233f322b}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries acceleration} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a20155dcc9d38726c4a2887d9a7072659}\label{classhydro_1_1_i__cell_a20155dcc9d38726c4a2887d9a7072659}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries shear\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a57a75ba03c165381e216e205bba9111a}\label{classhydro_1_1_i__cell_a57a75ba03c165381e216e205bba9111a}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries fluid\+\_\+vort\+\_\+vec} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a6589ed8d423bdb12c79ca5a913b55bc9}\label{classhydro_1_1_i__cell_a6589ed8d423bdb12c79ca5a913b55bc9}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries fluid\+\_\+vort\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aa339059e3f96d3b468cb05f61b830ab4}\label{classhydro_1_1_i__cell_aa339059e3f96d3b468cb05f61b830ab4}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries thermal\+\_\+vort\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a417c3bdec6ee5f1f70447cb21980fc80}\label{classhydro_1_1_i__cell_a417c3bdec6ee5f1f70447cb21980fc80}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries thermal\+\_\+shear\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a45f1bf93a98d8c6cd320a80ce08c1c44}\label{classhydro_1_1_i__cell_a45f1bf93a98d8c6cd320a80ce08c1c44}} 
+virtual double {\bfseries theta} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a65c2fd8f13495e2dda9a3ffc3f972512}\label{classhydro_1_1_i__cell_a65c2fd8f13495e2dda9a3ffc3f972512}} 
+virtual double {\bfseries b\+\_\+theta} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a23ae753be5afa227b9a86f85aa9e364d}\label{classhydro_1_1_i__cell_a23ae753be5afa227b9a86f85aa9e364d}} 
+virtual double {\bfseries normal\+\_\+sq} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a69c872c64aa4090d3dd7d087baf8d583}\label{classhydro_1_1_i__cell_a69c872c64aa4090d3dd7d087baf8d583}} 
+virtual bool {\bfseries is\+\_\+spacelike} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a7087abe2efb421cb966e921ae9c18add}\label{classhydro_1_1_i__cell_a7087abe2efb421cb966e921ae9c18add}} 
+virtual double {\bfseries sigma\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_af4d402b9830689b2c0abd643938a1486}\label{classhydro_1_1_i__cell_af4d402b9830689b2c0abd643938a1486}} 
+virtual double {\bfseries fvort\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_adba351aaaaf7f0f7a10f15736cb27a7f}\label{classhydro_1_1_i__cell_adba351aaaaf7f0f7a10f15736cb27a7f}} 
+virtual double {\bfseries tvort\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aef7b63b2938c5de14984ced707605fbe}\label{classhydro_1_1_i__cell_aef7b63b2938c5de14984ced707605fbe}} 
+virtual double {\bfseries tshear\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_adb4e95d056899c4c0c35548cba72283d}\label{classhydro_1_1_i__cell_adb4e95d056899c4c0c35548cba72283d}} 
+virtual double {\bfseries acc\+\_\+norm} ()=0
+\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__cell_a3515b7e282e062293731f16e8b40f24c}{u\+\_\+dot\+\_\+n}} ()=0
+\begin{DoxyCompactList}\small\item\em scalar product of the four velocity and the surface vector \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aa42d52401bf30863d7a2985935993ea4}\label{classhydro_1_1_i__cell_aa42d52401bf30863d7a2985935993ea4}} 
+virtual std\+::ostream \& {\bfseries write\+\_\+info} (std\+::ostream \&osm, const char delim)=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aaae7511fca3b508eab794a98ace8b8a9}\label{classhydro_1_1_i__cell_aaae7511fca3b508eab794a98ace8b8a9}} 
+virtual std\+::ostream \& {\bfseries write\+\_\+back} (std\+::ostream \&os, const char delim)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_af11a4d1d8a6fbd44f4873ca8795e1147}\label{classhydro_1_1fcell_af11a4d1d8a6fbd44f4873ca8795e1147}} 
+std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&stream, \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&cell)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fcell_ae3a9755649bcda24df0d1143f091bba0}\label{classhydro_1_1fcell_ae3a9755649bcda24df0d1143f091bba0}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&stream, const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&cell)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhydro_1_1fcell_a05e0c08ab7a016ce69dd035972cac690}\label{classhydro_1_1fcell_a05e0c08ab7a016ce69dd035972cac690}} 
+\index{hydro::fcell@{hydro::fcell}!acc\_norm@{acc\_norm}}
+\index{acc\_norm@{acc\_norm}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{acc\_norm()}{acc\_norm()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::acc\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_ab2c47fdf066ce5357601526b2e7e69c5}\label{classhydro_1_1fcell_ab2c47fdf066ce5357601526b2e7e69c5}} 
+\index{hydro::fcell@{hydro::fcell}!acceleration@{acceleration}}
+\index{acceleration@{acceleration}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{acceleration()}{acceleration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} hydro\+::fcell\+::acceleration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a44ff166973c3f2e2c472fb61df95e87d}\label{classhydro_1_1fcell_a44ff166973c3f2e2c472fb61df95e87d}} 
+\index{hydro::fcell@{hydro::fcell}!b\_theta@{b\_theta}}
+\index{b\_theta@{b\_theta}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{b\_theta()}{b\_theta()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::b\+\_\+theta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a0b333ff0ec39eb883ddf1fc95e08f125}\label{classhydro_1_1fcell_a0b333ff0ec39eb883ddf1fc95e08f125}} 
+\index{hydro::fcell@{hydro::fcell}!dbeta\_ll@{dbeta\_ll}}
+\index{dbeta\_ll@{dbeta\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{dbeta\_ll()}{dbeta\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::dbeta\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_ade44c63c03653a35cb54226c4d7d3362}\label{classhydro_1_1fcell_ade44c63c03653a35cb54226c4d7d3362}} 
+\index{hydro::fcell@{hydro::fcell}!delta\_ll@{delta\_ll}}
+\index{delta\_ll@{delta\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{delta\_ll()}{delta\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::delta\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Projector with indices up. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu} & \\
+\hline
+{\em nu} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhydro_1_1fcell_a67f0b3cb02d4900aea2f8484795ca465}\label{classhydro_1_1fcell_a67f0b3cb02d4900aea2f8484795ca465}} 
+\index{hydro::fcell@{hydro::fcell}!dsigma@{dsigma}}
+\index{dsigma@{dsigma}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{dsigma()}{dsigma()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} hydro\+::fcell\+::dsigma (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a6cc1f3001bb6178d62d2d7f00a79e28f}\label{classhydro_1_1fcell_a6cc1f3001bb6178d62d2d7f00a79e28f}} 
+\index{hydro::fcell@{hydro::fcell}!du\_ll@{du\_ll}}
+\index{du\_ll@{du\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{du\_ll()}{du\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::du\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\textbackslash{}partial\+\_\+\textbackslash{}mu u\+\_\+\textbackslash{}nu 
+
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell_a05e51408c1ddcc3c4619f29c45e2cadc}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a568a1b1e307583bdefce1bf96b4e9177}\label{classhydro_1_1fcell_a568a1b1e307583bdefce1bf96b4e9177}} 
+\index{hydro::fcell@{hydro::fcell}!fluid\_vort\_ll@{fluid\_vort\_ll}}
+\index{fluid\_vort\_ll@{fluid\_vort\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{fluid\_vort\_ll()}{fluid\_vort\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::fluid\+\_\+vort\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a19d3732ea5834f3adad0b1a2a9a63a71}\label{classhydro_1_1fcell_a19d3732ea5834f3adad0b1a2a9a63a71}} 
+\index{hydro::fcell@{hydro::fcell}!fluid\_vort\_vec@{fluid\_vort\_vec}}
+\index{fluid\_vort\_vec@{fluid\_vort\_vec}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{fluid\_vort\_vec()}{fluid\_vort\_vec()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} hydro\+::fcell\+::fluid\+\_\+vort\+\_\+vec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_ad29bb0716c1e788a4dd1d85922ae2a57}\label{classhydro_1_1fcell_ad29bb0716c1e788a4dd1d85922ae2a57}} 
+\index{hydro::fcell@{hydro::fcell}!four\_vel@{four\_vel}}
+\index{four\_vel@{four\_vel}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{four\_vel()}{four\_vel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} hydro\+::fcell\+::four\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a0967b697784e8d1a27e64a613a9a8f64}\label{classhydro_1_1fcell_a0967b697784e8d1a27e64a613a9a8f64}} 
+\index{hydro::fcell@{hydro::fcell}!fvort\_norm@{fvort\_norm}}
+\index{fvort\_norm@{fvort\_norm}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{fvort\_norm()}{fvort\_norm()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::fvort\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_ae0b71d5ecd0b58388c20e27e29f095f3}\label{classhydro_1_1fcell_ae0b71d5ecd0b58388c20e27e29f095f3}} 
+\index{hydro::fcell@{hydro::fcell}!is\_spacelike@{is\_spacelike}}
+\index{is\_spacelike@{is\_spacelike}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{is\_spacelike()}{is\_spacelike()}}
+{\footnotesize\ttfamily bool hydro\+::fcell\+::is\+\_\+spacelike (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a78d57f3dbe2ca0255f8f32088595a423}\label{classhydro_1_1fcell_a78d57f3dbe2ca0255f8f32088595a423}} 
+\index{hydro::fcell@{hydro::fcell}!milne\_coords@{milne\_coords}}
+\index{milne\_coords@{milne\_coords}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{milne\_coords()}{milne\_coords()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} hydro\+::fcell\+::milne\+\_\+coords (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_aaa75638c2981ed9725add6cd3e433fed}\label{classhydro_1_1fcell_aaa75638c2981ed9725add6cd3e433fed}} 
+\index{hydro::fcell@{hydro::fcell}!normal\_sq@{normal\_sq}}
+\index{normal\_sq@{normal\_sq}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{normal\_sq()}{normal\_sq()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::normal\+\_\+sq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_aee98774703f0d122b5f2e270c47ab828}\label{classhydro_1_1fcell_aee98774703f0d122b5f2e270c47ab828}} 
+\index{hydro::fcell@{hydro::fcell}!r2proj\_uu\_ll@{r2proj\_uu\_ll}}
+\index{r2proj\_uu\_ll@{r2proj\_uu\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{r2proj\_uu\_ll()}{r2proj\_uu\_ll()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::r2proj\+\_\+uu\+\_\+ll (\begin{DoxyParamCaption}\item[{int}]{mu,  }\item[{int}]{nu,  }\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Rank-\/4 project with mu and nu up, a and b down. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu} & \\
+\hline
+{\em nu} & \\
+\hline
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhydro_1_1fcell_a8ca7dc1791669aa8cac8b6776920df00}\label{classhydro_1_1fcell_a8ca7dc1791669aa8cac8b6776920df00}} 
+\index{hydro::fcell@{hydro::fcell}!shear\_ll@{shear\_ll}}
+\index{shear\_ll@{shear\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{shear\_ll()}{shear\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::shear\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a191139674cc80f594f88546502650848}\label{classhydro_1_1fcell_a191139674cc80f594f88546502650848}} 
+\index{hydro::fcell@{hydro::fcell}!sigma\_norm@{sigma\_norm}}
+\index{sigma\_norm@{sigma\_norm}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{sigma\_norm()}{sigma\_norm()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::sigma\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_aa610726e2e59720f11d4ba30fe3ce563}\label{classhydro_1_1fcell_aa610726e2e59720f11d4ba30fe3ce563}} 
+\index{hydro::fcell@{hydro::fcell}!thermal\_shear\_ll@{thermal\_shear\_ll}}
+\index{thermal\_shear\_ll@{thermal\_shear\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{thermal\_shear\_ll()}{thermal\_shear\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::thermal\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_af9c27572962c3bf39c5bc3602ee202bf}\label{classhydro_1_1fcell_af9c27572962c3bf39c5bc3602ee202bf}} 
+\index{hydro::fcell@{hydro::fcell}!thermal\_vort\_ll@{thermal\_vort\_ll}}
+\index{thermal\_vort\_ll@{thermal\_vort\_ll}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{thermal\_vort\_ll()}{thermal\_vort\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor hydro\+::fcell\+::thermal\+\_\+vort\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_abaab17f84df9a25c1e9c2be7294a1671}\label{classhydro_1_1fcell_abaab17f84df9a25c1e9c2be7294a1671}} 
+\index{hydro::fcell@{hydro::fcell}!thermodynamics@{thermodynamics}}
+\index{thermodynamics@{thermodynamics}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{thermodynamics()}{thermodynamics()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} hydro\+::fcell\+::thermodynamics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Cell\textquotesingle{}s thermodynamics in the form (T, \textbackslash{}mu\+\_\+B, \textbackslash{}mu\+\_\+Q, \textbackslash{}mu\+\_\+S) 
+
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell_ac5a7b540b8823703d5e17afe15bc11a2}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_abad0161c402371ffc47343eaed42f889}\label{classhydro_1_1fcell_abad0161c402371ffc47343eaed42f889}} 
+\index{hydro::fcell@{hydro::fcell}!theta@{theta}}
+\index{theta@{theta}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{theta()}{theta()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::theta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a73066ce701d262cd6ece121b7f49bf05}\label{classhydro_1_1fcell_a73066ce701d262cd6ece121b7f49bf05}} 
+\index{hydro::fcell@{hydro::fcell}!tshear\_norm@{tshear\_norm}}
+\index{tshear\_norm@{tshear\_norm}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{tshear\_norm()}{tshear\_norm()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::tshear\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a4f8930b21352432d396863d8cc24e905}\label{classhydro_1_1fcell_a4f8930b21352432d396863d8cc24e905}} 
+\index{hydro::fcell@{hydro::fcell}!tvort\_norm@{tvort\_norm}}
+\index{tvort\_norm@{tvort\_norm}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{tvort\_norm()}{tvort\_norm()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::tvort\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_ac77fbece1e9663748db9f829a6e60d57}\label{classhydro_1_1fcell_ac77fbece1e9663748db9f829a6e60d57}} 
+\index{hydro::fcell@{hydro::fcell}!u\_dot\_n@{u\_dot\_n}}
+\index{u\_dot\_n@{u\_dot\_n}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{u\_dot\_n()}{u\_dot\_n()}}
+{\footnotesize\ttfamily double hydro\+::fcell\+::u\+\_\+dot\+\_\+n (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+scalar product of the four velocity and the surface vector 
+
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell_a3515b7e282e062293731f16e8b40f24c}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a7f997a0d87e412a6f9931c702e59b53e}\label{classhydro_1_1fcell_a7f997a0d87e412a6f9931c702e59b53e}} 
+\index{hydro::fcell@{hydro::fcell}!write\_back@{write\_back}}
+\index{write\_back@{write\_back}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{write\_back()}{write\_back()}}
+{\footnotesize\ttfamily std\+::ostream \& hydro\+::fcell\+::write\+\_\+back (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{output,  }\item[{const char}]{delim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classhydro_1_1fcell_a73426fd1f6f827d2d05a6425076a2088}\label{classhydro_1_1fcell_a73426fd1f6f827d2d05a6425076a2088}} 
+\index{hydro::fcell@{hydro::fcell}!write\_info@{write\_info}}
+\index{write\_info@{write\_info}!hydro::fcell@{hydro::fcell}}
+\doxysubsubsection{\texorpdfstring{write\_info()}{write\_info()}}
+{\footnotesize\ttfamily std\+::ostream \& hydro\+::fcell\+::write\+\_\+info (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{output,  }\item[{const char}]{delim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell$<$ utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/fcell.\+h\item 
+src/fcell.\+cpp\end{DoxyCompactItemize}

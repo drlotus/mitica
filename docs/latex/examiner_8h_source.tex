@@ -1,0 +1,189 @@
+\hypertarget{examiner_8h_source}{}\doxysection{examiner.\+h}
+\label{examiner_8h_source}\index{src/examiner.h@{src/examiner.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}interfaces.h"{}}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}fcell.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}geometry.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }powerhouse}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpowerhouse_1_1examiner}{examiner}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse::I\_calculator}}<hydro::fcell>}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_step\_size;}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_percentage;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_local\_cell\_counter;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_count;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1examiner}{examiner}}()\ :\ \_percentage(0),\ \_local\_cell\_counter(0)\ \{\}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1examiner}{\string~examiner}}()\textcolor{keyword}{\ override\ }\{\}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1examiner_a06c9ec488562f9e93d52d314ef081bc1}{prepare}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \&t\_count)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \_count\ =\ t\_count;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \_step\_size\ =\ t\_count\ /\ 100\ -\/\ 1;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1examiner_af438485feb8aa0f5569ec919a28165d6}{pre\_step}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_local\_cell\_counter\ \%\ \_step\_size\ ==\ 0)}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#pragma\ omp\ atomic}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_percentage++;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#pragma\ omp\ critical}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::show\_progress((\_percentage\ >\ 100)\ ?\ 100\ :\ \_percentage);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \_local\_cell\_counter++;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *\mbox{\hyperlink{classpowerhouse_1_1examiner_a80424e798ea5f348c6a2688348071d28}{perform\_step}}(\mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell,\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *previous\_step)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00045\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output<hydro::fcell>}}\ data;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (previous\_step)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ exam\_output\_ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output<hydro::fcell>}}\ *\textcolor{keyword}{>}(previous\_step);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (exam\_output\_ptr)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ *exam\_output\_ptr;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Unknown\ error"{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sigma\ =\ cell.shear\_ll();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!utils::is\_zero(utils::trace\_ll(sigma)))}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.tr\_sigma++;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ u\ =\ cell.four\_vel();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!utils::is\_zero(utils::dot\_utl(u.vec(),\ sigma)))}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.longi\_sigma++;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.acceleration()\ *\ u\ !=\ 0)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.u\_dot\_a\_not\_zero++;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.theta()\ <\ 0)}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.neg\_theta++;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ data.theta\_sum\ +=\ cell.theta();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ data.sigma2\_sum\ +=\ cell.sigma\_norm();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ acc}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.acc\_norm()\ >\ 0)}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.timelike\_a++;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ data.a2\_sum\ +=\ cell.acc\_norm();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ omega}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ omega\ =\ cell.fluid\_vort\_ll();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ omegav\ =\ cell.fluid\_vort\_vec();}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ o2\ =\ omegav.norm\_sq();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (o2\ >\ 0)}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.timelike\_omega++;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ data.fvort2\_sum\ +=\ cell.fvort\_norm();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ data.btheta\_sum\ +=\ cell.b\_theta();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ data.th\_vort\_2\_sum\ +=\ cell.tvort\_norm();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ data.th\_shear\_2\_sum\ +=\ cell.tshear\_norm();}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ check\ decomposition}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rhs\ =\ utils::add\_tensors(\{cell.four\_vel().to\_lower()\ \&\ cell.acceleration().to\_lower(),}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::s\_product(cell.\mbox{\hyperlink{classhydro_1_1fcell_ade44c63c03653a35cb54226c4d7d3362}{delta\_ll}}(),\ cell.theta()\ /\ 3.0),}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sigma,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ omega\});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!utils::are\_equal(rhs,\ cell.\mbox{\hyperlink{classhydro_1_1fcell_a6cc1f3001bb6178d62d2d7f00a79e28f}{du\_ll}}()))}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data.decomp\_failed++;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output}}(data);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1examiner_ad85236b84ef9e569d9eb62f67ceeff68}{process\_output}}(\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *output)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00129\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output<hydro::fcell>}}\ data;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (output)}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ exam\_output\_ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output<hydro::fcell>}}\ *\textcolor{keyword}{>}(output);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (exam\_output\_ptr)}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ *exam\_output\_ptr;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Unknown\ error"{}});}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ std::endl}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Basic\ information"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ How\ \%\ of\ timelikes}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ *data.basic\_info\ <<\ std::endl;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ std::endl}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Report:"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}shear\ tensor\(\backslash\)t\ sqrt(<sigma\string^2>)\ =\ "{}}\ <<\ utils::sign(data.sigma2\_sum)\ *\ utils::hbarC\ *\ sqrt(abs(data.sigma2\_sum)\ /\ \_count)}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)tnonzero\ trace\ =\ "{}}\ <<\ data.tr\_sigma\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)tnot\ transverse\ =\ "{}}\ <<\ data.longi\_sigma\ <<\ std::endl;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}expansion\(\backslash\)t\ avg\ theta\ =\ "{}}\ <<\ utils::hbarC\ *\ data.theta\_sum\ /\ \_count}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)t\ (theta\ <\ 0)\ count\ =\ "{}}\ <<\ data.neg\_theta\ <<\ std::endl;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}acceleration\(\backslash\)t\ sqrt(<a\string^2>)\ =\ "{}}\ <<\ utils::sign(data.a2\_sum)\ *\ utils::hbarC\ *\ sqrt(abs(data.a2\_sum)\ /\ \_count)}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)t\ timelike\ a\ count\ =\ "{}}\ <<\ data.timelike\_a\ <<\ std::endl;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}fluid\ vorticity\(\backslash\)t\ sqrt(<omega\string^2>)\ =\ "{}}\ <<\ utils::sign(data.fvort2\_sum)\ *\ utils::hbarC\ *\ sqrt(abs(data.fvort2\_sum)\ /\ \_count)}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)t\ timelike\ omega\ count\ =\ "{}}\ <<\ data.timelike\_omega\ <<\ std::endl;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}thermal\ vorticity\(\backslash\)t\ sqrt(<varpi\string^2>)\ =\ "{}}\ <<\ utils::sign(data.th\_vort\_2\_sum)\ *\ sqrt(abs(data.th\_vort\_2\_sum\ /\ \_count))}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}thermal\ shear\(\backslash\)t\ sqrt(<xi\string^2>)\ =\ "{}}\ <<\ utils::sign(data.th\_shear\_2\_sum)\ *\ sqrt(data.th\_shear\_2\_sum\ /\ \_count)}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}div.beta\(\backslash\)t\ avg\ =\ "{}}\ <<\ data.btheta\_sum\ /\ \_count\ <<\ std::endl;}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}failed\ du\ decomp\ =\ "{}}\ <<\ data.decomp\_failed\ <<\ std::endl;}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1examiner_a29c9124498769e5c4453a03afc0df297}{pre\_write}}(std::ostream\ \&output)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00168\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ output}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\#\ tau,x,y,eta,theta,sqrt(sigma\string^2),sqrt(-\/omega\string^2),div.beta,sqrt(-\/varpi\string^2),sqrt(xi\string^2),sqrt(-\/a\string^2)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1examiner_aab00e702d3c33928d250e0323e5ec73a}{write}}(std::ostream\ \&output,\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ *cell\_ptr,\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *final\_output)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00174\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ cell\ =\ *cell\_ptr;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ output\ <<\ cell.tau()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.x()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.y()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.eta()}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.theta()}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.sigma\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.fvort\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.b\_theta()}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.tvort\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.tshear\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.acc\_norm()}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \};}
+\DoxyCodeLine{00183\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,165 @@
+\hypertarget{classpowerhouse_1_1examiner}{}\doxysection{powerhouse\+::examiner Class Reference}
+\label{classpowerhouse_1_1examiner}\index{powerhouse::examiner@{powerhouse::examiner}}
+Inheritance diagram for powerhouse\+::examiner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpowerhouse_1_1examiner}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpowerhouse_1_1examiner_a06c9ec488562f9e93d52d314ef081bc1}{prepare}} (const size\+\_\+t \&t\+\_\+count) override
+\begin{DoxyCompactList}\small\item\em happens before entering the loop \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpowerhouse_1_1examiner_af438485feb8aa0f5569ec919a28165d6}{pre\+\_\+step}} () override
+\begin{DoxyCompactList}\small\item\em happens before perform\+\_\+step in each iteration \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$ \mbox{\hyperlink{classpowerhouse_1_1examiner_a80424e798ea5f348c6a2688348071d28}{perform\+\_\+step}} (\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$previous\+\_\+step) override
+\begin{DoxyCompactList}\small\item\em The main calculation in a single iteration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpowerhouse_1_1examiner_ad85236b84ef9e569d9eb62f67ceeff68}{process\+\_\+output}} (\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$output) override
+\begin{DoxyCompactList}\small\item\em happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpowerhouse_1_1examiner_a29c9124498769e5c4453a03afc0df297}{pre\+\_\+write}} (std\+::ostream \&output) override
+\begin{DoxyCompactList}\small\item\em happens before writing the results \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpowerhouse_1_1examiner_aab00e702d3c33928d250e0323e5ec73a}{write}} (std\+::ostream \&output, \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $\ast$cell\+\_\+ptr, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$final\+\_\+output) override
+\begin{DoxyCompactList}\small\item\em writes the results to output \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}{perform\+\_\+step}} (\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$previous\+\_\+step)=0
+\begin{DoxyCompactList}\small\item\em The main calculation in a single iteration. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}{prepare}} (const size\+\_\+t \&t\+\_\+count)=0
+\begin{DoxyCompactList}\small\item\em happens before entering the loop \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}{pre\+\_\+step}} ()=0
+\begin{DoxyCompactList}\small\item\em happens before perform\+\_\+step in each iteration \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}{process\+\_\+output}} (\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$output)=0
+\begin{DoxyCompactList}\small\item\em happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}{pre\+\_\+write}} (std\+::ostream \&os)=0
+\begin{DoxyCompactList}\small\item\em happens before writing the results \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}{write}} (std\+::ostream \&os, \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $\ast$cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$final\+\_\+output)=0
+\begin{DoxyCompactList}\small\item\em writes the results to output \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classpowerhouse_1_1examiner_a80424e798ea5f348c6a2688348071d28}\label{classpowerhouse_1_1examiner_a80424e798ea5f348c6a2688348071d28}} 
+\index{powerhouse::examiner@{powerhouse::examiner}!perform\_step@{perform\_step}}
+\index{perform\_step@{perform\_step}!powerhouse::examiner@{powerhouse::examiner}}
+\doxysubsubsection{\texorpdfstring{perform\_step()}{perform\_step()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$ powerhouse\+::examiner\+::perform\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{cell,  }\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$}]{previous\+\_\+step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+The main calculation in a single iteration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & cell \\
+\hline
+{\em previous\+\_\+step} & the output from the previous step \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output from this step 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1examiner_af438485feb8aa0f5569ec919a28165d6}\label{classpowerhouse_1_1examiner_af438485feb8aa0f5569ec919a28165d6}} 
+\index{powerhouse::examiner@{powerhouse::examiner}!pre\_step@{pre\_step}}
+\index{pre\_step@{pre\_step}!powerhouse::examiner@{powerhouse::examiner}}
+\doxysubsubsection{\texorpdfstring{pre\_step()}{pre\_step()}}
+{\footnotesize\ttfamily void powerhouse\+::examiner\+::pre\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens before perform\+\_\+step in each iteration 
+
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1examiner_a29c9124498769e5c4453a03afc0df297}\label{classpowerhouse_1_1examiner_a29c9124498769e5c4453a03afc0df297}} 
+\index{powerhouse::examiner@{powerhouse::examiner}!pre\_write@{pre\_write}}
+\index{pre\_write@{pre\_write}!powerhouse::examiner@{powerhouse::examiner}}
+\doxysubsubsection{\texorpdfstring{pre\_write()}{pre\_write()}}
+{\footnotesize\ttfamily void powerhouse\+::examiner\+::pre\+\_\+write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens before writing the results 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1examiner_a06c9ec488562f9e93d52d314ef081bc1}\label{classpowerhouse_1_1examiner_a06c9ec488562f9e93d52d314ef081bc1}} 
+\index{powerhouse::examiner@{powerhouse::examiner}!prepare@{prepare}}
+\index{prepare@{prepare}!powerhouse::examiner@{powerhouse::examiner}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily void powerhouse\+::examiner\+::prepare (\begin{DoxyParamCaption}\item[{const size\+\_\+t \&}]{t\+\_\+count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens before entering the loop 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+count} & the number of steps \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1examiner_ad85236b84ef9e569d9eb62f67ceeff68}\label{classpowerhouse_1_1examiner_ad85236b84ef9e569d9eb62f67ceeff68}} 
+\index{powerhouse::examiner@{powerhouse::examiner}!process\_output@{process\_output}}
+\index{process\_output@{process\_output}!powerhouse::examiner@{powerhouse::examiner}}
+\doxysubsubsection{\texorpdfstring{process\_output()}{process\_output()}}
+{\footnotesize\ttfamily void powerhouse\+::examiner\+::process\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & the current or final output \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1examiner_aab00e702d3c33928d250e0323e5ec73a}\label{classpowerhouse_1_1examiner_aab00e702d3c33928d250e0323e5ec73a}} 
+\index{powerhouse::examiner@{powerhouse::examiner}!write@{write}}
+\index{write@{write}!powerhouse::examiner@{powerhouse::examiner}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void powerhouse\+::examiner\+::write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $\ast$}]{cell,  }\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$}]{final\+\_\+output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+writes the results to output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & \\
+\hline
+{\em cell} & \\
+\hline
+{\em final\+\_\+output} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/examiner.\+h\end{DoxyCompactItemize}

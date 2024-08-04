@@ -1,0 +1,213 @@
+\hypertarget{examine_8hpp_source}{}\doxysection{examine.\+hpp}
+\label{examine_8hpp_source}\index{src/examine.hpp@{src/examine.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{keywordtype}{void}\ powerhouse::engine::examine()}
+\DoxyCodeLine{00002\ \{}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{keyword}{auto}\ basic\_info\ =\ \_hypersurface.read\_info();}
+\DoxyCodeLine{00004\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Basic\ information"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{comment}{//\ How\ \%\ of\ timelikes}}
+\DoxyCodeLine{00006\ \ \ \ \ std::cout\ <<\ basic\_info\ <<\ std::endl;}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_settings.verbose)}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Going\ through\ "{}}\ <<\ \_hypersurface.total()\ <<\ \textcolor{stringliteral}{"{}\ \ cells.."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00010\ \ \ \ \ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{double}\ sigma2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ longi\_sigma\ =\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ tr\_sigma\ =\ 0;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ theta\_sum\ =\ 0.0;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ neg\_theta\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ btheta\_sum\ =\ 0.0;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ a2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ timelike\_a\ =\ 0;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ fvort2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ timelike\_omega\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ th\_shear\_2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ th\_vort\_2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ sum\_diff;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ decomp\_failed\ =\ 0;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ dimension\_factor\ =\ 1.0;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ step\_size\ =\ \_hypersurface.total()\ /\ 100\ -\/\ 1;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ perc\ =\ 0;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ nills\_fail\ =\ 0;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ threads\_\ =\ NTHREADS;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_settings.verbose)}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}openmp\ on\ with\ "{}}\ <<\ threads\_\ <<\ \textcolor{stringliteral}{"{}\ threads."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ num\_threads(threads\_)}}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ local\_cell\_counter\ =\ 0;}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#pragma\ omp\ for\ reduction(+\ :\ sigma2\_sum,\ longi\_sigma,\ tr\_sigma,\ theta\_sum,\ neg\_theta,\ btheta\_sum,\ \(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a2\_sum,\ timelike\_a,\ fvort2\_sum,\ timelike\_omega,\ th\_shear\_2\_sum,\ th\_vort\_2\_sum,\ sum\_diff,\ nills\_fail)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&cell\ :\ \_hypersurface.hypersurface())}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_cell\_counter\ \%\ step\_size\ ==\ 0)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#pragma\ omp\ atomic}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ perc++;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#pragma\ omp\ critical}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::show\_progress((perc\ >\ 100)\ ?\ 100\ :\ perc);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ local\_cell\_counter++;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ dimension\_factor\ =\ 1.0\ /\ cell.T;}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sigma}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sigma\ =\ cell.shear\_ll();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!utils::is\_zero(utils::trace\_ll(sigma)))}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tr\_sigma++;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!utils::is\_zero(utils::dot\_utl(cell.u\_u(),\ sigma)))}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ longi\_sigma++;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ theta}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.theta()\ <\ 0)}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ neg\_theta++;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ theta\_sum\ +=\ cell.theta();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ sigma2\_sum\ +=\ cell.sigma\_norm();}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ acc}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.acc\_norm()\ >\ 0)}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_a++;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ a2\_sum\ +=\ cell.acc\_norm();}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ omega}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ omega\ =\ cell.f\_vorticity\_ll();}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ omegav\ =\ cell.f\_vorticity\_u();}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ o2\ =\ utils::dot\_uu(omegav,\ omegav);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (o2\ >\ 0)}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_omega++;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ fvort2\_sum\ +=\ cell.fvort\_norm();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ btheta\_sum\ +=\ cell.b\_theta();}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ th\_vort\_2\_sum\ +=\ cell.tvort\_norm();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ th\_shear\_2\_sum\ +=\ cell.tshear\_norm();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ diff\ between\ du\ and\ db}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ sum\_diff\ +=\ cell.dbdu\_diff\_norm();}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ check\ decomposition}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rhs\ =\ utils::add\_tensors(\{utils::mat\_product(cell.u\_l(),\ utils::to\_lower(cell.acc\_u())),}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::s\_product(cell.delta\_ll(),\ cell.theta()\ /\ 3.0),}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sigma,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ omega\});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!utils::are\_equal(rhs,\ cell.du\_ll()))}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ decomp\_failed++;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Comparison\ with\ Nils}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flag\ \&=\ utils::equals(sigma[i][j],\ cell.old\_shear(i,\ j));}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!flag)}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nills\_fail++;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00147\ \ \ \ \ \}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ std::cout\ <<\ std::endl}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Report:"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}shear\ tensor\(\backslash\)t\ sqrt(<sigma\string^2>)\ =\ "{}}\ <<\ utils::sign(sigma2\_sum)\ *\ utils::hbarC\ *\ sqrt(abs(sigma2\_sum)\ /\ \_hypersurface.total())}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)tnonzero\ trace\ =\ "{}}\ <<\ tr\_sigma\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)tnot\ transverse\ =\ "{}}\ <<\ longi\_sigma\ <<\ std::endl;}
+\DoxyCodeLine{00155\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}expansion\(\backslash\)t\ avg\ theta\ =\ "{}}\ <<\ utils::hbarC\ *\ theta\_sum\ /\ \_hypersurface.total()}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)t\ (theta\ <\ 0)\ count\ =\ "{}}\ <<\ neg\_theta\ <<\ std::endl;}
+\DoxyCodeLine{00157\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}acceleration\(\backslash\)t\ sqrt(<a\string^2>)\ =\ "{}}\ <<\ utils::sign(a2\_sum)\ *\ utils::hbarC\ *\ sqrt(abs(a2\_sum)\ /\ \_hypersurface.total())}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)t\ timelike\ a\ count\ =\ "{}}\ <<\ timelike\_a\ <<\ std::endl;}
+\DoxyCodeLine{00159\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}fluid\ vorticity\(\backslash\)t\ sqrt(<omega\string^2>)\ =\ "{}}\ <<\ utils::sign(fvort2\_sum)\ *\ utils::hbarC\ *\ sqrt(abs(fvort2\_sum)\ /\ \_hypersurface.total())}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}GeV\(\backslash\)t\ timelike\ omega\ count\ =\ "{}}\ <<\ timelike\_omega\ <<\ std::endl;}
+\DoxyCodeLine{00161\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}thermal\ vorticity\(\backslash\)t\ sqrt(<varpi\string^2>)\ =\ "{}}\ <<\ utils::sign(th\_vort\_2\_sum)\ *\ sqrt(abs(th\_vort\_2\_sum\ /\ \_hypersurface.total()))}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00163\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}thermal\ shear\(\backslash\)t\ sqrt(<xi\string^2>)\ =\ "{}}\ <<\ utils::sign(th\_shear\_2\_sum)\ *\ sqrt(th\_shear\_2\_sum\ /\ \_hypersurface.total())}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00165\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}div.beta\(\backslash\)t\ avg\ =\ "{}}\ <<\ btheta\_sum\ /\ \_hypersurface.total()\ <<\ std::endl;}
+\DoxyCodeLine{00166\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}sqrt<T*du\ -\/\ dbeta>\ =\ "{}}\ <<\ utils::sign(sum\_diff)\ *\ sqrt(abs(sum\_diff)\ /\ \_hypersurface.total())\ <<\ std::endl;}
+\DoxyCodeLine{00167\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}failed\ du\ decomp\ =\ "{}}\ <<\ decomp\_failed\ <<\ std::endl;}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{//\ std::cout\ <<\ "{}Comparison\ to\ Nils\ shear\ failed\ =\ "{}\ <<\ nills\_fail\ <<\ std::endl;}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ std::ofstream\ output(\_settings.out\_file);}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{int}\ lastperc\ =\ 0;}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_settings.verbose)}
+\DoxyCodeLine{00175\ \ \ \ \ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Writing\ output\ ..."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00177\ \ \ \ \ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ output}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\#\ tau,x,y,eta,theta,sqrt(sigma\string^2),sqrt(-\/omega\string^2),div.beta,sqrt(-\/varpi\string^2),sqrt(xi\string^2),sqrt(-\/a\string^2)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\#pragma\ critical}}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ utils::show\_progress(0);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ cell\ :\ \_hypersurface.hypersurface())}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ counter++;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ perc\ =\ 100\ *\ ((double)counter)\ /\ ((double)\_hypersurface.total());}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (perc\ >\ lastperc)}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lastperc\ =\ perc;}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::show\_progress(perc);}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ output\ <<\ cell.tau\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.x\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.y\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.eta}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.theta()}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.sigma\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.fvort\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.b\_theta()}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.tvort\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.tshear\_norm()\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.acc\_norm()}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ output.close();}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#pragma\ critical}}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00207\ \}}
+
+\end{DoxyCode}

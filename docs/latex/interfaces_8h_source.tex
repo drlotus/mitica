@@ -1,0 +1,569 @@
+\hypertarget{interfaces_8h_source}{}\doxysection{interfaces.\+h}
+\label{interfaces_8h_source}\index{src/interfaces.h@{src/interfaces.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <istream>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}utils.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <omp.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Template\ metaprogramming\ utility}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...>\ \textcolor{keyword}{class\ }C,\ \textcolor{keyword}{typename}...\ Ts>}
+\DoxyCodeLine{00017\ std::true\_type\ is\_template\_base\_of\_impl(\textcolor{keyword}{const}\ C<Ts...>\ *);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{template}\ <\textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...>\ \textcolor{keyword}{class\ }C>}
+\DoxyCodeLine{00020\ std::false\_type\ is\_template\_base\_of\_impl(...);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}\ <\textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...>\ \textcolor{keyword}{class\ }C,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00023\ \textcolor{keyword}{using\ }is\_template\_base\_of\ =\ \textcolor{keyword}{decltype}(is\_template\_base\_of\_impl<C>(std::declval<T\ *>()));}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }hydro}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhydro_1_1_i__cell}{I\_cell}}}
+\DoxyCodeLine{00032\ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ milne\_coords()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ \mbox{\hyperlink{classhydro_1_1_i__cell_ac5a7b540b8823703d5e17afe15bc11a2}{thermodynamics}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__cell_a05e51408c1ddcc3c4619f29c45e2cadc}{du\_ll}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ dbeta\_ll()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ four\_vel()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ dsigma()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ acceleration()\ =\ 0;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ shear\_ll()\ =\ 0;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ fluid\_vort\_vec()\ =\ 0;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ fluid\_vort\_ll()\ =\ 0;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ thermal\_vort\_ll()\ =\ 0;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ thermal\_shear\_ll()\ =\ 0;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ theta()\ =\ 0;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ b\_theta()\ =\ 0;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ normal\_sq()\ =\ 0;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ is\_spacelike()\ =\ 0;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ sigma\_norm()\ =\ 0;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ fvort\_norm()\ =\ 0;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ tvort\_norm()\ =\ 0;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ tshear\_norm()\ =\ 0;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ acc\_norm()\ =\ 0;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classhydro_1_1_i__cell_a3515b7e282e062293731f16e8b40f24c}{u\_dot\_n}}()\ =\ 0;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::ostream\ \&write\_info(std::ostream\ \&osm,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ delim)\ =\ 0;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::ostream\ \&write\_back(std::ostream\ \&os,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ delim)\ =\ 0;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classhydro_1_1_i__cell}{\string~I\_cell}}()\ \{\}}
+\DoxyCodeLine{00065\ \ \ \ \ \};}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structhydro_1_1surface__stat}{surface\_stat}}}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ C\ min\_T,\ max\_T;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ C\ min\_mub,\ max\_mub;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ min\_coords;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ max\_coords;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ C\ avg\_T;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ C\ avg\_mub;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structhydro_1_1surface__stat}{surface\_stat<C>}}\ \&info)}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ utils::MILNE[i]\ <<\ \textcolor{stringliteral}{"{}\ in\ ["{}}\ <<\ info.min\_coords[i]\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ info.max\_coords[i]\ <<\ \textcolor{stringliteral}{"{}]\(\backslash\)t"{}};}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ std::endl;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min\ T\ =\ "{}}\ <<\ info.min\_T.thermodynamics()[0]\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.min\_T\ <<\ std::endl;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max\ T\ =\ "{}}\ <<\ info.max\_T.thermodynamics()[0]\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.max\_T\ <<\ std::endl;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min\ mu\_B\ =\ "{}}\ <<\ info.min\_mub.thermodynamics()[1]\ <<\ \textcolor{stringliteral}{"{}\ @\ "{}}\ <<\ info.min\_mub\ <<\ std::endl;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max\ mu\_B\ =\ "{}}\ <<\ info.max\_mub.thermodynamics()[1]\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.max\_mub\ <<\ std::endl;}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(is\_template\_base\_of<I\_cell,\ C>::value,}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}C\ class\ in\ surface\_stat\ must\ be\ derived\ from\ Icell<V,T>"{}});}
+\DoxyCodeLine{00095\ \ \ \ \ \};}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhydro_1_1hypersurface}{hypersurface}}}
+\DoxyCodeLine{00100\ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ skipped()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_skipped;\ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rejected()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_rejected;\ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ timelikes()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_timelikes;\ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ total()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_total;\ \}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ failed()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_failed;\ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lines()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_lines;\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ C\ operator[](\textcolor{keywordtype}{size\_t}\ i)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_cells[i];\ \}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ C\ \&operator[](\textcolor{keywordtype}{size\_t}\ i)\ \{\ \textcolor{keywordflow}{return}\ \_cells[i];\ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhydro_1_1hypersurface_ab2c6049e4b1ae018098e1a129576a211}{read}}(\textcolor{keyword}{const}\ std::string\ \&i\_file,\ utils::accept\_modes\ mode);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhydro_1_1surface__stat}{surface\_stat<C>}}\ readinfo();}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ add(C\ \&cell,\ utils::accept\_modes\ mode);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::vector<C>\ \&data()\ \{\ \textcolor{keywordflow}{return}\ \_cells;\ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ clear()}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \_failed\ =\ 0;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \_lines\ =\ 0;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \_rejected\ =\ 0;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \_skipped\ =\ 0;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \_timelikes\ =\ 0;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \_total\ =\ 0;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \_cells.clear();}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ checksize()}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ r\ =\ \_cells.size()\ ==\ \_total;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \_total\ =\ \_cells.size();}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ std::vector<C>\ \_cells;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_skipped;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_rejected;}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_timelikes;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_total;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_failed;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_lines;}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(is\_template\_base\_of<I\_cell,\ C>::value,}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}C\ class\ in\ hypersurface\ must\ be\ derived\ from\ Icell<V,T>"{}});}
+\DoxyCodeLine{00147\ \ \ \ \ \};}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhydro_1_1hypersurface_ab2c6049e4b1ae018098e1a129576a211}{hypersurface<C>::read}}(\textcolor{keyword}{const}\ std::string\ \&i\_file,\ utils::accept\_modes\ mode)}
+\DoxyCodeLine{00151\ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ estimated\_line\_count\ =\ 900000;\ \textcolor{comment}{//\ Rough\ estimate\ of\ the\ number\ of\ lines}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ step\_size\ =\ estimated\_line\_count\ /\ 100\ -\/\ 1;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ std::vector<std::streampos>\ file\_positions;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ std::vector<std::streampos>\ failed\_positions;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ std::ifstream\ file(i\_file);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Input\ file\ cannot\ be\ opened!"{}});}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Determine\ chunk\ positions}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ file.seekg(0,\ std::ios::end);}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ std::streampos\ file\_size\ =\ file.tellg();}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ file.seekg(0,\ std::ios::beg);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ threads\_count\ =\ omp\_get\_max\_threads();}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ threads\_count\ =\ 1;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \_lines\ =\ std::count(std::istreambuf\_iterator<char>(file),}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::istreambuf\_iterator<char>(),\ \textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ file\_size\ =\ \_lines;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ file.seekg(0,\ std::ios::beg);}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ std::streampos\ chunk\_size\ =\ file\_size\ /\ threads\_count;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ threads\_count;\ ++i)}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ std::streampos\ start\ =\ i\ *\ chunk\_size;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ file\_positions.push\_back(start);}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ file\_positions.push\_back(file\_size);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \_total\ =\ 0;}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \_failed\ =\ 0;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \_rejected\ =\ 0;}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \_timelikes\ =\ 0;}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \_skipped\ =\ 0;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ perc\ =\ 0;}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ last\_perc\ =\ -\/1;}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#pragma\ omp\ parallel}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tid\ =\ omp\_get\_thread\_num();}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tid\ =\ 0;}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_total\ =\ 0;}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_failed\ =\ 0;}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_rejected\ =\ 0;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_timelikes\ =\ 0;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_skipped\ =\ 0;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_counter\ =\ 0;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_perc\ =\ 0;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_last\_perc\ =\ -\/1;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ std::ifstream\ local\_file(i\_file);}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<C>\ thread\_cells;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ thread\_cells.reserve(chunk\_size);}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!local\_file.is\_open())}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Cannot\ open\ file\ "{}}\ <<\ i\_file\ <<\ \textcolor{stringliteral}{"{}\ in\ thread\ "{}}\ <<\ tid\ <<\ std::endl;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_file.seekg(file\_positions[tid]);}
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (local\_file.tellg()\ <\ file\_positions[tid\ +\ 1]\ \&\&\ std::getline(local\_file,\ line))}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(local\_file,\ line))}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_counter++;}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ reject\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (line.empty()\ ||\ line[0]\ ==\ \textcolor{charliteral}{'\#'})}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_skipped++;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::istringstream\ iss(line);}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ C\ cell;}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iss\ >>\ cell;}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (iss.fail())}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_failed++;}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\#pragma\ omp\ critical}}
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failed\_positions.push\_back(local\_file.tellg());}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!cell.is\_spacelike())}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ utils::accept\_modes::RejectTimelike)}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reject\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_timelikes++;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ utils::accept\_modes::RejectNegativeDuDSigma\ \&\&\ (cell.u\_dot\_n()\ <\ 0))}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reject\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!reject)}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ thread\_cells.push\_back(cell);}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_total++;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_rejected++;}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_perc\ =\ 100\ *\ ((double)local\_counter)\ /\ ((double)estimated\_line\_count);}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#pragma\ omp\ critical}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ perc\ =\ std::max(perc,\ local\_perc);}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (perc\ >\ last\_perc)}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_perc\ =\ perc;}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::show\_progress((last\_perc\ >\ 100)\ ?\ 100\ :\ last\_perc);}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00295\ \textcolor{preprocessor}{\#pragma\ omp\ critical}}
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_cells.insert(\_cells.end(),\ thread\_cells.begin(),\ thread\_cells.end());}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_total\ +=\ local\_total;}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_failed\ +=\ local\_failed;}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_rejected\ +=\ local\_rejected;}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_timelikes\ +=\ local\_timelikes;}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_skipped\ +=\ local\_skipped;}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_lines\ +=\ local\_counter;}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ utils::show\_progress(100);}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ retrying\ for\ the\ failed\ cells}}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_failed\ >\ 0)}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&\&pos\ :\ failed\_positions)}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ file.seekg(pos);}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::getline(file,\ line);}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::istringstream\ iss(line);}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ C\ cell;}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iss\ >>\ cell;}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!iss.fail())}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_cells.push\_back(cell);}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_failed-\/-\/;}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_total++;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ std::cout\ <<\ std::endl;}
+\DoxyCodeLine{00332\ \ \ \ \ \}}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00335\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{structhydro_1_1surface__stat}{surface\_stat<C>}}\ \mbox{\hyperlink{classhydro_1_1hypersurface}{hypersurface<C>::readinfo}}()}
+\DoxyCodeLine{00336\ \ \ \ \ \{}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhydro_1_1surface__stat}{surface\_stat<C>}}\ info;}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ info.min\_coords[i]\ =\ std::min\_element(\_cells.begin(),\ \_cells.end(),}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [i](\textcolor{keyword}{const}\ C\ \&first,\ \textcolor{keyword}{const}\ C\ \&second)}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ first.milne\_coords()[i]\ <\ second.milne\_coords()[i];}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \})}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .base()}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>milne\_coords()[i];}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ info.max\_coords[i]\ =\ std::max\_element(\_cells.begin(),\ \_cells.end(),}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [i](\textcolor{keyword}{const}\ C\ \&first,\ \textcolor{keyword}{const}\ C\ \&second)}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ first.milne\_coords()[i]\ <\ second.milne\_coords()[i];}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \})}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .base()}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>milne\_coords()[i];}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ [min\_T,\ max\_T]\ =\ std::minmax\_element(\_cells.begin(),\ \_cells.end(),\ [](\textcolor{keyword}{const}\ C\ \&first,\ \textcolor{keyword}{const}\ C\ \&second)}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ return\ first.thermodynamics()[0]\ <\ second.thermodynamics()[0];\ \});}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ info.min\_T\ =\ *min\_T.base();}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ info.max\_T\ =\ *max\_T.base();}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ [min\_mub,\ max\_mub]\ =\ std::minmax\_element(\_cells.begin(),\ \_cells.end(),\ [](\textcolor{keyword}{const}\ C\ \&first,\ \textcolor{keyword}{const}\ C\ \&second)}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ return\ first.thermodynamics()[1]\ <\ second.thermodynamics()[1];\ \});}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ info.min\_mub\ =\ *min\_mub.base();}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ info.max\_mub\ =\ *max\_mub.base();}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ info;}
+\DoxyCodeLine{00366\ \ \ \ \ \}}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00368\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ hypersurface<C>::add(C\ \&cell,\ utils::accept\_modes\ mode)}
+\DoxyCodeLine{00369\ \ \ \ \ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ reject\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ spacelike\ =\ cell.is\_spacelike();}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ !=\ utils::accept\_modes::AcceptAll)}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ reject\ =\ (mode\ ==\ utils::accept\_modes::RejectTimelike\ \&\&\ !spacelike)\ ||}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (mode\ ==\ utils::accept\_modes::RejectNegativeDuDSigma\ \&\&\ cell.u\_dot\_n()\ <\ 0);}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reject)}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \_rejected++;}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!spacelike)}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_timelikes++;}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \_cells.push\_back(cell);}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \_total++;}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00392\ \ \ \ \ \}}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ }
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C,\ \textcolor{keyword}{typename}\ V,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhydro_1_1_i__solution}{I\_solution}}}
+\DoxyCodeLine{00401\ \ \ \ \ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}{populate}}()\ =\ 0;}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ write(std::ostream\ \&output)\ =\ 0;}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ \mbox{\hyperlink{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}{exp\_acc\_u}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}{exp\_shear\_ll}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ V\ \mbox{\hyperlink{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}{exp\_f\_vorticity\_u}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}{exp\_f\_vorticity\_ll}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}{exp\_th\_vorticity\_ll}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}{exp\_th\_shear\_ll}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}{exp\_gradu\_ll}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}{exp\_delta\_ll}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}{exp\_delta\_ul}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ T\ \mbox{\hyperlink{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}{exp\_delta\_uu}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}{exp\_theta}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}{exp\_b\_theta}}(\textcolor{keyword}{const}\ C\ \&)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ count()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ data()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classhydro_1_1_i__solution}{\string~I\_solution}}()\ \{\}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ C\ solve(\textcolor{keyword}{const}\ C\&\ prim)\ =\ 0;}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(is\_template\_base\_of<I\_cell,\ C>::value,}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}C\ class\ in\ surface\_stat\ must\ be\ derived\ from\ Icell<V,T>"{}});}
+\DoxyCodeLine{00463\ \ \ \ \ \};}
+\DoxyCodeLine{00464\ \}}
+\DoxyCodeLine{00465\ \textcolor{keyword}{namespace\ }powerhouse}
+\DoxyCodeLine{00466\ \{}
+\DoxyCodeLine{00469\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00470\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\_output}}}
+\DoxyCodeLine{00471\ \ \ \ \ \{}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{\string~I\_output}}()\ \{\}}
+\DoxyCodeLine{00473\ \ \ \ \ \};}
+\DoxyCodeLine{00476\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00477\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\_output}}<C>}
+\DoxyCodeLine{00478\ \ \ \ \ \{}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ std::shared\_ptr<hydro::surface\_stat<C>>\ basic\_info;}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output}}(\mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output}}\ \&other)\ :\ basic\_info(other.basic\_info)}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ sigma2\_sum\ =\ other.sigma2\_sum;}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ longi\_sigma\ =\ other.longi\_sigma;}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ tr\_sigma\ =\ other.tr\_sigma;}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ theta\_sum\ =\ other.theta\_sum;}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ neg\_theta\ =\ other.neg\_theta;}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ btheta\_sum\ =\ other.btheta\_sum;}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ a2\_sum\ =\ other.a2\_sum;}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_a\ =\ other.timelike\_a;}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ u\_dot\_a\_not\_zero\ =\ other.u\_dot\_a\_not\_zero;}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ fvort2\_sum\ =\ other.fvort2\_sum;}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_omega\ =\ other.timelike\_omega;}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ th\_shear\_2\_sum\ =\ other.th\_shear\_2\_sum;}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ th\_vort\_2\_sum\ =\ other.th\_vort\_2\_sum;}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ decomp\_failed\ =\ other.decomp\_failed;}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output}}(\mbox{\hyperlink{structhydro_1_1surface__stat}{hydro::surface\_stat<C>}}\ *info\ =\ \textcolor{keyword}{nullptr})\ :\ basic\_info(info)\ \{\}}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sigma2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ longi\_sigma\ =\ 0;}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tr\_sigma\ =\ 0;}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ theta\_sum\ =\ 0.0;}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ neg\_theta\ =\ 0;}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ btheta\_sum\ =\ 0.0;}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ timelike\_a\ =\ 0;}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ u\_dot\_a\_not\_zero\ =\ 0;}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ fvort2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ timelike\_omega\ =\ 0;}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ th\_shear\_2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ th\_vort\_2\_sum\ =\ 0.0;}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ decomp\_failed\ =\ 0;}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{\string~exam\_output}}()\textcolor{keyword}{\ override\ }\{\}}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ accumulate(\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<C>}}\ *output)}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ other\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output<C>}}\ *\textcolor{keyword}{>}(output);}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (other)}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sigma2\_sum\ +=\ other-\/>sigma2\_sum;}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ longi\_sigma\ +=\ other-\/>longi\_sigma;}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tr\_sigma\ +=\ other-\/>tr\_sigma;}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ theta\_sum\ +=\ other-\/>theta\_sum;}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ neg\_theta\ +=\ other-\/>neg\_theta;}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ btheta\_sum\ +=\ other-\/>btheta\_sum;}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a2\_sum\ +=\ other-\/>a2\_sum;}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_a\ +=\ other-\/>timelike\_a;}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u\_dot\_a\_not\_zero\ +=\ other-\/>u\_dot\_a\_not\_zero;}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fvort2\_sum\ +=\ other-\/>fvort2\_sum;}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_omega\ +=\ other-\/>timelike\_omega;}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ th\_shear\_2\_sum\ +=\ other-\/>th\_shear\_2\_sum;}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ th\_vort\_2\_sum\ +=\ other-\/>th\_vort\_2\_sum;}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ decomp\_failed\ +=\ other-\/>decomp\_failed;}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ to\ cast\ output\ to\ exam\_output<C>"{}});}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output}}\ \&operator+=(\textcolor{keyword}{const}\ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output}}\ \&rhs)}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ sigma2\_sum\ +=\ rhs.sigma2\_sum;}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ longi\_sigma\ +=\ rhs.longi\_sigma;}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ tr\_sigma\ +=\ rhs.tr\_sigma;}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ theta\_sum\ +=\ rhs.theta\_sum;}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ neg\_theta\ +=\ rhs.neg\_theta;}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ btheta\_sum\ +=\ rhs.btheta\_sum;}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ a2\_sum\ +=\ rhs.a2\_sum;}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_a\ +=\ rhs.timelike\_a;}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ u\_dot\_a\_not\_zero\ +=\ rhs.u\_dot\_a\_not\_zero;}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ fvort2\_sum\ +=\ rhs.fvort2\_sum;}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ timelike\_omega\ +=\ rhs.timelike\_omega;}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ th\_shear\_2\_sum\ +=\ rhs.th\_shear\_2\_sum;}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ th\_vort\_2\_sum\ +=\ rhs.th\_vort\_2\_sum;}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ decomp\_failed\ +=\ rhs.decomp\_failed;}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00556\ \ \ \ \ \};}
+\DoxyCodeLine{00557\ \ \ \ \ }
+\DoxyCodeLine{00560\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00561\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpowerhouse_1_1polarization__output}{polarization\_output}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\_output}}<C>}
+\DoxyCodeLine{00562\ \ \ \ \ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ data\ */}}
+\DoxyCodeLine{00564\ \ \ \ \ \};}
+\DoxyCodeLine{00565\ \ \ \ \ }
+\DoxyCodeLine{00568\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00569\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpowerhouse_1_1yield__output}{yield\_output}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\_output}}<C>}
+\DoxyCodeLine{00570\ \ \ \ \ \{}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ data\ */}}
+\DoxyCodeLine{00572\ \ \ \ \ \};}
+\DoxyCodeLine{00575\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00576\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{I\_calculator}}}
+\DoxyCodeLine{00577\ \ \ \ \ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\_output<C>}}\ *\mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}{perform\_step}}(C\ \&cell,\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<C>}}\ *previous\_step)\ =\ 0;}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}{prepare}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \&t\_count)\ =\ 0;}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}{pre\_step}}()\ =\ 0;}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}{process\_output}}(\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<C>}}\ *output)\ =\ 0;}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}{pre\_write}}(std::ostream\ \&os)\ =\ 0;}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}{write}}(std::ostream\ \&os,\ C\ *cell,\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<C>}}\ *final\_output)\ =\ 0;}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{\string~I\_calculator}}()\ \{\}}
+\DoxyCodeLine{00601\ \ \ \ \ \};}
+\DoxyCodeLine{00603\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpowerhouse_1_1_i__particle}{I\_particle}}}
+\DoxyCodeLine{00604\ \ \ \ \ \{}
+\DoxyCodeLine{00605\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classpowerhouse_1_1_i__particle}{\string~I\_particle}}()\ =\ 0;}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ mass()\ =\ 0;}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ name()\ =\ 0;}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ pdg\_id()\ =\ 0;}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ Q()\ =\ 0;}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ B()\ =\ 0;}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ S()\ =\ 0;}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{float}\ spin()\ =\ 0;}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ isparticle()\ =\ 0;}
+\DoxyCodeLine{00615\ \ \ \ \ \};}
+\DoxyCodeLine{00617\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structpowerhouse_1_1calculator__key}{calculator\_key}}}
+\DoxyCodeLine{00618\ \ \ \ \ \{}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ utils::program\_modes\ program\_mode;}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ utils::polarization\_modes\ polarization\_mode;}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ utils::yield\_modes\ yield\_mode;}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{structpowerhouse_1_1calculator__key}{calculator\_key}}\ \&other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00624\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::tie(program\_mode,\ polarization\_mode,\ yield\_mode)\ ==}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::tie(other.program\_mode,\ other.polarization\_mode,\ other.yield\_mode);}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00628\ }
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structpowerhouse_1_1calculator__key}{calculator\_key}}\ get\_key(\mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ opts)}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structpowerhouse_1_1calculator__key}{calculator\_key}}\{opts.program\_mode,\ opts.polarization\_mode,\ opts.yield\_mode\};}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00633\ \ \ \ \ \};}
+\DoxyCodeLine{00634\ \}}
+\DoxyCodeLine{00635\ \textcolor{keyword}{namespace\ }std}
+\DoxyCodeLine{00636\ \{}
+\DoxyCodeLine{00638\ \ \ \ \ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00639\ \ \ \ \ \textcolor{keyword}{struct\ }hash<powerhouse::calculator\_key>}
+\DoxyCodeLine{00640\ \ \ \ \ \{}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{structpowerhouse_1_1calculator__key}{powerhouse::calculator\_key}}\ \&key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00642\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::hash<int>()(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(key.program\_mode))\ \string^}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::hash<int>()(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(key.polarization\_mode))\ \string^}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::hash<int>()(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(key.yield\_mode));}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00647\ \ \ \ \ \};}
+\DoxyCodeLine{00648\ \}}
+
+\end{DoxyCode}

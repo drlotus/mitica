@@ -1,0 +1,113 @@
+\hypertarget{classhydro_1_1_i__analytical__sol}{}\doxysection{hydro\+::I\+\_\+analytical\+\_\+sol Class Reference}
+\label{classhydro_1_1_i__analytical__sol}\index{hydro::I\_analytical\_sol@{hydro::I\_analytical\_sol}}
+Inheritance diagram for hydro\+::I\+\_\+analytical\+\_\+sol\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhydro_1_1_i__analytical__sol}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_a9042ec42609aaa994b257443d141696b}\label{classhydro_1_1_i__analytical__sol_a9042ec42609aaa994b257443d141696b}} 
+{\bfseries I\+\_\+analytical\+\_\+sol} (\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} coordsteps, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} mincoords, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} maxcoords)
+\item 
+int \mbox{\hyperlink{classhydro_1_1_i__analytical__sol_a3fabb112112a20c531bffef0885695e5}{count}} () const override
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_af19ffbe96838f0608c7e78696cf763ed}\label{classhydro_1_1_i__analytical__sol_af19ffbe96838f0608c7e78696cf763ed}} 
+virtual \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} {\bfseries generate\+\_\+cell} (double T, double x, double y, double eta)=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ fcell, utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}\label{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}} 
+virtual void {\bfseries populate} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}\label{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}} 
+virtual void {\bfseries write} (std\+::ostream \&output)=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}\label{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries exp\+\_\+acc\+\_\+u} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}\label{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+shear\+\_\+ll} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}\label{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}} 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries exp\+\_\+f\+\_\+vorticity\+\_\+u} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}\label{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+f\+\_\+vorticity\+\_\+ll} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}\label{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+th\+\_\+vorticity\+\_\+ll} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}\label{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+th\+\_\+shear\+\_\+ll} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}\label{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+gradu\+\_\+ll} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}\label{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+delta\+\_\+ll} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}\label{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+delta\+\_\+ul} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}\label{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}} 
+virtual utils\+::r2\+\_\+tensor {\bfseries exp\+\_\+delta\+\_\+uu} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}\label{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}} 
+virtual double {\bfseries exp\+\_\+theta} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}\label{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}} 
+virtual double {\bfseries exp\+\_\+b\+\_\+theta} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&) const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}\label{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}} 
+virtual int {\bfseries count} () const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}\label{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}} 
+virtual \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} $>$ {\bfseries data} () const=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_a4123582ee5c029369c8cb717d712bb0d}\label{classhydro_1_1_i__analytical__sol_a4123582ee5c029369c8cb717d712bb0d}} 
+size\+\_\+t {\bfseries \+\_\+count}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_a9f481921d7603d16b8693fb948d7aac9}\label{classhydro_1_1_i__analytical__sol_a9f481921d7603d16b8693fb948d7aac9}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries \+\_\+mincoords}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_ad0be2ef85b689c4deb28844e6ec7c97d}\label{classhydro_1_1_i__analytical__sol_ad0be2ef85b689c4deb28844e6ec7c97d}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries \+\_\+maxcoords}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_af73c2e16b274a7ee36fe0722200e5759}\label{classhydro_1_1_i__analytical__sol_af73c2e16b274a7ee36fe0722200e5759}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} {\bfseries \+\_\+coordsteps}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_a8f4a1a97b58164520651ad4d727d638d}\label{classhydro_1_1_i__analytical__sol_a8f4a1a97b58164520651ad4d727d638d}} 
+\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ {\bfseries \+\_\+cells}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ fcell, utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}\label{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}} 
+virtual \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} {\bfseries solve} (const \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&prim)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhydro_1_1_i__analytical__sol_a3fabb112112a20c531bffef0885695e5}\label{classhydro_1_1_i__analytical__sol_a3fabb112112a20c531bffef0885695e5}} 
+\index{hydro::I\_analytical\_sol@{hydro::I\_analytical\_sol}!count@{count}}
+\index{count@{count}!hydro::I\_analytical\_sol@{hydro::I\_analytical\_sol}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily int hydro\+::\+I\+\_\+analytical\+\_\+sol\+::count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ fcell, utils\+::geometry\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/fcell.\+h\end{DoxyCompactItemize}

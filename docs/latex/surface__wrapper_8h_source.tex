@@ -1,0 +1,71 @@
+\hypertarget{surface__wrapper_8h_source}{}\doxysection{surface\+\_\+wrapper.\+h}
+\label{surface__wrapper_8h_source}\index{src/surface\_wrapper.h@{src/surface\_wrapper.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ SURFACE\_WRAPPER\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ SURFACE\_WRAPPER\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <util.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }hydro}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{struct\ }surface\_info}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ C\ min\_T,\ max\_T;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ C\ min\_mub,\ max\_mub;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ min\_coords;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ max\_coords;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ C\ avg\_T;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ C\ avg\_mub;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&stream,\ \textcolor{keyword}{const}\ surface\_info<C>\ \&info)}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ utils::MILNE[i]\ <<\ \textcolor{stringliteral}{"{}\ in\ ["{}}\ <<\ info.min\_coords[i]\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ info.max\_coords[i]\ <<\ \textcolor{stringliteral}{"{}]\(\backslash\)t"{}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ std::endl;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min\ T\ =\ "{}}\ <<\ info.min\_T.thermodynamics[0]\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.min\_T\ <<\ std::endl;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max\ T\ =\ "{}}\ <<\ info.max\_T.thermodynamics[0]\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.max\_T\ <<\ std::endl;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min\ mu\_B\ =\ "{}}\ <<\ info.min\_mub.thermodynamics[1]\ <<\ \textcolor{stringliteral}{"{}\ @\ "{}}\ <<\ info.min\_mub\ <<\ std::endl;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max\ mu\_B\ =\ "{}}\ <<\ info.max\_mub.thermodynamics[1]\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.max\_mub\ <<\ std::endl;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhydro_1_1surface__wrapper}{surface\_wrapper}}}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ skipped()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_skipped;\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ rejected()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_rejected;\ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ timelikes()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_timelikes;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ total()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_total;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ failed()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_failed;\ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ lines()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_lines;\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ C\ operator[](\textcolor{keywordtype}{size\_t}\ i)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_cells[i];\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ C\ \&operator[](\textcolor{keywordtype}{size\_t}\ i)\ \{\ \textcolor{keywordflow}{return}\ \_cells[i];\ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ read(std::ifstream\ \&file,\ utils::accept\_modes\ mode);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhydro_1_1surface__info}{surface\_info<C>}}\ readinfo();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ add(C\ \&cell,\ utils::accept\_modes\ mode);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::vector<C>\ \&\mbox{\hyperlink{classhydro_1_1hypersurface}{hypersurface}}()\ \{\ \textcolor{keywordflow}{return}\ \_cells;\ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ clear();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ checksize();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::vector<C>\ \_cells;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_skipped;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_rejected;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_timelikes;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_total;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_failed;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_lines;}
+\DoxyCodeLine{00062\ \ \ \ \ \};}
+\DoxyCodeLine{00063\ \}\ \textcolor{comment}{//\ namespace\ hydro}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

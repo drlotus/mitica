@@ -1,0 +1,73 @@
+\hypertarget{pdg__particle_8h_source}{}\doxysection{pdg\+\_\+particle.\+h}
+\label{pdg__particle_8h_source}\index{src/pdg\_particle.h@{src/pdg\_particle.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PDG\_PARTICLE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PDG\_PARTICLE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ A\ modified\ version\ of\ Andrea's\ code}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}interfaces.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }powerhouse}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ DATABASE\ =\ \textcolor{stringliteral}{"{}pdg\_database/baryons\_mesons.dat"{}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{enum}\ particle\_names\ :\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ LAMBDA\ =\ 3122,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ PION\ =\ 211}
+\DoxyCodeLine{00016\ \ \ \ \ \};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classpowerhouse_1_1_i__particle}{I\_particle}}}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_id;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_mass;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::string\ \_name;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_spin;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_q;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_b;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_s;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_particle;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}(\mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}\ \&other)}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_b\ =\ other.\_b;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_id\ =\ other.\_id;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_mass\ =\ other.\_mass;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_name\ =\ other.\_name;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_q\ =\ other.\_q;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_s\ =\ other.\_s;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_spin\ =\ other.\_spin;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{\string~pdg\_particle}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::string\ name()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_name;\ \};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ mass()\ \{\ \textcolor{keywordflow}{return}\ \_mass;\ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pdg\_id()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_id;\ \};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ Q()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_q;\ \};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ B()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_b;\ \};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ S()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_s;\ \};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ spin()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_spin;\ \};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isparticle()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \_particle;\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::istream\ \&operator>>(std::istream\ \&stream,\ \mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}\ \&particle)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ particle.\_id\ >>\ particle.\_mass\ >>\ particle.\_name\ >>\ particle.\_q\ >>\ particle.\_spin\ >>\ particle.\_b\ >>\ particle.\_s;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classpowerhouse_1_1pdg__particle}{pdg\_particle}}\ \&particle)}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ particle.\_name\ <<\ \textcolor{stringliteral}{"{},\ M\ =\ "{}}\ <<\ particle.\_mass}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ (B,Q,S)\ =\ \ ("{}}\ <<\ particle.\_b\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ particle.\_q\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ particle.\_s}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{})\ Spin-\/"{}}\ <<\ particle.\_spin;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00064\ \ \ \ \ \};}
+\DoxyCodeLine{00065\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

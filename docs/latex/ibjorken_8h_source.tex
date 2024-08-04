@@ -1,0 +1,75 @@
+\hypertarget{ibjorken_8h_source}{}\doxysection{ibjorken.\+h}
+\label{ibjorken_8h_source}\index{test/ibjorken.h@{test/ibjorken.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IBJORKEN\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IBJORKEN\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../src/interfaces.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../src/fcell.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../src/geometry.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../src/utils.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }ug\ =\ utils::geometry;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classibjorken}{ibjorken}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro::I\_solution}}<hydro::fcell,\ ug::four\_vector,\ utils::r2\_tensor>}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classibjorken}{ibjorken}}(\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ coordsteps,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ mincoords,}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ maxcoords,}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_f,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_0,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ vs2)\ :\ \_coordsteps(std::move(coordsteps)),}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mincoords(std::move(mincoords)),}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_maxcoords(std::move(maxcoords)),}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_T\_f(T\_f),}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_T\_0(T\_0),}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_vs2(vs2)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ count()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \_count;\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classibjorken}{\string~ibjorken}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \_cells.clear();}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ get\_name()\ \{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}i\_bjorken"{}};\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classibjorken_a0e46fa958e6abb78500ef3e1ed175a4e}{populate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ write(std::ostream\ \&output)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug::four\_vector}}\ \mbox{\hyperlink{classibjorken_a7a615498f862b450b54b6d53b39b8d7b}{exp\_acc\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \{0\};\ \}}
+\DoxyCodeLine{00034\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_ae723fc23e6a2e733ba4e6550e2d80ec3}{exp\_shear\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug::four\_vector}}\ \mbox{\hyperlink{classibjorken_a4e056dadd160079c637b004b35056b3a}{exp\_f\_vorticity\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \{0\};\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_a2e93e078ced273fb56a2e57a7b347b1b}{exp\_f\_vorticity\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \{0\};\ \}}
+\DoxyCodeLine{00037\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_a9aa586dc97ae59e4636dde806f9c9ce6}{exp\_th\_vorticity\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \{0\};\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_a85e8ec37c1e2e7e672d2a03c47848976}{exp\_th\_shear\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00039\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_a32ccdbde4b9be802d7024f427af8ca16}{exp\_gradu\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00040\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_a5ac1ab051361fd192bab94e89df9c6b8}{exp\_delta\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00041\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_aee4cac4acef0cba0a9839948f8f26a52}{exp\_delta\_ul}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00042\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classibjorken_ae1fdfd509bdecebfc14759de69888ab3}{exp\_delta\_uu}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classibjorken_a4c7a4ff2fb7d799f0772513f38c39948}{exp\_theta}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ 1.0\ /\ cell.tau();\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classibjorken_a350b84d67691fab487344c9adbed32d3}{exp\_b\_theta}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00045\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (dotT(cell.tau())\ +\ cell.T()\ /\ cell.tau())\ *\ utils::hbarC;}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<hydro::fcell>}}\ data()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00049\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_cells;}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ solve(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_count;}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ \_mincoords;}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ \_maxcoords;}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ \_coordsteps;}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<hydro::fcell>}}\ \_cells;}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{double}\ \_T\_f;}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\ \_T\_0;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{double}\ \_vs2;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{double}\ dotT(\textcolor{keywordtype}{double}\ tau)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/\_T\_0\ *\ \_vs2\ *\ pow(\_mincoords[0]\ /\ tau,\ \_vs2)\ /\ tau;}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

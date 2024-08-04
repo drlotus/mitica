@@ -1,0 +1,28 @@
+\hypertarget{classhydro_1_1solution__factory}{}\doxysection{hydro\+::solution\+\_\+factory\texorpdfstring{$<$}{<} C, V, T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classhydro_1_1solution__factory}\index{hydro::solution\_factory$<$ C, V, T $>$@{hydro::solution\_factory$<$ C, V, T $>$}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1solution__factory_aa822351eacaf89f8a67c12fb0cae6fae}\label{classhydro_1_1solution__factory_aa822351eacaf89f8a67c12fb0cae6fae}} 
+using {\bfseries solution\+\_\+creator} = std\+::function$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classhydro_1_1_i__solution}{I\+\_\+solution}}$<$ C, V, T $>$ $>$()$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1solution__factory_a338bf80da62ec0d0b21dc5a770c01089}\label{classhydro_1_1solution__factory_a338bf80da62ec0d0b21dc5a770c01089}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classhydro_1_1_i__solution}{I\+\_\+solution}}$<$ C, V, T $>$ $>$ {\bfseries create} (const std\+::string \&name)
+\item 
+\mbox{\Hypertarget{classhydro_1_1solution__factory_a3e89461afd2816a5095f5e4606348fa5}\label{classhydro_1_1solution__factory_a3e89461afd2816a5095f5e4606348fa5}} 
+void {\bfseries regsiter\+\_\+solution} (const std\+::string \&name, solution\+\_\+creator creator)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1solution__factory_a3059624f73192888c169f7c7d2f8283e}\label{classhydro_1_1solution__factory_a3059624f73192888c169f7c7d2f8283e}} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classhydro_1_1solution__factory}{solution\+\_\+factory}}$<$ C, V, T $>$ $>$ \& {\bfseries factory} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/factories.\+h\end{DoxyCompactItemize}

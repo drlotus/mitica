@@ -1,0 +1,204 @@
+\hypertarget{classutils_1_1geometry_1_1four__vector}{}\doxysection{utils\+::geometry\+::four\+\_\+vector Class Reference}
+\label{classutils_1_1geometry_1_1four__vector}\index{utils::geometry::four\_vector@{utils::geometry::four\_vector}}
+
+
+Minkowski four vector with index information.  
+
+
+
+
+{\ttfamily \#include $<$geometry.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_adb0a76b36cbb1d37decbfb9116e28958}\label{classutils_1_1geometry_1_1four__vector_adb0a76b36cbb1d37decbfb9116e28958}} 
+{\bfseries four\+\_\+vector} (bool lower)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a48ff516ea4646ae1d6239cb59b393aba}\label{classutils_1_1geometry_1_1four__vector_a48ff516ea4646ae1d6239cb59b393aba}} 
+{\bfseries four\+\_\+vector} (four\+\_\+vec vec, bool is\+\_\+lower=false)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a334d0b091d494aa0787141eb224cffa9}\label{classutils_1_1geometry_1_1four__vector_a334d0b091d494aa0787141eb224cffa9}} 
+{\bfseries four\+\_\+vector} (double arr\mbox{[}$\,$\mbox{]}, const int size, bool is\+\_\+lower=false)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a59cf75f3573fee16f18400d649d583b6}\label{classutils_1_1geometry_1_1four__vector_a59cf75f3573fee16f18400d649d583b6}} 
+{\bfseries four\+\_\+vector} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&other)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a32c0619fe09775277a7a074345b7e878}\label{classutils_1_1geometry_1_1four__vector_a32c0619fe09775277a7a074345b7e878}} 
+{\bfseries four\+\_\+vector} (const double \&v0, const double \&v1, const double \&v2, const double \&v3, const bool \&lower)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a3cb8228bba98ed45cd6678503a12c0e7}\label{classutils_1_1geometry_1_1four__vector_a3cb8228bba98ed45cd6678503a12c0e7}} 
+four\+\_\+vec {\bfseries vec} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a531424d5582f877bcd0e641d1fe45029}\label{classutils_1_1geometry_1_1four__vector_a531424d5582f877bcd0e641d1fe45029}} 
+bool {\bfseries is\+\_\+lower} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a0c8966c321c26131f2c4ee207c82f3fb}\label{classutils_1_1geometry_1_1four__vector_a0c8966c321c26131f2c4ee207c82f3fb}} 
+double $\ast$ {\bfseries to\+\_\+array} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a23787574e3efb611e81131e7e2ac7f27}\label{classutils_1_1geometry_1_1four__vector_a23787574e3efb611e81131e7e2ac7f27}} 
+double {\bfseries operator\mbox{[}$\,$\mbox{]}} (const int i) const
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_af05cfc2338158dadb7395175624f88b9}\label{classutils_1_1geometry_1_1four__vector_af05cfc2338158dadb7395175624f88b9}} 
+double \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const int i)
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \& \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a45db4c705cb1904997b8d735a626ffc4}{operator+=}} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&rhs)
+\begin{DoxyCompactList}\small\item\em vector addition \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a3c9dbe412f7f71da1cb7b3f9eda5802f}{operator+}} (\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&vec2)
+\begin{DoxyCompactList}\small\item\em vector addition \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a55f3fa3ddc92fd44b4d67da8e62f482e}{operator-\/}} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&vec2)
+\begin{DoxyCompactList}\small\item\em vector subtraction \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a86811416e1e130e373dfbc9437f36cd4}\label{classutils_1_1geometry_1_1four__vector_a86811416e1e130e373dfbc9437f36cd4}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \& {\bfseries operator-\/=} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&rhs)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a2b3c698c491933a27bf3dc0fc98015ec}\label{classutils_1_1geometry_1_1four__vector_a2b3c698c491933a27bf3dc0fc98015ec}} 
+double {\bfseries operator$\ast$} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&vec2)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a10aab2b381f8c3a6dd930faedb9a89bc}\label{classutils_1_1geometry_1_1four__vector_a10aab2b381f8c3a6dd930faedb9a89bc}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} {\bfseries operator$\ast$} (const r2\+\_\+tensor \&tensor)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_ac726480dcf3a44244d7134cac7f6cf8d}\label{classutils_1_1geometry_1_1four__vector_ac726480dcf3a44244d7134cac7f6cf8d}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} {\bfseries operator$\ast$} (const double \&x)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_aecdd2ba997e2ac8812fafc438d476b6c}\label{classutils_1_1geometry_1_1four__vector_aecdd2ba997e2ac8812fafc438d476b6c}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&other) const
+\item 
+r2\+\_\+tensor \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a12e9be15f7387e91ed5f25017db82e1a}{operator\&}} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&vec2)
+\begin{DoxyCompactList}\small\item\em Outer product. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a8663f4aa96ce13d419d1572f80ae4a2b}\label{classutils_1_1geometry_1_1four__vector_a8663f4aa96ce13d419d1572f80ae4a2b}} 
+double {\bfseries norm\+\_\+sq} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a0d3a5194233d98bb98b2ad5c55b11033}\label{classutils_1_1geometry_1_1four__vector_a0d3a5194233d98bb98b2ad5c55b11033}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} {\bfseries to\+\_\+lower} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a857bd70b2d002e0e27f8c39ced2fe1dc}\label{classutils_1_1geometry_1_1four__vector_a857bd70b2d002e0e27f8c39ced2fe1dc}} 
+void {\bfseries lower} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a883c2b1e89702cf880f4d459d83c0cc2}\label{classutils_1_1geometry_1_1four__vector_a883c2b1e89702cf880f4d459d83c0cc2}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} {\bfseries to\+\_\+upper} ()
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_abf56a158001076007050165e9bce38a7}\label{classutils_1_1geometry_1_1four__vector_abf56a158001076007050165e9bce38a7}} 
+void {\bfseries raise} ()
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a58f71b4638f2e26ecff3f349e81577f8}{boost}} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&four\+\_\+velocity)
+\begin{DoxyCompactList}\small\item\em Lorentz boost (not implemented) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a8f823dce02eff67ba3dd754789d17e49}\label{classutils_1_1geometry_1_1four__vector_a8f823dce02eff67ba3dd754789d17e49}} 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} {\bfseries operator/} (const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&four\+\_\+velocity)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_ae78a983bca44f3a58137d4e8a5253b1d}\label{classutils_1_1geometry_1_1four__vector_ae78a983bca44f3a58137d4e8a5253b1d}} 
+static \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} {\bfseries add\+\_\+vectors} (std\+::vector$<$ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} $>$ vecs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_ab0fde93b2f7f75ee6efd78d76bf00243}\label{classutils_1_1geometry_1_1four__vector_ab0fde93b2f7f75ee6efd78d76bf00243}} 
+std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&stream, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&vector)
+\item 
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_ad948ce5fde5bc2228c4fe702c28dfb8c}\label{classutils_1_1geometry_1_1four__vector_ad948ce5fde5bc2228c4fe702c28dfb8c}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&stream, const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&vector)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Minkowski four vector with index information. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a58f71b4638f2e26ecff3f349e81577f8}\label{classutils_1_1geometry_1_1four__vector_a58f71b4638f2e26ecff3f349e81577f8}} 
+\index{utils::geometry::four\_vector@{utils::geometry::four\_vector}!boost@{boost}}
+\index{boost@{boost}!utils::geometry::four\_vector@{utils::geometry::four\_vector}}
+\doxysubsubsection{\texorpdfstring{boost()}{boost()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} utils\+::geometry\+::four\+\_\+vector\+::boost (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&}]{four\+\_\+velocity }\end{DoxyParamCaption})}
+
+
+
+Lorentz boost (not implemented) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em four\+\_\+velocity} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a12e9be15f7387e91ed5f25017db82e1a}\label{classutils_1_1geometry_1_1four__vector_a12e9be15f7387e91ed5f25017db82e1a}} 
+\index{utils::geometry::four\_vector@{utils::geometry::four\_vector}!operator\&@{operator\&}}
+\index{operator\&@{operator\&}!utils::geometry::four\_vector@{utils::geometry::four\_vector}}
+\doxysubsubsection{\texorpdfstring{operator\&()}{operator\&()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor utils\+::geometry\+::four\+\_\+vector\+::operator\& (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&}]{vec2 }\end{DoxyParamCaption})}
+
+
+
+Outer product. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a\+\_\+\textbackslash{}mu b\+\_\+\textbackslash{}nu or similar 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a3c9dbe412f7f71da1cb7b3f9eda5802f}\label{classutils_1_1geometry_1_1four__vector_a3c9dbe412f7f71da1cb7b3f9eda5802f}} 
+\index{utils::geometry::four\_vector@{utils::geometry::four\_vector}!operator+@{operator+}}
+\index{operator+@{operator+}!utils::geometry::four\_vector@{utils::geometry::four\_vector}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} utils\+::geometry\+::four\+\_\+vector\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&}]{vec2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+vector addition 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a45db4c705cb1904997b8d735a626ffc4}\label{classutils_1_1geometry_1_1four__vector_a45db4c705cb1904997b8d735a626ffc4}} 
+\index{utils::geometry::four\_vector@{utils::geometry::four\_vector}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!utils::geometry::four\_vector@{utils::geometry::four\_vector}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \& utils\+::geometry\+::four\+\_\+vector\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+vector addition 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutils_1_1geometry_1_1four__vector_a55f3fa3ddc92fd44b4d67da8e62f482e}\label{classutils_1_1geometry_1_1four__vector_a55f3fa3ddc92fd44b4d67da8e62f482e}} 
+\index{utils::geometry::four\_vector@{utils::geometry::four\_vector}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!utils::geometry::four\_vector@{utils::geometry::four\_vector}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} utils\+::geometry\+::four\+\_\+vector\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\+\_\+vector}} \&}]{vec2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+vector subtraction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/geometry.\+h\item 
+src/geometry.\+cpp\end{DoxyCompactItemize}

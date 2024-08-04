@@ -1,0 +1,173 @@
+\hypertarget{classpowerhouse_1_1_i__calculator}{}\doxysection{powerhouse\+::I\+\_\+calculator\texorpdfstring{$<$}{<} C \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classpowerhouse_1_1_i__calculator}\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+
+
+Interface for calculation.  
+
+
+
+
+{\ttfamily \#include $<$interfaces.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\+\_\+output}}$<$ C $>$ $\ast$ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}{perform\+\_\+step}} (C \&cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ C $>$ $\ast$previous\+\_\+step)=0
+\begin{DoxyCompactList}\small\item\em The main calculation in a single iteration. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}{prepare}} (const size\+\_\+t \&t\+\_\+count)=0
+\begin{DoxyCompactList}\small\item\em happens before entering the loop \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}{pre\+\_\+step}} ()=0
+\begin{DoxyCompactList}\small\item\em happens before perform\+\_\+step in each iteration \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}{process\+\_\+output}} (\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ C $>$ $\ast$output)=0
+\begin{DoxyCompactList}\small\item\em happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}{pre\+\_\+write}} (std\+::ostream \&os)=0
+\begin{DoxyCompactList}\small\item\em happens before writing the results \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}{write}} (std\+::ostream \&os, C $\ast$cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ C $>$ $\ast$final\+\_\+output)=0
+\begin{DoxyCompactList}\small\item\em writes the results to output \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename C$>$\newline
+class powerhouse\+::\+I\+\_\+calculator$<$ C $>$}
+Interface for calculation. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & ~\newline
+ \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}\label{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}} 
+\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}!perform\_step@{perform\_step}}
+\index{perform\_step@{perform\_step}!powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{perform\_step()}{perform\_step()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+virtual \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\+\_\+output}}$<$ C $>$ $\ast$ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse\+::\+I\+\_\+calculator}}$<$ C $>$\+::perform\+\_\+step (\begin{DoxyParamCaption}\item[{C \&}]{cell,  }\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ C $>$ $\ast$}]{previous\+\_\+step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The main calculation in a single iteration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & cell \\
+\hline
+{\em previous\+\_\+step} & the output from the previous step \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output from this step 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classpowerhouse_1_1examiner_a80424e798ea5f348c6a2688348071d28}{powerhouse\+::examiner}}, and \mbox{\hyperlink{classmock__calculator_ac78ec7fedf3cbb0ce1b59885dc6b23f4}{mock\+\_\+calculator}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}\label{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}} 
+\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}!pre\_step@{pre\_step}}
+\index{pre\_step@{pre\_step}!powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{pre\_step()}{pre\_step()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse\+::\+I\+\_\+calculator}}$<$ C $>$\+::pre\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+happens before perform\+\_\+step in each iteration 
+
+
+
+Implemented in \mbox{\hyperlink{classpowerhouse_1_1examiner_af438485feb8aa0f5569ec919a28165d6}{powerhouse\+::examiner}}, and \mbox{\hyperlink{classmock__calculator_add02973fb7d80b51012995203a72719c}{mock\+\_\+calculator}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}\label{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}} 
+\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}!pre\_write@{pre\_write}}
+\index{pre\_write@{pre\_write}!powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{pre\_write()}{pre\_write()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse\+::\+I\+\_\+calculator}}$<$ C $>$\+::pre\+\_\+write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+happens before writing the results 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classpowerhouse_1_1examiner_a29c9124498769e5c4453a03afc0df297}{powerhouse\+::examiner}}, and \mbox{\hyperlink{classmock__calculator_a194f0bd2465c80afe626ac97f732d34b}{mock\+\_\+calculator}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}\label{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}} 
+\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}!prepare@{prepare}}
+\index{prepare@{prepare}!powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse\+::\+I\+\_\+calculator}}$<$ C $>$\+::prepare (\begin{DoxyParamCaption}\item[{const size\+\_\+t \&}]{t\+\_\+count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+happens before entering the loop 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+count} & the number of steps \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classpowerhouse_1_1examiner_a06c9ec488562f9e93d52d314ef081bc1}{powerhouse\+::examiner}}, and \mbox{\hyperlink{classmock__calculator_aa77faf61ca0c1b80c8b9a71d6151e092}{mock\+\_\+calculator}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}\label{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}} 
+\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}!process\_output@{process\_output}}
+\index{process\_output@{process\_output}!powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{process\_output()}{process\_output()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse\+::\+I\+\_\+calculator}}$<$ C $>$\+::process\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ C $>$ $\ast$}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & the current or final output \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classpowerhouse_1_1examiner_ad85236b84ef9e569d9eb62f67ceeff68}{powerhouse\+::examiner}}, and \mbox{\hyperlink{classmock__calculator_addbcb7fbfc6c1fa888ab2c2950c437c0}{mock\+\_\+calculator}}.
+
+\mbox{\Hypertarget{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}\label{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}} 
+\index{powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}!write@{write}}
+\index{write@{write}!powerhouse::I\_calculator$<$ C $>$@{powerhouse::I\_calculator$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse\+::\+I\+\_\+calculator}}$<$ C $>$\+::write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{C $\ast$}]{cell,  }\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ C $>$ $\ast$}]{final\+\_\+output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+writes the results to output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & \\
+\hline
+{\em cell} & \\
+\hline
+{\em final\+\_\+output} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classmock__calculator_afac508a12c3aac0845d2d3a87b3778ed}{mock\+\_\+calculator}}, and \mbox{\hyperlink{classpowerhouse_1_1examiner_aab00e702d3c33928d250e0323e5ec73a}{powerhouse\+::examiner}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/interfaces.\+h\end{DoxyCompactItemize}

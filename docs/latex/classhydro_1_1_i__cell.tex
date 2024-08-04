@@ -1,0 +1,162 @@
+\hypertarget{classhydro_1_1_i__cell}{}\doxysection{hydro\+::I\+\_\+cell\texorpdfstring{$<$}{<} V, T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classhydro_1_1_i__cell}\index{hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}}
+
+
+Interface for a hypersurface cell.  
+
+
+
+
+{\ttfamily \#include $<$interfaces.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a1c2279d68de7a6e72c739fd85f2d2fb7}\label{classhydro_1_1_i__cell_a1c2279d68de7a6e72c739fd85f2d2fb7}} 
+virtual V {\bfseries milne\+\_\+coords} () const =0
+\item 
+virtual V \mbox{\hyperlink{classhydro_1_1_i__cell_ac5a7b540b8823703d5e17afe15bc11a2}{thermodynamics}} () const =0
+\begin{DoxyCompactList}\small\item\em Cell\textquotesingle{}s thermodynamics in the form (T, \textbackslash{}mu\+\_\+B, \textbackslash{}mu\+\_\+Q, \textbackslash{}mu\+\_\+S) \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__cell_a05e51408c1ddcc3c4619f29c45e2cadc}{du\+\_\+ll}} () const =0
+\begin{DoxyCompactList}\small\item\em \textbackslash{}partial\+\_\+\textbackslash{}mu u\+\_\+\textbackslash{}nu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aa43c7e9694b51dfdd56183e1afe8a62d}\label{classhydro_1_1_i__cell_aa43c7e9694b51dfdd56183e1afe8a62d}} 
+virtual T {\bfseries dbeta\+\_\+ll} () const =0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a348040ffdef20dc369f788a73dc33e9f}\label{classhydro_1_1_i__cell_a348040ffdef20dc369f788a73dc33e9f}} 
+virtual V {\bfseries four\+\_\+vel} () const =0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_ae8b70d83094c7a5768fc16af37c10e4e}\label{classhydro_1_1_i__cell_ae8b70d83094c7a5768fc16af37c10e4e}} 
+virtual V {\bfseries dsigma} () const =0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a4f724788eef6491dc096cd08233f322b}\label{classhydro_1_1_i__cell_a4f724788eef6491dc096cd08233f322b}} 
+virtual V {\bfseries acceleration} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a20155dcc9d38726c4a2887d9a7072659}\label{classhydro_1_1_i__cell_a20155dcc9d38726c4a2887d9a7072659}} 
+virtual T {\bfseries shear\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a57a75ba03c165381e216e205bba9111a}\label{classhydro_1_1_i__cell_a57a75ba03c165381e216e205bba9111a}} 
+virtual V {\bfseries fluid\+\_\+vort\+\_\+vec} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a6589ed8d423bdb12c79ca5a913b55bc9}\label{classhydro_1_1_i__cell_a6589ed8d423bdb12c79ca5a913b55bc9}} 
+virtual T {\bfseries fluid\+\_\+vort\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aa339059e3f96d3b468cb05f61b830ab4}\label{classhydro_1_1_i__cell_aa339059e3f96d3b468cb05f61b830ab4}} 
+virtual T {\bfseries thermal\+\_\+vort\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a417c3bdec6ee5f1f70447cb21980fc80}\label{classhydro_1_1_i__cell_a417c3bdec6ee5f1f70447cb21980fc80}} 
+virtual T {\bfseries thermal\+\_\+shear\+\_\+ll} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a45f1bf93a98d8c6cd320a80ce08c1c44}\label{classhydro_1_1_i__cell_a45f1bf93a98d8c6cd320a80ce08c1c44}} 
+virtual double {\bfseries theta} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a65c2fd8f13495e2dda9a3ffc3f972512}\label{classhydro_1_1_i__cell_a65c2fd8f13495e2dda9a3ffc3f972512}} 
+virtual double {\bfseries b\+\_\+theta} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a23ae753be5afa227b9a86f85aa9e364d}\label{classhydro_1_1_i__cell_a23ae753be5afa227b9a86f85aa9e364d}} 
+virtual double {\bfseries normal\+\_\+sq} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a69c872c64aa4090d3dd7d087baf8d583}\label{classhydro_1_1_i__cell_a69c872c64aa4090d3dd7d087baf8d583}} 
+virtual bool {\bfseries is\+\_\+spacelike} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a7087abe2efb421cb966e921ae9c18add}\label{classhydro_1_1_i__cell_a7087abe2efb421cb966e921ae9c18add}} 
+virtual double {\bfseries sigma\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_af4d402b9830689b2c0abd643938a1486}\label{classhydro_1_1_i__cell_af4d402b9830689b2c0abd643938a1486}} 
+virtual double {\bfseries fvort\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_adba351aaaaf7f0f7a10f15736cb27a7f}\label{classhydro_1_1_i__cell_adba351aaaaf7f0f7a10f15736cb27a7f}} 
+virtual double {\bfseries tvort\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aef7b63b2938c5de14984ced707605fbe}\label{classhydro_1_1_i__cell_aef7b63b2938c5de14984ced707605fbe}} 
+virtual double {\bfseries tshear\+\_\+norm} ()=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_adb4e95d056899c4c0c35548cba72283d}\label{classhydro_1_1_i__cell_adb4e95d056899c4c0c35548cba72283d}} 
+virtual double {\bfseries acc\+\_\+norm} ()=0
+\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__cell_a3515b7e282e062293731f16e8b40f24c}{u\+\_\+dot\+\_\+n}} ()=0
+\begin{DoxyCompactList}\small\item\em scalar product of the four velocity and the surface vector \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aa42d52401bf30863d7a2985935993ea4}\label{classhydro_1_1_i__cell_aa42d52401bf30863d7a2985935993ea4}} 
+virtual std\+::ostream \& {\bfseries write\+\_\+info} (std\+::ostream \&osm, const char delim)=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__cell_aaae7511fca3b508eab794a98ace8b8a9}\label{classhydro_1_1_i__cell_aaae7511fca3b508eab794a98ace8b8a9}} 
+virtual std\+::ostream \& {\bfseries write\+\_\+back} (std\+::ostream \&os, const char delim)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename V, typename T$>$\newline
+class hydro\+::\+I\+\_\+cell$<$ V, T $>$}
+Interface for a hypersurface cell. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em V} & the four-\/vector type \\
+\hline
+{\em T} & the rank-\/2 tensor type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a05e51408c1ddcc3c4619f29c45e2cadc}\label{classhydro_1_1_i__cell_a05e51408c1ddcc3c4619f29c45e2cadc}} 
+\index{hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}!du\_ll@{du\_ll}}
+\index{du\_ll@{du\_ll}!hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}}
+\doxysubsubsection{\texorpdfstring{du\_ll()}{du\_ll()}}
+{\footnotesize\ttfamily template$<$typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell}}$<$ V, T $>$\+::du\+\_\+ll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+\textbackslash{}partial\+\_\+\textbackslash{}mu u\+\_\+\textbackslash{}nu 
+
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classhydro_1_1fcell_a6cc1f3001bb6178d62d2d7f00a79e28f}{hydro\+::fcell}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__cell_ac5a7b540b8823703d5e17afe15bc11a2}\label{classhydro_1_1_i__cell_ac5a7b540b8823703d5e17afe15bc11a2}} 
+\index{hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}!thermodynamics@{thermodynamics}}
+\index{thermodynamics@{thermodynamics}!hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}}
+\doxysubsubsection{\texorpdfstring{thermodynamics()}{thermodynamics()}}
+{\footnotesize\ttfamily template$<$typename V , typename T $>$ \\
+virtual V \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell}}$<$ V, T $>$\+::thermodynamics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Cell\textquotesingle{}s thermodynamics in the form (T, \textbackslash{}mu\+\_\+B, \textbackslash{}mu\+\_\+Q, \textbackslash{}mu\+\_\+S) 
+
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classhydro_1_1fcell_abaab17f84df9a25c1e9c2be7294a1671}{hydro\+::fcell}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__cell_a3515b7e282e062293731f16e8b40f24c}\label{classhydro_1_1_i__cell_a3515b7e282e062293731f16e8b40f24c}} 
+\index{hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}!u\_dot\_n@{u\_dot\_n}}
+\index{u\_dot\_n@{u\_dot\_n}!hydro::I\_cell$<$ V, T $>$@{hydro::I\_cell$<$ V, T $>$}}
+\doxysubsubsection{\texorpdfstring{u\_dot\_n()}{u\_dot\_n()}}
+{\footnotesize\ttfamily template$<$typename V , typename T $>$ \\
+virtual double \mbox{\hyperlink{classhydro_1_1_i__cell}{hydro\+::\+I\+\_\+cell}}$<$ V, T $>$\+::u\+\_\+dot\+\_\+n (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+scalar product of the four velocity and the surface vector 
+
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classhydro_1_1fcell_ac77fbece1e9663748db9f829a6e60d57}{hydro\+::fcell}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/interfaces.\+h\end{DoxyCompactItemize}

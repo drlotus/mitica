@@ -1,0 +1,70 @@
+\hypertarget{classhydro_1_1hypersurface__wrapper}{}\doxysection{hydro\+::hypersurface\+\_\+wrapper Class Reference}
+\label{classhydro_1_1hypersurface__wrapper}\index{hydro::hypersurface\_wrapper@{hydro::hypersurface\_wrapper}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classhydro_1_1hypersurface__wrapper_a1122f44a45e5fb3ae1c3013f41b3638e}{read\+\_\+hypersrface}} (std\+::ifstream \&file, utils\+::accept\+\_\+modes mode)
+\begin{DoxyCompactList}\small\item\em Reads the hypersurface data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_aa7c64241aec2313c526e1a38b5a7afe8}\label{classhydro_1_1hypersurface__wrapper_aa7c64241aec2313c526e1a38b5a7afe8}} 
+int {\bfseries skipped} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_ad08446cf888f6fb2c8a9e0cc68be199d}\label{classhydro_1_1hypersurface__wrapper_ad08446cf888f6fb2c8a9e0cc68be199d}} 
+int {\bfseries rejected} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a0b011c120b2dfd185bdcee9e38bd1f6e}\label{classhydro_1_1hypersurface__wrapper_a0b011c120b2dfd185bdcee9e38bd1f6e}} 
+int {\bfseries timelikes} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a4dcd360162679a0c62eb6f19135f46cb}\label{classhydro_1_1hypersurface__wrapper_a4dcd360162679a0c62eb6f19135f46cb}} 
+int {\bfseries total} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a840c0ac745cd095e7309feac5c015b34}\label{classhydro_1_1hypersurface__wrapper_a840c0ac745cd095e7309feac5c015b34}} 
+int {\bfseries failed} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a7f16fe53a5672d7351a9a346f48acbad}\label{classhydro_1_1hypersurface__wrapper_a7f16fe53a5672d7351a9a346f48acbad}} 
+int {\bfseries lines} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_ada4e68213fce282b42190b71176220ae}\label{classhydro_1_1hypersurface__wrapper_ada4e68213fce282b42190b71176220ae}} 
+std\+::vector$<$ \mbox{\hyperlink{structhydro_1_1element}{element}} $>$ {\bfseries hypersurface} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_ab98cc84cb49f5cd9ce15455f09bf1e72}\label{classhydro_1_1hypersurface__wrapper_ab98cc84cb49f5cd9ce15455f09bf1e72}} 
+\mbox{\hyperlink{structhydro_1_1surface__info}{surface\+\_\+info}} {\bfseries read\+\_\+info} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a7adf718c10cda08d1c2f0b981f1f8f67}\label{classhydro_1_1hypersurface__wrapper_a7adf718c10cda08d1c2f0b981f1f8f67}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_ac0d4958f443249ab36028a530289ed43}\label{classhydro_1_1hypersurface__wrapper_ac0d4958f443249ab36028a530289ed43}} 
+void {\bfseries add} (\mbox{\hyperlink{structhydro_1_1element}{element}} \&cell, utils\+::accept\+\_\+modes acc\+\_\+mode)
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_aaffb31db832c970e5f4f8a3795973c67}\label{classhydro_1_1hypersurface__wrapper_aaffb31db832c970e5f4f8a3795973c67}} 
+\mbox{\hyperlink{structhydro_1_1element}{element}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int)
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a098bd56d9e0827b157d5834f1689738a}\label{classhydro_1_1hypersurface__wrapper_a098bd56d9e0827b157d5834f1689738a}} 
+bool {\bfseries checksize} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhydro_1_1hypersurface__wrapper_a1122f44a45e5fb3ae1c3013f41b3638e}\label{classhydro_1_1hypersurface__wrapper_a1122f44a45e5fb3ae1c3013f41b3638e}} 
+\index{hydro::hypersurface\_wrapper@{hydro::hypersurface\_wrapper}!read\_hypersrface@{read\_hypersrface}}
+\index{read\_hypersrface@{read\_hypersrface}!hydro::hypersurface\_wrapper@{hydro::hypersurface\_wrapper}}
+\doxysubsubsection{\texorpdfstring{read\_hypersrface()}{read\_hypersrface()}}
+{\footnotesize\ttfamily void hydro\+::hypersurface\+\_\+wrapper\+::read\+\_\+hypersrface (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{file,  }\item[{utils\+::accept\+\_\+modes}]{mode }\end{DoxyParamCaption})}
+
+
+
+Reads the hypersurface data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & \\
+\hline
+{\em mode} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/surface.\+h\item 
+src/surface.\+cpp\end{DoxyCompactItemize}

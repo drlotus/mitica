@@ -1,0 +1,112 @@
+\hypertarget{my__engine_8h_source}{}\doxysection{my\+\_\+engine.\+h}
+\label{my__engine_8h_source}\index{test/my\_engine.h@{test/my\_engine.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MY\_ENGINE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MY\_ENGINE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../src/utils.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../src/fcell.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../src/interfaces.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../src/I\_engine.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../src/geometry.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmy__engine}{my\_engine}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{powerhouse::I\_engine}}<hydro::fcell>}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classmy__engine}{\string~my\_engine}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ run()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ write()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmock__calculator}{mock\_calculator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{powerhouse::I\_calculator}}<hydro::fcell>}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_count;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_step\_size;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_perc\ =\ 0;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_local\_cell\_counter\ =\ 0;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classmock__calculator}{mock\_calculator}}()\ \{\}}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classmock__calculator}{\string~mock\_calculator}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *\mbox{\hyperlink{classmock__calculator_ac78ec7fedf3cbb0ce1b59885dc6b23f4}{perform\_step}}(\mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell,\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *previous\_step)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output<hydro::fcell>}}\ data;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (previous\_step)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ exam\_output\_ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output<hydro::fcell>}}\ *\textcolor{keyword}{>}(previous\_step);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (exam\_output\_ptr)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ *exam\_output\_ptr;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Type\ of\ previous\_step:\ "{}}\ <<\ \textcolor{keyword}{typeid}(*previous\_step).name()\ <<\ std::endl;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Unknown\ error"{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ data.a2\_sum\ +=\ cell.acc\_norm();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ data.btheta\_sum\ +=\ cell.b\_theta();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ data.fvort2\_sum\ +=\ cell.fvort\_norm();}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ data.sigma2\_sum\ +=\ cell.sigma\_norm();}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ data.th\_shear\_2\_sum\ +=\ cell.tshear\_norm();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ data.th\_vort\_2\_sum\ +=\ cell.tvort\_norm();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ data.theta\_sum\ +=\ cell.theta();}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.theta()\ <\ 0)}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ data.neg\_theta++;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cell.acceleration()\ *\ cell.four\_vel()\ !=\ 0)}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ data.u\_dot\_a\_not\_zero++;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (utils::trace\_ll(cell.shear\_ll())\ !=\ 0)}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ data.tr\_sigma++;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{powerhouse::exam\_output}}(data);}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmock__calculator_aa77faf61ca0c1b80c8b9a71d6151e092}{prepare}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \&t\_count)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00079\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \_count\ =\ t\_count;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \_step\_size\ =\ \_count\ /\ 100\ -\/\ 1;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \_perc\ =\ 0;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \_local\_cell\_counter\ =\ 0;}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmock__calculator_add02973fb7d80b51012995203a72719c}{pre\_step}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_local\_cell\_counter\ \%\ \_step\_size\ ==\ 0)}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \_perc++;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ utils::show\_progress((\_perc\ >\ 100)\ ?\ 100\ :\ \_perc);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \_local\_cell\_counter++;}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmock__calculator_addbcb7fbfc6c1fa888ab2c2950c437c0}{process\_output}}(\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *output)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00095\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmock__calculator_a194f0bd2465c80afe626ac97f732d34b}{pre\_write}}(std::ostream\ \&output)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00099\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmock__calculator_afac508a12c3aac0845d2d3a87b3778ed}{write}}(std::ostream\ \&output,\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ *cell,\ \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<hydro::fcell>}}\ *final\_output)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00103\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \};}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

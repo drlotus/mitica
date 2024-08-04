@@ -1,0 +1,24 @@
+\hypertarget{interpolation_8h_source}{}\doxysection{interpolation.\+h}
+\label{interpolation_8h_source}\index{src/interpolation.h@{src/interpolation.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INTERPOLATION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INTERPOLATION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}TSpline.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_data_point}{DataPoint}}\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{double}\ x;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{double}\ y;}
+\DoxyCodeLine{00010\ \};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ std::vector<DataPoint>\ parseCSV(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00013\ TSpline3*\ performInterpolation(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00014\ TSpline3*\ getInterpolationSpline(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00015\ \textcolor{keywordtype}{void}\ plotTGraph(TGraph*\ graph);}
+\DoxyCodeLine{00016\ \textcolor{keywordtype}{void}\ saveTableToFile(\textcolor{keyword}{const}\ TSpline3*\ spline,\ \textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INTERPOLATION\_H}}
+
+\end{DoxyCode}

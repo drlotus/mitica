@@ -1,0 +1,94 @@
+\hypertarget{classhydro_1_1hypersurface}{}\doxysection{hydro\+::hypersurface\texorpdfstring{$<$}{<} C \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classhydro_1_1hypersurface}\index{hydro::hypersurface$<$ C $>$@{hydro::hypersurface$<$ C $>$}}
+
+
+A wrapper for the surface.  
+
+
+
+
+{\ttfamily \#include $<$interfaces.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a4ba97bff449093cd45fc19c8a0f72c64}\label{classhydro_1_1hypersurface_a4ba97bff449093cd45fc19c8a0f72c64}} 
+int {\bfseries skipped} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_aa93800fccbe38ef7a698408c96e7d703}\label{classhydro_1_1hypersurface_aa93800fccbe38ef7a698408c96e7d703}} 
+int {\bfseries rejected} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_ab03978a98c88a63547849bb7914221ef}\label{classhydro_1_1hypersurface_ab03978a98c88a63547849bb7914221ef}} 
+int {\bfseries timelikes} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a4db74884ed0343c1d9b29b61f090c5c9}\label{classhydro_1_1hypersurface_a4db74884ed0343c1d9b29b61f090c5c9}} 
+int {\bfseries total} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a17657a7beb10c71d5cc346fad4022786}\label{classhydro_1_1hypersurface_a17657a7beb10c71d5cc346fad4022786}} 
+int {\bfseries failed} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a6c7fd067a39de2c08c2344faa096404d}\label{classhydro_1_1hypersurface_a6c7fd067a39de2c08c2344faa096404d}} 
+int {\bfseries lines} () const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a294a9c4998b648b3930cd6d377bd46d1}\label{classhydro_1_1hypersurface_a294a9c4998b648b3930cd6d377bd46d1}} 
+C {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_ad11a43cb6571144f67274c50603749a3}\label{classhydro_1_1hypersurface_ad11a43cb6571144f67274c50603749a3}} 
+C \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t i)
+\item 
+virtual void \mbox{\hyperlink{classhydro_1_1hypersurface_ab2c6049e4b1ae018098e1a129576a211}{read}} (const std\+::string \&i\+\_\+file, utils\+::accept\+\_\+modes mode)
+\begin{DoxyCompactList}\small\item\em reads the surface data from a file, uses parallelization if the code is compiled with Open\+MP \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a42a4e09845e6d5eaeb565077ec4149b9}\label{classhydro_1_1hypersurface_a42a4e09845e6d5eaeb565077ec4149b9}} 
+\mbox{\hyperlink{structhydro_1_1surface__stat}{surface\+\_\+stat}}$<$ C $>$ {\bfseries readinfo} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_ade11ef963e6c4aa279552934b1fd4939}\label{classhydro_1_1hypersurface_ade11ef963e6c4aa279552934b1fd4939}} 
+void {\bfseries add} (C \&cell, utils\+::accept\+\_\+modes mode)
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_a9916d2c3eeb20e64638e6320182cde40}\label{classhydro_1_1hypersurface_a9916d2c3eeb20e64638e6320182cde40}} 
+std\+::vector$<$ C $>$ \& {\bfseries data} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_ad310161641f73f1efbd5c0d99c530b39}\label{classhydro_1_1hypersurface_ad310161641f73f1efbd5c0d99c530b39}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1hypersurface_ace367268d69b949ef96e5725ab5224f1}\label{classhydro_1_1hypersurface_ace367268d69b949ef96e5725ab5224f1}} 
+bool {\bfseries checksize} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename C$>$\newline
+class hydro\+::hypersurface$<$ C $>$}
+A wrapper for the surface. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & the cell\textquotesingle{}s type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhydro_1_1hypersurface_ab2c6049e4b1ae018098e1a129576a211}\label{classhydro_1_1hypersurface_ab2c6049e4b1ae018098e1a129576a211}} 
+\index{hydro::hypersurface$<$ C $>$@{hydro::hypersurface$<$ C $>$}!read@{read}}
+\index{read@{read}!hydro::hypersurface$<$ C $>$@{hydro::hypersurface$<$ C $>$}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+void \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ C $>$\+::read (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{i\+\_\+file,  }\item[{utils\+::accept\+\_\+modes}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+reads the surface data from a file, uses parallelization if the code is compiled with Open\+MP 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+file} & input file \\
+\hline
+{\em mode} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/interfaces.\+h\end{DoxyCompactItemize}

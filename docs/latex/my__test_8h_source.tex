@@ -1,0 +1,151 @@
+\hypertarget{my__test_8h_source}{}\doxysection{my\+\_\+test.\+h}
+\label{my__test_8h_source}\index{test/my\_test.h@{test/my\_test.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MY\_TEST\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MY\_TEST\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <gtest/gtest.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../src/utils.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../src/geometry.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../src/interfaces.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../src/fcell.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../src/element.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmy__test}{my\_test}}\ :\ \textcolor{keyword}{public}\ testing::Test}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ abs\_error;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ PATH\ =\ \textcolor{stringliteral}{"{}./input/beta.dat"{}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ BJORKEN\ =\ \textcolor{stringliteral}{"{}./input/bjorken.dat"{}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ RIGID\_CYL\ =\ \textcolor{stringliteral}{"{}./input/rigid.dat"{}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_ARRAY\_EQ(utils::four\_vec\ x,\ utils::four\_vec\ y,\ std::string\ msg\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00021\ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ ASSERT\_EQ(x.size(),\ y.size())\ <<\ \textcolor{stringliteral}{"{}Vectors\ x\ and\ y\ are\ of\ unequal\ length"{}}\ <<\ msg;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ x.size();\ ++i)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x[i],\ y[i])\ <<\ \textcolor{stringliteral}{"{}Vectors\ x\ and\ y\ differ\ at\ index\ "{}}\ <<\ i\ <<\ msg;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_ARRAY\_NEAR(utils::four\_vec\ x,\ utils::four\_vec\ y,\ std::string\ msg\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{double}\ tolerance\ =\ abs\_error)}
+\DoxyCodeLine{00031\ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ ASSERT\_EQ(x.size(),\ y.size())\ <<\ \textcolor{stringliteral}{"{}Vectors\ x\ and\ y\ are\ of\ unequal\ length"{}}\ <<\ msg;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ x.size();\ ++i)}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(x[i],\ y[i],\ tolerance)\ <<\ \textcolor{stringliteral}{"{}Vectors\ x\ and\ y\ differ\ at\ index\ "{}}\ <<\ i\ <<\ msg;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_ARRAY\_EQ(utils::r2\_tensor\ x,\ utils::r2\_tensor\ y,\ std::string\ msg\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ ASSERT\_EQ(x.size(),\ y.size())\ <<\ \textcolor{stringliteral}{"{}Tensors\ x\ and\ y\ are\ of\ unequal\ length"{}}\ <<\ msg;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(x[i][j],\ y[i][j])\ <<\ \textcolor{stringliteral}{"{}Tensors\ x\ and\ y\ differ\ at\ index\ ["{}}\ <<\ i\ <<\ \textcolor{charliteral}{','}\ <<\ j\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ msg;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_ARRAY\_NEAR\_SYMMETRIC(utils::r2\_tensor\ x,\ std::string\ msg\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{double}\ tolerance\ =\ abs\_error)}
+\DoxyCodeLine{00053\ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(x[i][j]\ -\/\ x[j][i],\ 0,\ tolerance)\ <<\ \textcolor{stringliteral}{"{}\ index\ ["{}}\ <<\ i\ <<\ \textcolor{charliteral}{','}\ <<\ j\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ msg;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_ARRAY\_NEAR\_ANTISYMMETRIC(utils::r2\_tensor\ x,\ std::string\ msg\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{double}\ tolerance\ =\ abs\_error)}
+\DoxyCodeLine{00064\ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(x[i][j]\ +\ x[j][i],\ 0,\ tolerance)\ <<\ \textcolor{stringliteral}{"{}\ index\ ["{}}\ <<\ i\ <<\ \textcolor{charliteral}{','}\ <<\ j\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ msg;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ EXPECT\_ARRAY\_NEAR(utils::r2\_tensor\ x,\ utils::r2\_tensor\ y,\ std::string\ msg\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{double}\ tolerance\ =\ abs\_error)}
+\DoxyCodeLine{00075\ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ ASSERT\_EQ(x.size(),\ y.size())\ <<\ \textcolor{stringliteral}{"{}Tensors\ x\ and\ y\ are\ of\ unequal\ length"{}}\ <<\ msg;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(x[i][j],\ y[i][j],\ tolerance)\ <<\ \textcolor{stringliteral}{"{}Tensors\ x\ and\ y\ differ\ at\ index\ ["{}}\ <<\ i\ <<\ \textcolor{charliteral}{','}\ <<\ j\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ msg;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ std::string\ to\_string(utils::four\_vec\ vec)}
+\DoxyCodeLine{00088\ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}("{}}\ <<\ vec[0]\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ vec[1]\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ vec[2]\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ vec[3]\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00094\ \ \ \ \ C\ read\_cell(std::string\ path)}
+\DoxyCodeLine{00095\ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ std::ifstream\ file(path);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ C\ el;}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ std::getline(file,\ line);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ std::istringstream\ iss(line);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!iss.fail())}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iss\ >>\ el;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (line.empty()\ ||\ line[0]\ ==\ \textcolor{charliteral}{'\#'});}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ el;}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ read\_cells(std::string\ path,\ \textcolor{keywordtype}{int}\ count,\ \textcolor{keywordtype}{int}\ \&lines)}
+\DoxyCodeLine{00114\ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ \_surface;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ std::ifstream\ file(path);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ lines\ =\ std::count(std::istreambuf\_iterator<char>(file),}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::istreambuf\_iterator<char>(),\ \textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ file.seekg(0);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_counter\ =\ 0;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(file,\ line)\ \&\&\ \_counter\ <\ count)}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (line.empty()\ ||\ line[0]\ ==\ \textcolor{charliteral}{'\#'})}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \_counter++;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ std::istringstream\ iss(line);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ C\ cell;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ iss\ >>\ cell;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \_surface.add(cell,\ utils::accept\_modes::AcceptAll);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ file.close();}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_surface;}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ my\_test::abs\_error\ =\ 1e-\/6;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

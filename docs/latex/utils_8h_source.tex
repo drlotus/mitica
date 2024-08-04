@@ -1,0 +1,255 @@
+\hypertarget{utils_8h_source}{}\doxysection{utils.\+h}
+\label{utils_8h_source}\index{src/utils.h@{src/utils.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UTILS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UTILS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ BOOST}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ BOOST\ false}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ DEBUG}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ DEBUG\ true}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ BENCHMARK}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BENCHMARK\ true}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ USEOLDSHEAR}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ USEOLDSHEAR\ false}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ <strstream>}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00032\ \textcolor{keyword}{namespace\ }utils}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ MILNE[4]\ =\ \{\textcolor{stringliteral}{"{}tau"{}},\ \textcolor{stringliteral}{"{}x"{}},\ \textcolor{stringliteral}{"{}y"{}},\ \textcolor{stringliteral}{"{}eta"{}}\};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ MINKOWSKI[4]\ =\ \{\textcolor{stringliteral}{"{}t"{}},\ \textcolor{stringliteral}{"{}x"{}},\ \textcolor{stringliteral}{"{}y"{}},\ \textcolor{stringliteral}{"{}z"{}}\};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ bar\_width\ =\ 70;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ TOLERANCE\ =\ 0.0;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ SYNTAX\ =\ \textcolor{stringliteral}{"{}usage:\ ./calc\ -\/i\ <surface\_file>\ -\/o\ <output\_file>\ program\_mode\ [accept\_mode]\ [polarization\_mode]\ [-\/m\ modifier]\ [-\/d]\ [-\/q]\(\backslash\)n"{}}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}program\_mode:\ -\/e:\ examine\(\backslash\)t\ -\/y\ yield\(\backslash\)t\ -\/p\ polarization\(\backslash\)n"{}}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}accept\_mode:\ \(\backslash\)n"{}}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}polarization\_mode:\ \(\backslash\)n"{}}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/q\ quite\ -\/d\ feed\ down"{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{enum\ class}\ program\_modes}
+\DoxyCodeLine{00045\ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ Examine,\ \ \ \ \ \ \textcolor{comment}{//\ -\/e\ examine\ the\ hypersurface\ data}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Yield,\ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/y\ caclulate\ the\ yield}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ Polarization,\ \textcolor{comment}{//\ -\/p\ caclulate\ polarization}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ Invalid,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ Help}
+\DoxyCodeLine{00051\ \ \ \ \ \};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{enum\ class}\ accept\_modes}
+\DoxyCodeLine{00054\ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ AcceptAll,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/rn}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ RejectTimelike,\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/rt}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ RejectNegativeDuDSigma,\ \textcolor{comment}{//\ -\/ru}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ RejectNegativePDSigma,\ \ \textcolor{comment}{//\ -\/rp}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ Invalid}
+\DoxyCodeLine{00060\ \ \ \ \ \};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{enum\ class}\ polarization\_modes}
+\DoxyCodeLine{00062\ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ GlobalEq,\ \ \ \ \ \ \ \textcolor{comment}{//\ Thermal\ vorticity\ alone\ -\/geq}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ ThermalShear,\ \ \ \textcolor{comment}{//\ Thermal\ shear\ alone\ -\/ts}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ LocalEqDb,\ \ \ \ \ \ \textcolor{comment}{//\ Local\ equilibrium\ with\ dbeta\ -\/leqdb}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ LocalEqDu,\ \ \ \ \ \ \textcolor{comment}{//\ Local\ equilibrium\ with\ du\ -\/leqdu}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ EqSpinHydro,\ \ \ \ \textcolor{comment}{//\ spin\ hydro\ in\ equilibrium\ -\/eqsh}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ ModEqSpinHydro,\ \textcolor{comment}{//\ Modified\ spin\ hydro\ in\ equilibrium\ -\/meqdsh}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ SpinHydro,\ \ \ \ \ \ \textcolor{comment}{//\ Real\ spin\ hydro\ -\/sh}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ Invalid}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{enum\ class}\ yield\_modes}
+\DoxyCodeLine{00073\ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ GlobalEq}
+\DoxyCodeLine{00075\ \ \ \ \ \};}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{enum\ class}\ examine\_modes}
+\DoxyCodeLine{00077\ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ Simple}
+\DoxyCodeLine{00079\ \ \ \ \ \};}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structutils_1_1program__options}{program\_options}}}
+\DoxyCodeLine{00081\ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ utils::program\_modes\ program\_mode;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ utils::accept\_modes\ accept\_mode;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ utils::polarization\_modes\ polarization\_mode;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ utils::yield\_modes\ yield\_mode;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ modifier;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::string\ in\_file;\ \ \textcolor{comment}{//\ -\/i\ <input\_fule>}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::string\ out\_file;\ \textcolor{comment}{//\ -\/o\ <output\_file>}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ std::string\ what;\ \ \ \ \ \textcolor{comment}{//\ Error\ message}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ validate()\ \{\ \textcolor{keywordflow}{return}\ program\_mode\ !=\ program\_modes::Invalid;\ \};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ print();}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ show\_help();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ decay;\ \ \ \textcolor{comment}{//\ Use\ feeddown\ -\/d}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ verbose;\ \textcolor{comment}{//\ Default\ is\ true\ use\ -\/q\ for\ quiet\ mode}}
+\DoxyCodeLine{00096\ \ \ \ \ \};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ Random\ engine\ type}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{typedef}\ std::mt19937\ randomizer;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ Generates\ random\ integer}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{int}\ rand\_int(\textcolor{keywordtype}{int}\ min\ =\ 0,\ \textcolor{keywordtype}{int}\ max\ =\ 10);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{double}\ rand\_double(\textcolor{keywordtype}{double}\ min\ =\ 0,\ \textcolor{keywordtype}{double}\ max\ =\ 10);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ sign(\textcolor{keywordtype}{double}\ a)}
+\DoxyCodeLine{00106\ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ a\ >\ 0\ ?\ 1.0\ :\ -\/1.0;}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ kr\_delta(\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j)}
+\DoxyCodeLine{00111\ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (i==j)\ ?\ 1\ :\ 0;}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Gevtofm\ =\ 5.067728853;}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ hbarC\ =\ 1.\ /\ 5.067728853;\ \textcolor{comment}{//=0.197\ Gev*fm}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ PI\ =\ std::acos(-\/1);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ is\_zero(\textcolor{keywordtype}{double}\ v)\ \{\ \textcolor{keywordflow}{return}\ abs(v)\ >\ TOLERANCE;\ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ equals(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b)}
+\DoxyCodeLine{00122\ \ \ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ is\_zero(a\ -\/\ b);}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00127\ \ \ \ \ T\ absolute\_error(\textcolor{keyword}{const}\ T\ approx,\ \textcolor{keyword}{const}\ T\ exact);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00130\ \ \ \ \ T\ relative\_error(\textcolor{keyword}{const}\ T\ approx,\ \textcolor{keyword}{const}\ T\ exact);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ program\_options\ read\_cmd(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv);}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ show\_progress(\textcolor{keywordtype}{int}\ perc);}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//\ Andrea\ Palermo}}
+\DoxyCodeLine{00135\ \ \ \ \ std::vector<double>\ linspace(\textcolor{keywordtype}{double}\ min,\ \textcolor{keywordtype}{double}\ max,\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{double}\ simple\_bench(std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{void})>\ f,\ \textcolor{keywordtype}{int}\ iter);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{typedef}\ std::array<double,\ 4>\ four\_vec;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{typedef}\ std::array<std::array<double,\ 4>,\ 4>\ r2\_tensor;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{const}\ std::array<int,\ 4>\ gmumu\ =\ \{1,\ -\/1,\ -\/1,\ -\/1\};}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{comment}{//\ Metric\ tensor\ with\ both\ indices\ up\ or\ down}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ gmunu[4][4]\ =\ \{\{1.,\ 0.,\ 0.,\ 0.\},}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.,\ -\/1.,\ 0.,\ 0.\},}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.,\ 0.,\ -\/1.,\ 0.\},}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.,\ 0.,\ 0.,\ -\/1.\}\};}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{const}\ r2\_tensor\ metric\ =\ \{\{\{1.,\ 0.,\ 0.,\ 0.\},}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.,\ -\/1.,\ 0.,\ 0.\},}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.,\ 0.,\ -\/1.,\ 0.\},}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.,\ 0.,\ 0.,\ -\/1.\}\}\};}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{const}\ std::array<int,\ 4>\ t\_vector\ =\ \{1,\ 0,\ 0,\ 0\};}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{constexpr}\ four\_vec\ from\_array(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *a)}
+\DoxyCodeLine{00154\ \ \ \ \ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{a[0],\ a[1],\ a[2],\ a[3]\};}
+\DoxyCodeLine{00156\ \ \ \ \ \};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{int}\ g(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu);}
+\DoxyCodeLine{00162\ \ \ \ \ r2\_tensor\ add\_tensors(std::vector<r2\_tensor>\ tensors);}
+\DoxyCodeLine{00166\ \ \ \ \ four\_vec\ add\_vectors(std::vector<four\_vec>\ vecs);}
+\DoxyCodeLine{00171\ \ \ \ \ four\_vec\ s\_product(utils::four\_vec\ v1,\ \textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00176\ \ \ \ \ r2\_tensor\ s\_product(r2\_tensor\ t1,\ \textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00181\ \ \ \ \ r2\_tensor\ mat\_product(four\_vec\ v1,\ four\_vec\ v2);}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{constexpr}\ four\_vec\ to\_lower(four\_vec\ v\_u)}
+\DoxyCodeLine{00186\ \ \ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{v\_u[0],\ -\/v\_u[1],\ -\/v\_u[2],\ -\/v\_u[3]\};}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{constexpr}\ four\_vec\ raise(four\_vec\ v\_l)}
+\DoxyCodeLine{00193\ \ \ \ \ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{v\_l[0],\ -\/v\_l[1],\ -\/v\_l[2],\ -\/v\_l[3]\};}
+\DoxyCodeLine{00195\ \ \ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{comment}{//\ std::string\ print\_vec(four\_vec\ vec)}}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ std::stringstream\ ss;}}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ ss\ <<\ "{}("{}<<\ vec[0]\ <<\ "{},"{}\ <<\ vec[1]<<"{},"{}<<vec[2]<<"{},"{}\ <<\ vec[3]\ <<\ "{})"{}\ ;}}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ ss.str();}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{double}\ get\_norm\_sq(four\_vec\ vec);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{double}\ dot\_uu(four\_vec\ vec1\_u,\ four\_vec\ vec2\_u);}
+\DoxyCodeLine{00218\ \ \ \ \ four\_vec\ dot\_utl(four\_vec\ vec\_u,\ r2\_tensor\ t\_ll);}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{double}\ dot\_tltl(r2\_tensor\ t1\_ll,\ r2\_tensor\ t2\_ll);}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ trace\_ll(\textcolor{keyword}{const}\ r2\_tensor\ \&tensor)}
+\DoxyCodeLine{00228\ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ double\ tr\ =\ 0;}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ (size\_t\ i\ =\ 0;\ i\ <\ 4;\ i++)}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for\ (size\_t\ j\ =\ 0;\ j\ <\ 4;\ j++)}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ tr\ +=\ utils::gmunu[i][j]\ *\ tensor[i][j];}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ return\ tr;}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tensor[0][0]\ -\/\ tensor[1][1]\ -\/\ tensor[2][2]\ -\/\ tensor[3][3];}
+\DoxyCodeLine{00239\ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ is\_zero(four\_vec\ v)}
+\DoxyCodeLine{00242\ \ \ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ r\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ v.size();\ i++)}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ r\ \&\&\ is\_zero(v[i]);}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{00249\ \ \ \ \ \}}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ levi(\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keywordtype}{int}\ k,\ \textcolor{keywordtype}{int}\ l)}
+\DoxyCodeLine{00257\ \ \ \ \ \{}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((i\ ==\ j)\ ||\ (i\ ==\ k)\ ||\ (i\ ==\ l)\ ||\ (j\ ==\ k)\ ||\ (j\ ==\ l)\ ||\ (k\ ==\ l))}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ((i\ -\/\ j)\ *\ (i\ -\/\ k)\ *\ (i\ -\/\ l)\ *\ (j\ -\/\ k)\ *\ (j\ -\/\ l)\ *\ (k\ -\/\ l)\ /\ 12);}
+\DoxyCodeLine{00263\ \ \ \ \ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ are\_equal(r2\_tensor\ t1,\ r2\_tensor\ t2)}
+\DoxyCodeLine{00266\ \ \ \ \ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ equal\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ equal\ =\ equal\ \&\&\ utils::equals(t1[i][j],\ t2[i][j]);}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ equal;}
+\DoxyCodeLine{00277\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ are\_equal(four\_vec\ v1,\ four\_vec\ v2)}
+\DoxyCodeLine{00280\ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ equal\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ equal\ =\ equal\ \&\ equals(v1[i],\ v2[i]);}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ equal;}
+\DoxyCodeLine{00288\ \ \ \ \ \}}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ \textcolor{keyword}{namespace\ }powerhouse}
+\DoxyCodeLine{00291\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ DEFAULT\_SIZE\_PT\ =\ 20;}
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ DEFAULT\_SIZE\_PHI\ =\ 30;}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ DEFAULT\_SIZE\_Y\ =\ 20;}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ DEFAULT\_Y\_MIN\ =\ -\/1.0;}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ DEFAULT\_Y\_MAX\ =\ 1.0;}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ DEFAULT\_PT\_MAX\ =\ -\/1.0;}
+\DoxyCodeLine{00298\ \}}
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

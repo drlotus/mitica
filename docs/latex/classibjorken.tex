@@ -1,0 +1,424 @@
+\hypertarget{classibjorken}{}\doxysection{ibjorken Class Reference}
+\label{classibjorken}\index{ibjorken@{ibjorken}}
+Inheritance diagram for ibjorken\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classibjorken}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classibjorken_adb6de650364f45d5c4425fc3d0e1364a}\label{classibjorken_adb6de650364f45d5c4425fc3d0e1364a}} 
+{\bfseries ibjorken} (\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} coordsteps, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} mincoords, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} maxcoords, double T\+\_\+f, double T\+\_\+0, double vs2)
+\item 
+int \mbox{\hyperlink{classibjorken_a57a7e3c773df87cf708f313c25851f14}{count}} () const override
+\item 
+void \mbox{\hyperlink{classibjorken_a0e46fa958e6abb78500ef3e1ed175a4e}{populate}} () override
+\begin{DoxyCompactList}\small\item\em generate and store the hypersuface \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classibjorken_a8b3406cbc733779dc020111b3ca2372e}{write}} (std\+::ostream \&output) override
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classibjorken_a7a615498f862b450b54b6d53b39b8d7b}{exp\+\_\+acc\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected acceleration \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_ae723fc23e6a2e733ba4e6550e2d80ec3}{exp\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected shear tensor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classibjorken_a4e056dadd160079c637b004b35056b3a}{exp\+\_\+f\+\_\+vorticity\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected fluid vorticity vector \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_a2e93e078ced273fb56a2e57a7b347b1b}{exp\+\_\+f\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected fluid voritcity tensor \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_a9aa586dc97ae59e4636dde806f9c9ce6}{exp\+\_\+th\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected thermal vorticity \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_a85e8ec37c1e2e7e672d2a03c47848976}{exp\+\_\+th\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected thermal shear \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_a32ccdbde4b9be802d7024f427af8ca16}{exp\+\_\+gradu\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected gradient of u \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_a5ac1ab051361fd192bab94e89df9c6b8}{exp\+\_\+delta\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected with two lower indices \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_aee4cac4acef0cba0a9839948f8f26a52}{exp\+\_\+delta\+\_\+ul}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected with an up and a lower indices \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classibjorken_ae1fdfd509bdecebfc14759de69888ab3}{exp\+\_\+delta\+\_\+uu}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected with two upper indices \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classibjorken_a4c7a4ff2fb7d799f0772513f38c39948}{exp\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected expansion scalar (divergence of u) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classibjorken_a350b84d67691fab487344c9adbed32d3}{exp\+\_\+b\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected divergence of beta vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ \mbox{\hyperlink{classibjorken_a80d37cd4b2c32ea92644e9360da0fe3f}{data}} () const override
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}{populate}} ()=0
+\begin{DoxyCompactList}\small\item\em generate and store the hypersuface \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}\label{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}} 
+virtual void {\bfseries write} (std\+::ostream \&output)=0
+\item 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}{exp\+\_\+acc\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected acceleration \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}{exp\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected shear tensor \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}{exp\+\_\+f\+\_\+vorticity\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected fluid vorticity vector \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}{exp\+\_\+f\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected fluid voritcity tensor \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}{exp\+\_\+th\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected thermal vorticity \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}{exp\+\_\+th\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected thermal shear \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}{exp\+\_\+gradu\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected gradient of u \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}{exp\+\_\+delta\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected with two lower indices \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}{exp\+\_\+delta\+\_\+ul}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected with an up and a lower indices \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}{exp\+\_\+delta\+\_\+uu}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected with two upper indices \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}{exp\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected expansion scalar (divergence of u) \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}{exp\+\_\+b\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected divergence of beta vector \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}\label{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}} 
+virtual int {\bfseries count} () const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}\label{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}} 
+virtual \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ {\bfseries data} () const=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classibjorken_aa41913c2874108f423ac4ba5331ac36e}\label{classibjorken_aa41913c2874108f423ac4ba5331ac36e}} 
+static std\+::string {\bfseries get\+\_\+name} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}\label{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}} 
+virtual \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} {\bfseries solve} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&prim)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classibjorken_a57a7e3c773df87cf708f313c25851f14}\label{classibjorken_a57a7e3c773df87cf708f313c25851f14}} 
+\index{ibjorken@{ibjorken}!count@{count}}
+\index{count@{count}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily int ibjorken\+::count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a80d37cd4b2c32ea92644e9360da0fe3f}\label{classibjorken_a80d37cd4b2c32ea92644e9360da0fe3f}} 
+\index{ibjorken@{ibjorken}!data@{data}}
+\index{data@{data}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ ibjorken\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a7a615498f862b450b54b6d53b39b8d7b}\label{classibjorken_a7a615498f862b450b54b6d53b39b8d7b}} 
+\index{ibjorken@{ibjorken}!exp\_acc\_u@{exp\_acc\_u}}
+\index{exp\_acc\_u@{exp\_acc\_u}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_acc\_u()}{exp\_acc\_u()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} ibjorken\+::exp\+\_\+acc\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected acceleration 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a350b84d67691fab487344c9adbed32d3}\label{classibjorken_a350b84d67691fab487344c9adbed32d3}} 
+\index{ibjorken@{ibjorken}!exp\_b\_theta@{exp\_b\_theta}}
+\index{exp\_b\_theta@{exp\_b\_theta}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_b\_theta()}{exp\_b\_theta()}}
+{\footnotesize\ttfamily double ibjorken\+::exp\+\_\+b\+\_\+theta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected divergence of beta vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a5ac1ab051361fd192bab94e89df9c6b8}\label{classibjorken_a5ac1ab051361fd192bab94e89df9c6b8}} 
+\index{ibjorken@{ibjorken}!exp\_delta\_ll@{exp\_delta\_ll}}
+\index{exp\_delta\_ll@{exp\_delta\_ll}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_ll()}{exp\_delta\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+delta\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected with two lower indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_aee4cac4acef0cba0a9839948f8f26a52}\label{classibjorken_aee4cac4acef0cba0a9839948f8f26a52}} 
+\index{ibjorken@{ibjorken}!exp\_delta\_ul@{exp\_delta\_ul}}
+\index{exp\_delta\_ul@{exp\_delta\_ul}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_ul()}{exp\_delta\_ul()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+delta\+\_\+ul (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected with an up and a lower indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_ae1fdfd509bdecebfc14759de69888ab3}\label{classibjorken_ae1fdfd509bdecebfc14759de69888ab3}} 
+\index{ibjorken@{ibjorken}!exp\_delta\_uu@{exp\_delta\_uu}}
+\index{exp\_delta\_uu@{exp\_delta\_uu}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_uu()}{exp\_delta\_uu()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+delta\+\_\+uu (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected with two upper indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a2e93e078ced273fb56a2e57a7b347b1b}\label{classibjorken_a2e93e078ced273fb56a2e57a7b347b1b}} 
+\index{ibjorken@{ibjorken}!exp\_f\_vorticity\_ll@{exp\_f\_vorticity\_ll}}
+\index{exp\_f\_vorticity\_ll@{exp\_f\_vorticity\_ll}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_f\_vorticity\_ll()}{exp\_f\_vorticity\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+f\+\_\+vorticity\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected fluid voritcity tensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a4e056dadd160079c637b004b35056b3a}\label{classibjorken_a4e056dadd160079c637b004b35056b3a}} 
+\index{ibjorken@{ibjorken}!exp\_f\_vorticity\_u@{exp\_f\_vorticity\_u}}
+\index{exp\_f\_vorticity\_u@{exp\_f\_vorticity\_u}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_f\_vorticity\_u()}{exp\_f\_vorticity\_u()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} ibjorken\+::exp\+\_\+f\+\_\+vorticity\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected fluid vorticity vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a32ccdbde4b9be802d7024f427af8ca16}\label{classibjorken_a32ccdbde4b9be802d7024f427af8ca16}} 
+\index{ibjorken@{ibjorken}!exp\_gradu\_ll@{exp\_gradu\_ll}}
+\index{exp\_gradu\_ll@{exp\_gradu\_ll}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_gradu\_ll()}{exp\_gradu\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+gradu\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected gradient of u 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_ae723fc23e6a2e733ba4e6550e2d80ec3}\label{classibjorken_ae723fc23e6a2e733ba4e6550e2d80ec3}} 
+\index{ibjorken@{ibjorken}!exp\_shear\_ll@{exp\_shear\_ll}}
+\index{exp\_shear\_ll@{exp\_shear\_ll}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_shear\_ll()}{exp\_shear\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected shear tensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a85e8ec37c1e2e7e672d2a03c47848976}\label{classibjorken_a85e8ec37c1e2e7e672d2a03c47848976}} 
+\index{ibjorken@{ibjorken}!exp\_th\_shear\_ll@{exp\_th\_shear\_ll}}
+\index{exp\_th\_shear\_ll@{exp\_th\_shear\_ll}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_th\_shear\_ll()}{exp\_th\_shear\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+th\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected thermal shear 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a9aa586dc97ae59e4636dde806f9c9ce6}\label{classibjorken_a9aa586dc97ae59e4636dde806f9c9ce6}} 
+\index{ibjorken@{ibjorken}!exp\_th\_vorticity\_ll@{exp\_th\_vorticity\_ll}}
+\index{exp\_th\_vorticity\_ll@{exp\_th\_vorticity\_ll}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_th\_vorticity\_ll()}{exp\_th\_vorticity\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor ibjorken\+::exp\+\_\+th\+\_\+vorticity\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected thermal vorticity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a4c7a4ff2fb7d799f0772513f38c39948}\label{classibjorken_a4c7a4ff2fb7d799f0772513f38c39948}} 
+\index{ibjorken@{ibjorken}!exp\_theta@{exp\_theta}}
+\index{exp\_theta@{exp\_theta}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{exp\_theta()}{exp\_theta()}}
+{\footnotesize\ttfamily double ibjorken\+::exp\+\_\+theta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected expansion scalar (divergence of u) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a0e46fa958e6abb78500ef3e1ed175a4e}\label{classibjorken_a0e46fa958e6abb78500ef3e1ed175a4e}} 
+\index{ibjorken@{ibjorken}!populate@{populate}}
+\index{populate@{populate}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{populate()}{populate()}}
+{\footnotesize\ttfamily void ibjorken\+::populate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+generate and store the hypersuface 
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classibjorken_a8b3406cbc733779dc020111b3ca2372e}\label{classibjorken_a8b3406cbc733779dc020111b3ca2372e}} 
+\index{ibjorken@{ibjorken}!write@{write}}
+\index{write@{write}!ibjorken@{ibjorken}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void ibjorken\+::write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+test/ibjorken.\+h\item 
+test/ibjorken.\+cpp\end{DoxyCompactItemize}

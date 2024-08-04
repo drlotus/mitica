@@ -1,0 +1,458 @@
+\hypertarget{_i__engine_8h_source}{}\doxysection{I\+\_\+engine.\+h}
+\label{_i__engine_8h_source}\index{src/I\_engine.h@{src/I\_engine.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ I\_ENGINE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ I\_ENGINE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}utils.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}fcell.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}interfaces.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}factories.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ The\ engine\ is\ a\ singlton\ factory\ that\ takes\ care\ of\ the\ calculations.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }powerhouse}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine}}}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{\string~I\_engine}}()}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \_pT.clear();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<I\_engine<C>>\ get(\mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ settings)}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ std::call\_once(}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::only\_one}},}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ opts)}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::\_engine}}.reset(\textcolor{keyword}{new}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>}}(opts));}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ settings);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::\_engine}};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<I\_engine<C>>\ get()}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::\_engine}};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ settings()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_settings;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ in\_data()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_hypersurface;\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ void\ init(hydro::hypersurface<C>\ \&t\_hypersurface,}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ I\_particle\ *t\_particle\_house,}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ int\ t\_particle\_id,}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ I\_calculator<C>\ *t\_calculator,}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ size\_t\ t\_size\_pt\ =\ powerhouse::DEFAULT\_SIZE\_PT,}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ size\_t\ t\_size\_phi\ =\ powerhouse::DEFAULT\_SIZE\_PHI,}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ size\_t\ t\_size\_y\ =\ powerhouse::DEFAULT\_SIZE\_Y,}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ double\ t\_y\_min\ =\ powerhouse::DEFAULT\_Y\_MIN,}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ double\ t\_y\_max\ =\ powerhouse::DEFAULT\_Y\_MAX,}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ double\ t\_pt\_max\ =\ powerhouse::DEFAULT\_PT\_MAX);}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ init(\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ \&t\_hypersurface,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__particle}{I\_particle}}\ *t\_particle\_house,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ t\_particle\_id,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ t\_size\_pt\ =\ powerhouse::DEFAULT\_SIZE\_PT,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ t\_size\_phi\ =\ powerhouse::DEFAULT\_SIZE\_PHI,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ t\_size\_y\ =\ powerhouse::DEFAULT\_SIZE\_Y,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ t\_y\_min\ =\ powerhouse::DEFAULT\_Y\_MIN,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ t\_y\_max\ =\ powerhouse::DEFAULT\_Y\_MAX,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ t\_pt\_max\ =\ powerhouse::DEFAULT\_PT\_MAX);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ void\ init(hydro::hypersurface<C>\ \&t\_hypersurface,}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ I\_calculator<C>\ *t\_calculator);}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ init(\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ \&t\_hypersurface);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ reset(\mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ settings)}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \_settings\ =\ settings;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \_initialized\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \_hypersurface.clear();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \_calculator\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \_particle\_house\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \_executed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ executed()\ \{\ \textcolor{keywordflow}{return}\ \_executed;\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ run()}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_initialized)}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Engine\ is\ not\ initialized!"{}});}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_hypersurface.data().empty())}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}No\ hypersurface\ data!"{}});}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_calculator)}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Calculator\ is\ not\ initialized!"{}});}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_settings.program\_mode)}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ utils::program\_modes::Examine:}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ examine();}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ utils::program\_modes::Polarization:}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calculate\_polarizatio();}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ utils::program\_modes::Yield:}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calculate\_yield();}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Invalid\ program\ mode!"{}});}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \_executed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ write()}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_initialized)}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Engine\ is\ not\ initialized!"{}});}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_executed)}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Engine\ is\ not\ used!"{}});}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\_settings.program\_mode)}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ utils::program\_modes::Examine:}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ write\_examin();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ utils::program\_modes::Polarization:}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ write\_polarization();}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ utils::program\_modes::Yield:}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ write\_yield();}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_size\_pt;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_size\_phi;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_size\_y;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_y\_min;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_y\_max;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_pt\_max;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ std::vector<double>\ \_pT;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ std::vector<double>\ \_phi;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ std::vector<double>\ \_y\_rap;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ std::vector<polarization\_output<C>>\ \_polarization\_output;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ std::vector<yield\_output<C>>\ \_yield\_output;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structpowerhouse_1_1exam__output}{exam\_output<C>}}\ \_exam\_output;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_initialized\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_executed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_particle\_id;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ \_settings;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ \_hypersurface;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator}{I\_calculator<C>}}\ *calculator()}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_calculator.get();}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__particle}{I\_particle}}\ *particle\_house()}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_particle\_house.get();}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ examine();}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ calculate\_polarizatio();}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ calculate\_yield();}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ write\_examin();}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ write\_polarization();}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ write\_yield();}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ std::shared\_ptr<powerhouse::calculator\_factory<C>>\ \_factory;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ \_mutex;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ std::unique\_ptr<powerhouse::I\_calculator<C>>\ \_calculator;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ std::unique\_ptr<powerhouse::I\_particle>\ \_particle\_house;}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine}}(\mbox{\hyperlink{structutils_1_1program__options}{utils::program\_options}}\ settings)\ :\ \_settings(std::move(settings)),\ \_calculator(\textcolor{keyword}{nullptr}),\ \_particle\_house(\textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \_factory\ =\ \mbox{\hyperlink{classpowerhouse_1_1calculator__factory}{calculator\_factory<C>::factory}}();}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine}}\ \&other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_engine\ =\ other.\_engine;}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine}}\ \&other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (this\ !=\ \&other)}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_engine\ =\ other.\_engine;}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ *this;}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<I\_engine<C>>\ \_engine;}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::once\_flag\ only\_one;}
+\DoxyCodeLine{00196\ \ \ \ \ \};}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00198\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::\_mutex}};}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00200\ \ \ \ \ std::once\_flag\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::only\_one}};}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00202\ \ \ \ \ std::shared\_ptr<I\_engine<C>>\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::\_engine}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{//\ template\ <typename\ C>}}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{comment}{//\ inline\ void\ I\_engine<C>::init(hydro::hypersurface<C>\ \&t\_hypersurface,}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ I\_particle\ *t\_particle\_house,\ int\ t\_particle\_id,}}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ I\_calculator<C>\ *t\_calculator,}}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ size\_t\ t\_size\_pt,\ size\_t\ t\_size\_phi,\ size\_t\ t\_size\_y,\ double\ t\_y\_min,\ double\ t\_y\_max,\ double\ t\_pt\_max)}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (\_initialized)}}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return;}}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ assert(\_settings.program\_mode\ !=\ utils::program\_modes::Help\ \&\&\ \_settings.program\_mode\ !=\ utils::program\_modes::Invalid);}}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_hypersurface\ =\ t\_hypersurface;}}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_particle\_id\ =\ t\_particle\_id;}}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_size\_pt\ =\ t\_size\_pt;}}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_size\_y\ =\ t\_size\_y;}}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_size\_phi\ =\ t\_size\_phi;}}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_y\_min\ =\ t\_y\_min;}}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_y\_max\ =\ t\_y\_max;}}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_pt\_max\ =\ t\_pt\_max;}}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ assert(\_settings.program\_mode\ ==\ utils::program\_modes::Examine\ ||\ t\_particle\_house);}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (!\_particle\_house)}}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(\_mutex);}}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_particle\_house.reset(t\_particle\_house);}}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (!\_calculator)}}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(\_mutex);}}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_calculator.reset(t\_calculator);}}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (!\_calculator)}}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ throw\ std::runtime\_error("{}Calculator\ is\ not\ initialized!"{});}}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ if\ (\_settings.program\_mode\ !=\ utils::program\_modes::Examine)}}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_pT\ =\ utils::linspace(0,\ \_pt\_max,\ \_size\_pt);}}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_phi\ =\ utils::linspace(0,\ 2\ *\ M\_PI,\ \_size\_phi);}}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \_y\_rap\ =\ utils::linspace(\_y\_min,\ \_y\_max,\ \_size\_y);}}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \_initialized\ =\ true;}}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpowerhouse_1_1_i__engine}{I\_engine<C>::init}}(\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ \&t\_hypersurface,}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpowerhouse_1_1_i__particle}{I\_particle}}\ *t\_particle\_house,\ \textcolor{keywordtype}{int}\ t\_particle\_id,}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ t\_size\_pt,\ \textcolor{keywordtype}{size\_t}\ t\_size\_phi,\ \textcolor{keywordtype}{size\_t}\ t\_size\_y,\ \textcolor{keywordtype}{double}\ t\_y\_min,\ \textcolor{keywordtype}{double}\ t\_y\_max,\ \textcolor{keywordtype}{double}\ t\_pt\_max)}
+\DoxyCodeLine{00252\ \ \ \ \ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_initialized)}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ assert(\_settings.program\_mode\ !=\ utils::program\_modes::Help\ \&\&\ \_settings.program\_mode\ !=\ utils::program\_modes::Invalid);}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \_hypersurface\ =\ t\_hypersurface;}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \_particle\_id\ =\ t\_particle\_id;}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \_size\_pt\ =\ t\_size\_pt;}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \_size\_y\ =\ t\_size\_y;}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \_size\_phi\ =\ t\_size\_phi;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \_y\_min\ =\ t\_y\_min;}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \_y\_max\ =\ t\_y\_max;}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \_pt\_max\ =\ t\_pt\_max;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ assert(\_settings.program\_mode\ ==\ utils::program\_modes::Examine\ ||\ t\_particle\_house);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_particle\_house)}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(\_mutex);}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \_particle\_house.reset(t\_particle\_house);}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_calculator)}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(\_mutex);}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \_calculator\ =\ calculator\_factory<C>::factory()-\/>create\_calculator(\_settings);}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_calculator)}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Calculator\ is\ not\ initialized!"{}});}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_settings.program\_mode\ !=\ utils::program\_modes::Examine)}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \_pT\ =\ utils::linspace(0,\ \_pt\_max,\ \_size\_pt);}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \_phi\ =\ utils::linspace(0,\ 2\ *\ M\_PI,\ \_size\_phi);}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \_y\_rap\ =\ utils::linspace(\_y\_min,\ \_y\_max,\ \_size\_y);}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \_initialized\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00289\ \ \ \ \ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::init(\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<C>}}\ \&t\_hypersurface)\ \textcolor{comment}{//,\ I\_calculator<C>\ *t\_calculator)}}
+\DoxyCodeLine{00293\ \ \ \ \ \{}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_initialized)}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ assert(\_settings.program\_mode\ !=\ utils::program\_modes::Help\ \&\&\ \_settings.program\_mode\ !=\ utils::program\_modes::Invalid);}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_settings.program\_mode\ !=\ utils::program\_modes::Examine)}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Wrong\ initializer\ called!"{}});}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \_hypersurface\ =\ t\_hypersurface;}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_calculator)}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(\_mutex);}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \_calculator\ =\ calculator\_factory<C>::factory()-\/>create(\_settings);}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \_initialized\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00311\ \ \ \ \ \}}
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::examine()}
+\DoxyCodeLine{00314\ \ \ \ \ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ calculator()-\/>prepare(\_hypersurface.total());}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \textcolor{preprocessor}{\#ifdef\ \_OPENMP}}
+\DoxyCodeLine{00318\ \textcolor{preprocessor}{\#pragma\ omp\ parallel}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<powerhouse::I\_output<C>>\ local\_output\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \textcolor{preprocessor}{\#pragma\ omp\ for}}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_hypersurface.total();\ i++)}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \&cell\ =\ \_hypersurface[i];}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>pre\_step();}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_output)}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_output.reset(calculator()-\/>perform\_step(cell,\ local\_output.get()));}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_output.reset(calculator()-\/>perform\_step(cell,\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Combine\ thread-\/local\ results\ into\ the\ shared\ result\ in\ a\ critical\ section}}
+\DoxyCodeLine{00339\ \textcolor{preprocessor}{\#pragma\ omp\ critical}}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_exam\_output.accumulate(\textcolor{keyword}{dynamic\_cast<}exam\_output<C>\ *\textcolor{keyword}{>}(local\_output.get()));}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00344\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ std::shared\_ptr<powerhouse::I\_output<C>>\ local\_output\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ local\_exam\_output\ =\ std::make\_shared<exam\_output<C>>();}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_hypersurface.total();\ i++)}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \&cell\ =\ \_hypersurface[i];}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>pre\_step();}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_output)}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_output.reset(calculator()-\/>perform\_step(cell,\ local\_output.get()));}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_output.reset(calculator()-\/>perform\_step(cell,\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \_exam\_output.accumulate(\textcolor{keyword}{dynamic\_cast<}exam\_output<C>\ *\textcolor{keyword}{>}(local\_output.get()));}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \_exam\_output.basic\_info.reset(\textcolor{keyword}{new}\ \mbox{\hyperlink{structhydro_1_1surface__stat}{hydro::surface\_stat<C>}}(\_hypersurface.readinfo()));}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ calculator()-\/>process\_output(\&\_exam\_output);}
+\DoxyCodeLine{00368\ \ \ \ \ \}}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::calculate\_polarizatio()}
+\DoxyCodeLine{00372\ \ \ \ \ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ calculator()-\/>prepare(\_hypersurface.total());}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ std::shared\_ptr<powerhouse::I\_output<C>>\ output\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&cell\ :\ \_hypersurface.data())}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>pre\_step();}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (output)}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output.reset(calculator()-\/>perform\_step(cell,\ output.get()));}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output.reset(calculator()-\/>perform\_step(cell,\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>process\_output(output.get());}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ *(\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1polarization__output}{powerhouse::polarization\_output<C>}}\ *\textcolor{keyword}{>}(output.get()));}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \_polarization\_output.push\_back(data);}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00392\ \ \ \ \ \}}
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::calculate\_yield()}
+\DoxyCodeLine{00395\ \ \ \ \ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ calculator()-\/>prepare(\_hypersurface.total());}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ std::shared\_ptr<powerhouse::I\_output<C>>\ output\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&cell\ :\ \_hypersurface.data())}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>pre\_step();}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (output)}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output.reset(calculator()-\/>perform\_step(cell,\ output.get()));}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output.reset(calculator()-\/>perform\_step(cell,\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>process\_output(output.get());}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ data\ =\ *(\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1yield__output}{powerhouse::yield\_output<C>}}\ *\textcolor{keyword}{>}(output.get()));}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \_yield\_output.push\_back(data);}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00415\ \ \ \ \ \}}
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00417\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::write\_examin()}
+\DoxyCodeLine{00418\ \ \ \ \ \{}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ std::ofstream\ output(\_settings.out\_file);}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ calculator()-\/>pre\_write(output);}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&cell\ :\ \_hypersurface.data())}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>write(output,\ \&cell,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ output.close();}
+\DoxyCodeLine{00426\ \ \ \ \ \}}
+\DoxyCodeLine{00427\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::write\_polarization()}
+\DoxyCodeLine{00429\ \ \ \ \ \{}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ std::ofstream\ output(\_settings.out\_file);}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ calculator()-\/>pre\_write(output);}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&element\ :\ \_polarization\_output)}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<C>}}\ *\textcolor{keyword}{>}(\&element);}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>write(output,\ \textcolor{keyword}{nullptr},\ ptr);}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ output.close();}
+\DoxyCodeLine{00438\ \ \ \ \ \}}
+\DoxyCodeLine{00439\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ C>}
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ I\_engine<C>::write\_yield()}
+\DoxyCodeLine{00441\ \ \ \ \ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ std::ofstream\ output(\_settings.out\_file);}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ calculator()-\/>pre\_write(output);}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&element\ :\ \_yield\_output)}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse::I\_output<C>}}\ *\textcolor{keyword}{>}(\&element);}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ calculator()-\/>write(output,\ \textcolor{keyword}{nullptr},\ ptr);}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ output.close();}
+\DoxyCodeLine{00450\ \ \ \ \ \}}
+\DoxyCodeLine{00451\ \}}
+\DoxyCodeLine{00452\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

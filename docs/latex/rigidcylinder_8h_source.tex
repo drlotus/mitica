@@ -1,0 +1,116 @@
+\hypertarget{rigidcylinder_8h_source}{}\doxysection{rigidcylinder.\+h}
+\label{rigidcylinder_8h_source}\index{test/rigidcylinder.h@{test/rigidcylinder.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RIGIDCYLINDER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RIGIDCYLINDER\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../src/interfaces.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../src/fcell.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../src/geometry.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../src/utils.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }ug\ =\ utils::geometry;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classrigid__cylinder}{rigid\_cylinder}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro::I\_solution}}<hydro::fcell,\ ug::four\_vector,\ utils::r2\_tensor>}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classrigid__cylinder}{rigid\_cylinder}}(\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ coordsteps,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ mincoords,}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ maxcoords,}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_f,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_0,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ om0)\ :\ \_coordsteps(std::move(coordsteps)),}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mincoords(std::move(mincoords)),}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_maxcoords(std::move(maxcoords)),}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_T\_f(T\_f),}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_T\_0(T\_0),}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_om\_0(om0)}
+\DoxyCodeLine{00025\ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&rf\ =\ r(\_T\_f);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (rf\ *\ om0\ *\ rf\ *\ om0\ >=\ 1)}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Provided\ parameters\ are\ not\ causal!"{}});}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \_rf\ =\ rf;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \_gf\ =\ gamma(\_rf);}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ count()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \_count;\ \}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classrigid__cylinder}{\string~rigid\_cylinder}}()}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \_cells.clear();}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classrigid__cylinder_ad647e2bcb212dba645c2c267041f6f31}{populate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ write(std::ostream\ \&output)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug::four\_vector}}\ \mbox{\hyperlink{classrigid__cylinder_afeaf007f16ae012d0d7ed0784614e2b9}{exp\_acc\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00043\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_aff38a561b075a6fe6f786ac50f3710d6}{exp\_shear\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{0\};}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug::four\_vector}}\ \mbox{\hyperlink{classrigid__cylinder_a1350ab66c23a90ee84a84c5a53d87fcc}{exp\_f\_vorticity\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00048\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_ab7b994ca431a7bf143559370636c6daf}{exp\_f\_vorticity\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00049\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_a92564c1076462c841c2affa91368f8a6}{exp\_th\_vorticity\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00050\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_a11536ae000cb0b5d1f572730d1de6549}{exp\_th\_shear\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{0\};}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_abfa93d4cd74447998691ef3620397586}{exp\_gradu\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00055\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_afd24ec891a3ebb24d3c05d284b181007}{exp\_delta\_ll}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00056\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_a727cb5256dbdcd865ad81ada71052880}{exp\_delta\_ul}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00057\ \ \ \ \ utils::r2\_tensor\ \mbox{\hyperlink{classrigid__cylinder_a384a6bced2a1cf466bcfc8ee78d2940f}{exp\_delta\_uu}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classrigid__cylinder_ad2eeb211fc77e412c5914c124a7b3196}{exp\_theta}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ 0.0;\ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classrigid__cylinder_aff0163408cdf26540783f09784abb758}{exp\_b\_theta}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<hydro::fcell>}}\ data()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_cells;}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ get\_name()}
+\DoxyCodeLine{00069\ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}rigid\_cylinder"{}};}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ solve(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_count;}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ \_mincoords;}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ \_maxcoords;}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils::geometry::four\_vector}}\ \_coordsteps;}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro::hypersurface<hydro::fcell>}}\ \_cells;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{double}\ \_T\_f;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{double}\ \_T\_0;}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{double}\ \_rf;}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{double}\ \_gf;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{double}\ \_om\_0;}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ r(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sqrt(cell.x()\ *\ cell.x()\ +\ cell.y()\ *\ cell.y());}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ r(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ T)}
+\DoxyCodeLine{00091\ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sqrt((T\ *\ T\ -\/\ \_T\_0\ *\ \_T\_0)\ /\ (\_om\_0\ *\ \_om\_0\ *\ T\ *\ T));}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ phi(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00096\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ atan(cell.y()\ /\ cell.x());}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ gamma(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhydro_1_1fcell}{hydro::fcell}}\ \&cell)}
+\DoxyCodeLine{00100\ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&rho\ =\ r(cell);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.\ /\ sqrt(1\ -\/\ rho\ *\ rho\ *\ \_om\_0\ *\ \_om\_0);}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ gamma(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&rho)}
+\DoxyCodeLine{00106\ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.\ /\ sqrt(1\ -\/\ rho\ *\ rho\ *\ \_om\_0\ *\ \_om\_0);}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

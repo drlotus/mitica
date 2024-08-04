@@ -1,0 +1,382 @@
+\hypertarget{classhydro_1_1_i__solution}{}\doxysection{hydro\+::I\+\_\+solution\texorpdfstring{$<$}{<} C, V, T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classhydro_1_1_i__solution}\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+
+
+This interface defines methods for populating and processing hydrodynamic solutions.  
+
+
+
+
+{\ttfamily \#include $<$interfaces.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}{populate}} ()=0
+\begin{DoxyCompactList}\small\item\em generate and store the hypersuface \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}\label{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}} 
+virtual void {\bfseries write} (std\+::ostream \&output)=0
+\item 
+virtual V \mbox{\hyperlink{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}{exp\+\_\+acc\+\_\+u}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected acceleration \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}{exp\+\_\+shear\+\_\+ll}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected shear tensor \end{DoxyCompactList}\item 
+virtual V \mbox{\hyperlink{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}{exp\+\_\+f\+\_\+vorticity\+\_\+u}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected fluid vorticity vector \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}{exp\+\_\+f\+\_\+vorticity\+\_\+ll}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected fluid voritcity tensor \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}{exp\+\_\+th\+\_\+vorticity\+\_\+ll}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected thermal vorticity \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}{exp\+\_\+th\+\_\+shear\+\_\+ll}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected thermal shear \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}{exp\+\_\+gradu\+\_\+ll}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected projected gradient of u \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}{exp\+\_\+delta\+\_\+ll}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected projected with two lower indices \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}{exp\+\_\+delta\+\_\+ul}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected projected with an up and a lower indices \end{DoxyCompactList}\item 
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}{exp\+\_\+delta\+\_\+uu}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected projected with two upper indices \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}{exp\+\_\+theta}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected expansion scalar (divergence of u) \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}{exp\+\_\+b\+\_\+theta}} (const C \&) const =0
+\begin{DoxyCompactList}\small\item\em expected divergence of beta vector \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}\label{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}} 
+virtual int {\bfseries count} () const =0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}\label{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}} 
+virtual \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ C $>$ {\bfseries data} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}\label{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}} 
+virtual C {\bfseries solve} (const C \&prim)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename C, typename V, typename T$>$\newline
+class hydro\+::\+I\+\_\+solution$<$ C, V, T $>$}
+This interface defines methods for populating and processing hydrodynamic solutions. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & the cell\textquotesingle{}s type \\
+\hline
+{\em V} & the four-\/vector\textquotesingle{}s type \\
+\hline
+{\em T} & the rank-\/2 tensor\textquotesingle{}s type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}\label{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_acc\_u@{exp\_acc\_u}}
+\index{exp\_acc\_u@{exp\_acc\_u}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_acc\_u()}{exp\_acc\_u()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual V \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+acc\+\_\+u (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected acceleration 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a7a615498f862b450b54b6d53b39b8d7b}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_afeaf007f16ae012d0d7ed0784614e2b9}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}\label{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_b\_theta@{exp\_b\_theta}}
+\index{exp\_b\_theta@{exp\_b\_theta}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_b\_theta()}{exp\_b\_theta()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+b\+\_\+theta (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected divergence of beta vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a350b84d67691fab487344c9adbed32d3}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_aff0163408cdf26540783f09784abb758}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}\label{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_delta\_ll@{exp\_delta\_ll}}
+\index{exp\_delta\_ll@{exp\_delta\_ll}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_ll()}{exp\_delta\_ll()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+delta\+\_\+ll (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected projected with two lower indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a5ac1ab051361fd192bab94e89df9c6b8}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_afd24ec891a3ebb24d3c05d284b181007}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}\label{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_delta\_ul@{exp\_delta\_ul}}
+\index{exp\_delta\_ul@{exp\_delta\_ul}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_ul()}{exp\_delta\_ul()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+delta\+\_\+ul (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected projected with an up and a lower indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_aee4cac4acef0cba0a9839948f8f26a52}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_a727cb5256dbdcd865ad81ada71052880}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}\label{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_delta\_uu@{exp\_delta\_uu}}
+\index{exp\_delta\_uu@{exp\_delta\_uu}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_uu()}{exp\_delta\_uu()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+delta\+\_\+uu (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected projected with two upper indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_ae1fdfd509bdecebfc14759de69888ab3}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_a384a6bced2a1cf466bcfc8ee78d2940f}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}\label{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_f\_vorticity\_ll@{exp\_f\_vorticity\_ll}}
+\index{exp\_f\_vorticity\_ll@{exp\_f\_vorticity\_ll}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_f\_vorticity\_ll()}{exp\_f\_vorticity\_ll()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+f\+\_\+vorticity\+\_\+ll (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected fluid voritcity tensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a2e93e078ced273fb56a2e57a7b347b1b}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_ab7b994ca431a7bf143559370636c6daf}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}\label{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_f\_vorticity\_u@{exp\_f\_vorticity\_u}}
+\index{exp\_f\_vorticity\_u@{exp\_f\_vorticity\_u}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_f\_vorticity\_u()}{exp\_f\_vorticity\_u()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual V \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+f\+\_\+vorticity\+\_\+u (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected fluid vorticity vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a4e056dadd160079c637b004b35056b3a}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_a1350ab66c23a90ee84a84c5a53d87fcc}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}\label{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_gradu\_ll@{exp\_gradu\_ll}}
+\index{exp\_gradu\_ll@{exp\_gradu\_ll}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_gradu\_ll()}{exp\_gradu\_ll()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+gradu\+\_\+ll (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected projected gradient of u 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a32ccdbde4b9be802d7024f427af8ca16}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_abfa93d4cd74447998691ef3620397586}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}\label{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_shear\_ll@{exp\_shear\_ll}}
+\index{exp\_shear\_ll@{exp\_shear\_ll}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_shear\_ll()}{exp\_shear\_ll()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected shear tensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_ae723fc23e6a2e733ba4e6550e2d80ec3}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_aff38a561b075a6fe6f786ac50f3710d6}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}\label{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_th\_shear\_ll@{exp\_th\_shear\_ll}}
+\index{exp\_th\_shear\_ll@{exp\_th\_shear\_ll}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_th\_shear\_ll()}{exp\_th\_shear\_ll()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+th\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected thermal shear 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a85e8ec37c1e2e7e672d2a03c47848976}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_a11536ae000cb0b5d1f572730d1de6549}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}\label{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_th\_vorticity\_ll@{exp\_th\_vorticity\_ll}}
+\index{exp\_th\_vorticity\_ll@{exp\_th\_vorticity\_ll}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_th\_vorticity\_ll()}{exp\_th\_vorticity\_ll()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual T \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+th\+\_\+vorticity\+\_\+ll (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected thermal vorticity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a9aa586dc97ae59e4636dde806f9c9ce6}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_a92564c1076462c841c2affa91368f8a6}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}\label{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!exp\_theta@{exp\_theta}}
+\index{exp\_theta@{exp\_theta}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{exp\_theta()}{exp\_theta()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::exp\+\_\+theta (\begin{DoxyParamCaption}\item[{const C \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+expected expansion scalar (divergence of u) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a4c7a4ff2fb7d799f0772513f38c39948}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_ad2eeb211fc77e412c5914c124a7b3196}{rigid\+\_\+cylinder}}.
+
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}\label{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}} 
+\index{hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}!populate@{populate}}
+\index{populate@{populate}!hydro::I\_solution$<$ C, V, T $>$@{hydro::I\_solution$<$ C, V, T $>$}}
+\doxysubsubsection{\texorpdfstring{populate()}{populate()}}
+{\footnotesize\ttfamily template$<$typename C , typename V , typename T $>$ \\
+virtual void \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution}}$<$ C, V, T $>$\+::populate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+generate and store the hypersuface 
+
+
+
+Implemented in \mbox{\hyperlink{classibjorken_a0e46fa958e6abb78500ef3e1ed175a4e}{ibjorken}}, and \mbox{\hyperlink{classrigid__cylinder_ad647e2bcb212dba645c2c267041f6f31}{rigid\+\_\+cylinder}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/interfaces.\+h\end{DoxyCompactItemize}

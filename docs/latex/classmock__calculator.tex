@@ -1,0 +1,165 @@
+\hypertarget{classmock__calculator}{}\doxysection{mock\+\_\+calculator Class Reference}
+\label{classmock__calculator}\index{mock\_calculator@{mock\_calculator}}
+Inheritance diagram for mock\+\_\+calculator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmock__calculator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$ \mbox{\hyperlink{classmock__calculator_ac78ec7fedf3cbb0ce1b59885dc6b23f4}{perform\+\_\+step}} (\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$previous\+\_\+step) override
+\begin{DoxyCompactList}\small\item\em The main calculation in a single iteration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmock__calculator_aa77faf61ca0c1b80c8b9a71d6151e092}{prepare}} (const size\+\_\+t \&t\+\_\+count) override
+\begin{DoxyCompactList}\small\item\em happens before entering the loop \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmock__calculator_add02973fb7d80b51012995203a72719c}{pre\+\_\+step}} () override
+\begin{DoxyCompactList}\small\item\em happens before perform\+\_\+step in each iteration \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmock__calculator_addbcb7fbfc6c1fa888ab2c2950c437c0}{process\+\_\+output}} (\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$output) override
+\begin{DoxyCompactList}\small\item\em happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmock__calculator_a194f0bd2465c80afe626ac97f732d34b}{pre\+\_\+write}} (std\+::ostream \&output) override
+\begin{DoxyCompactList}\small\item\em happens before writing the results \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmock__calculator_afac508a12c3aac0845d2d3a87b3778ed}{write}} (std\+::ostream \&output, \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $\ast$cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$final\+\_\+output) override
+\begin{DoxyCompactList}\small\item\em writes the results to output \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{structpowerhouse_1_1_i__output}{I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$ \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}{perform\+\_\+step}} (\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$previous\+\_\+step)=0
+\begin{DoxyCompactList}\small\item\em The main calculation in a single iteration. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}{prepare}} (const size\+\_\+t \&t\+\_\+count)=0
+\begin{DoxyCompactList}\small\item\em happens before entering the loop \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}{pre\+\_\+step}} ()=0
+\begin{DoxyCompactList}\small\item\em happens before perform\+\_\+step in each iteration \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}{process\+\_\+output}} (\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$output)=0
+\begin{DoxyCompactList}\small\item\em happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}{pre\+\_\+write}} (std\+::ostream \&os)=0
+\begin{DoxyCompactList}\small\item\em happens before writing the results \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}{write}} (std\+::ostream \&os, \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $\ast$cell, \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$final\+\_\+output)=0
+\begin{DoxyCompactList}\small\item\em writes the results to output \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmock__calculator_ac78ec7fedf3cbb0ce1b59885dc6b23f4}\label{classmock__calculator_ac78ec7fedf3cbb0ce1b59885dc6b23f4}} 
+\index{mock\_calculator@{mock\_calculator}!perform\_step@{perform\_step}}
+\index{perform\_step@{perform\_step}!mock\_calculator@{mock\_calculator}}
+\doxysubsubsection{\texorpdfstring{perform\_step()}{perform\_step()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$ mock\+\_\+calculator\+::perform\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{cell,  }\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$}]{previous\+\_\+step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+The main calculation in a single iteration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & cell \\
+\hline
+{\em previous\+\_\+step} & the output from the previous step \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output from this step 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a5e48e8b7b707d3ce709852f162952cef}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classmock__calculator_add02973fb7d80b51012995203a72719c}\label{classmock__calculator_add02973fb7d80b51012995203a72719c}} 
+\index{mock\_calculator@{mock\_calculator}!pre\_step@{pre\_step}}
+\index{pre\_step@{pre\_step}!mock\_calculator@{mock\_calculator}}
+\doxysubsubsection{\texorpdfstring{pre\_step()}{pre\_step()}}
+{\footnotesize\ttfamily void mock\+\_\+calculator\+::pre\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens before perform\+\_\+step in each iteration 
+
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aec34479c1d0d3a08fc8a4b554ab380d8}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classmock__calculator_a194f0bd2465c80afe626ac97f732d34b}\label{classmock__calculator_a194f0bd2465c80afe626ac97f732d34b}} 
+\index{mock\_calculator@{mock\_calculator}!pre\_write@{pre\_write}}
+\index{pre\_write@{pre\_write}!mock\_calculator@{mock\_calculator}}
+\doxysubsubsection{\texorpdfstring{pre\_write()}{pre\_write()}}
+{\footnotesize\ttfamily void mock\+\_\+calculator\+::pre\+\_\+write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens before writing the results 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_ae4ee9257acc7524ba55cca589ce46f26}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classmock__calculator_aa77faf61ca0c1b80c8b9a71d6151e092}\label{classmock__calculator_aa77faf61ca0c1b80c8b9a71d6151e092}} 
+\index{mock\_calculator@{mock\_calculator}!prepare@{prepare}}
+\index{prepare@{prepare}!mock\_calculator@{mock\_calculator}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily void mock\+\_\+calculator\+::prepare (\begin{DoxyParamCaption}\item[{const size\+\_\+t \&}]{t\+\_\+count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens before entering the loop 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+count} & the number of steps \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_aa5de3332d38704f0a18ea911ec7723c1}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classmock__calculator_addbcb7fbfc6c1fa888ab2c2950c437c0}\label{classmock__calculator_addbcb7fbfc6c1fa888ab2c2950c437c0}} 
+\index{mock\_calculator@{mock\_calculator}!process\_output@{process\_output}}
+\index{process\_output@{process\_output}!mock\_calculator@{mock\_calculator}}
+\doxysubsubsection{\texorpdfstring{process\_output()}{process\_output()}}
+{\footnotesize\ttfamily void mock\+\_\+calculator\+::process\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+happens after perform\+\_\+step (Polarization/\+Yield) or the whole iteration (Examine) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & the current or final output \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_afd84208ad907963da565d8e4dd726e4f}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+\mbox{\Hypertarget{classmock__calculator_afac508a12c3aac0845d2d3a87b3778ed}\label{classmock__calculator_afac508a12c3aac0845d2d3a87b3778ed}} 
+\index{mock\_calculator@{mock\_calculator}!write@{write}}
+\index{write@{write}!mock\_calculator@{mock\_calculator}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void mock\+\_\+calculator\+::write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $\ast$}]{cell,  }\item[{\mbox{\hyperlink{structpowerhouse_1_1_i__output}{powerhouse\+::\+I\+\_\+output}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ $\ast$}]{final\+\_\+output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+writes the results to output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & \\
+\hline
+{\em cell} & \\
+\hline
+{\em final\+\_\+output} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classpowerhouse_1_1_i__calculator_a86b6ce5146ffa1a59f2c5af70619a23a}{powerhouse\+::\+I\+\_\+calculator$<$ hydro\+::fcell $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+test/my\+\_\+engine.\+h\end{DoxyCompactItemize}

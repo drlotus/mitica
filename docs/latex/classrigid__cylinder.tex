@@ -1,0 +1,436 @@
+\hypertarget{classrigid__cylinder}{}\doxysection{rigid\+\_\+cylinder Class Reference}
+\label{classrigid__cylinder}\index{rigid\_cylinder@{rigid\_cylinder}}
+
+
+See, e,g,, \href{https://arxiv.org/abs/2309.07003}{\texttt{ https\+://arxiv.\+org/abs/2309.\+07003}}.  
+
+
+
+
+{\ttfamily \#include $<$rigidcylinder.\+h$>$}
+
+Inheritance diagram for rigid\+\_\+cylinder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classrigid__cylinder}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrigid__cylinder_af8b4eddf16914cf447c0f688b44d43cf}\label{classrigid__cylinder_af8b4eddf16914cf447c0f688b44d43cf}} 
+{\bfseries rigid\+\_\+cylinder} (\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} coordsteps, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} mincoords, \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{utils\+::geometry\+::four\+\_\+vector}} maxcoords, double T\+\_\+f, double T\+\_\+0, double om0)
+\item 
+int \mbox{\hyperlink{classrigid__cylinder_ab35193dc8ebcfeec548ff51abb3ad478}{count}} () const override
+\item 
+void \mbox{\hyperlink{classrigid__cylinder_ad647e2bcb212dba645c2c267041f6f31}{populate}} () override
+\begin{DoxyCompactList}\small\item\em generate and store the hypersuface \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classrigid__cylinder_a20dcd655418676e66c3e7e38582e7fa6}{write}} (std\+::ostream \&output) override
+\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classrigid__cylinder_afeaf007f16ae012d0d7ed0784614e2b9}{exp\+\_\+acc\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected acceleration \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_aff38a561b075a6fe6f786ac50f3710d6}{exp\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected shear tensor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classrigid__cylinder_a1350ab66c23a90ee84a84c5a53d87fcc}{exp\+\_\+f\+\_\+vorticity\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected fluid vorticity vector \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_ab7b994ca431a7bf143559370636c6daf}{exp\+\_\+f\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected fluid voritcity tensor \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_a92564c1076462c841c2affa91368f8a6}{exp\+\_\+th\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected thermal vorticity \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_a11536ae000cb0b5d1f572730d1de6549}{exp\+\_\+th\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected thermal shear \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_abfa93d4cd74447998691ef3620397586}{exp\+\_\+gradu\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected gradient of u \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_afd24ec891a3ebb24d3c05d284b181007}{exp\+\_\+delta\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected with two lower indices \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_a727cb5256dbdcd865ad81ada71052880}{exp\+\_\+delta\+\_\+ul}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected with an up and a lower indices \end{DoxyCompactList}\item 
+utils\+::r2\+\_\+tensor \mbox{\hyperlink{classrigid__cylinder_a384a6bced2a1cf466bcfc8ee78d2940f}{exp\+\_\+delta\+\_\+uu}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected projected with two upper indices \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrigid__cylinder_ad2eeb211fc77e412c5914c124a7b3196}{exp\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected expansion scalar (divergence of u) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrigid__cylinder_aff0163408cdf26540783f09784abb758}{exp\+\_\+b\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&cell) const override
+\begin{DoxyCompactList}\small\item\em expected divergence of beta vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ \mbox{\hyperlink{classrigid__cylinder_a3699b74d46abfe45aecce5c20854c3f9}{data}} () const override
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}{populate}} ()=0
+\begin{DoxyCompactList}\small\item\em generate and store the hypersuface \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}\label{classhydro_1_1_i__solution_a4181b90c00f2915bfc21c09e7221a52f}} 
+virtual void {\bfseries write} (std\+::ostream \&output)=0
+\item 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}{exp\+\_\+acc\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected acceleration \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}{exp\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected shear tensor \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} \mbox{\hyperlink{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}{exp\+\_\+f\+\_\+vorticity\+\_\+u}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected fluid vorticity vector \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}{exp\+\_\+f\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected fluid voritcity tensor \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}{exp\+\_\+th\+\_\+vorticity\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected thermal vorticity \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}{exp\+\_\+th\+\_\+shear\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected thermal shear \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}{exp\+\_\+gradu\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected gradient of u \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}{exp\+\_\+delta\+\_\+ll}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected with two lower indices \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}{exp\+\_\+delta\+\_\+ul}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected with an up and a lower indices \end{DoxyCompactList}\item 
+virtual utils\+::r2\+\_\+tensor \mbox{\hyperlink{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}{exp\+\_\+delta\+\_\+uu}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected projected with two upper indices \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}{exp\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected expansion scalar (divergence of u) \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}{exp\+\_\+b\+\_\+theta}} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&) const=0
+\begin{DoxyCompactList}\small\item\em expected divergence of beta vector \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}\label{classhydro_1_1_i__solution_acec5f82e6d196a53a49a0d371d27a3b8}} 
+virtual int {\bfseries count} () const=0
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}\label{classhydro_1_1_i__solution_ab94e72c8d79f3ff4907c1ac6bf2a97d4}} 
+virtual \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ {\bfseries data} () const=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrigid__cylinder_a4f7cfc098038132295895af77374e7bf}\label{classrigid__cylinder_a4f7cfc098038132295895af77374e7bf}} 
+static std\+::string {\bfseries get\+\_\+name} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}\label{classhydro_1_1_i__solution_ab1bba62fba1745a83f9092bf2c3d1e57}} 
+virtual \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} {\bfseries solve} (const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&prim)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+See, e,g,, \href{https://arxiv.org/abs/2309.07003}{\texttt{ https\+://arxiv.\+org/abs/2309.\+07003}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrigid__cylinder_ab35193dc8ebcfeec548ff51abb3ad478}\label{classrigid__cylinder_ab35193dc8ebcfeec548ff51abb3ad478}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!count@{count}}
+\index{count@{count}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily int rigid\+\_\+cylinder\+::count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a3699b74d46abfe45aecce5c20854c3f9}\label{classrigid__cylinder_a3699b74d46abfe45aecce5c20854c3f9}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!data@{data}}
+\index{data@{data}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhydro_1_1hypersurface}{hydro\+::hypersurface}}$<$ \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} $>$ rigid\+\_\+cylinder\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_afeaf007f16ae012d0d7ed0784614e2b9}\label{classrigid__cylinder_afeaf007f16ae012d0d7ed0784614e2b9}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_acc\_u@{exp\_acc\_u}}
+\index{exp\_acc\_u@{exp\_acc\_u}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_acc\_u()}{exp\_acc\_u()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} rigid\+\_\+cylinder\+::exp\+\_\+acc\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected acceleration 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a9a8531047ebe59db1b50fe768245221e}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_aff0163408cdf26540783f09784abb758}\label{classrigid__cylinder_aff0163408cdf26540783f09784abb758}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_b\_theta@{exp\_b\_theta}}
+\index{exp\_b\_theta@{exp\_b\_theta}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_b\_theta()}{exp\_b\_theta()}}
+{\footnotesize\ttfamily double rigid\+\_\+cylinder\+::exp\+\_\+b\+\_\+theta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected divergence of beta vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a350df5dc3581e79e9c9c91821d225bf4}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_afd24ec891a3ebb24d3c05d284b181007}\label{classrigid__cylinder_afd24ec891a3ebb24d3c05d284b181007}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_delta\_ll@{exp\_delta\_ll}}
+\index{exp\_delta\_ll@{exp\_delta\_ll}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_ll()}{exp\_delta\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+delta\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected with two lower indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a34731009bd869a3288c14ef92f2db219}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a727cb5256dbdcd865ad81ada71052880}\label{classrigid__cylinder_a727cb5256dbdcd865ad81ada71052880}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_delta\_ul@{exp\_delta\_ul}}
+\index{exp\_delta\_ul@{exp\_delta\_ul}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_ul()}{exp\_delta\_ul()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+delta\+\_\+ul (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected with an up and a lower indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a4829ada88c62dbdce2aaf446c96acff7}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a384a6bced2a1cf466bcfc8ee78d2940f}\label{classrigid__cylinder_a384a6bced2a1cf466bcfc8ee78d2940f}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_delta\_uu@{exp\_delta\_uu}}
+\index{exp\_delta\_uu@{exp\_delta\_uu}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_delta\_uu()}{exp\_delta\_uu()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+delta\+\_\+uu (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected with two upper indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_afa375137993b33cf26402592b072bdf4}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_ab7b994ca431a7bf143559370636c6daf}\label{classrigid__cylinder_ab7b994ca431a7bf143559370636c6daf}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_f\_vorticity\_ll@{exp\_f\_vorticity\_ll}}
+\index{exp\_f\_vorticity\_ll@{exp\_f\_vorticity\_ll}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_f\_vorticity\_ll()}{exp\_f\_vorticity\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+f\+\_\+vorticity\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected fluid voritcity tensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a3361b2f4d2f1cbc77bc6439d06615210}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a1350ab66c23a90ee84a84c5a53d87fcc}\label{classrigid__cylinder_a1350ab66c23a90ee84a84c5a53d87fcc}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_f\_vorticity\_u@{exp\_f\_vorticity\_u}}
+\index{exp\_f\_vorticity\_u@{exp\_f\_vorticity\_u}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_f\_vorticity\_u()}{exp\_f\_vorticity\_u()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{ug\+::four\+\_\+vector}} rigid\+\_\+cylinder\+::exp\+\_\+f\+\_\+vorticity\+\_\+u (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected fluid vorticity vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a4df275d1133db56e94e720152c706ded}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_abfa93d4cd74447998691ef3620397586}\label{classrigid__cylinder_abfa93d4cd74447998691ef3620397586}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_gradu\_ll@{exp\_gradu\_ll}}
+\index{exp\_gradu\_ll@{exp\_gradu\_ll}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_gradu\_ll()}{exp\_gradu\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+gradu\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected projected gradient of u 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a0ccd4a360e0dd299351e7abce49ede98}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_aff38a561b075a6fe6f786ac50f3710d6}\label{classrigid__cylinder_aff38a561b075a6fe6f786ac50f3710d6}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_shear\_ll@{exp\_shear\_ll}}
+\index{exp\_shear\_ll@{exp\_shear\_ll}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_shear\_ll()}{exp\_shear\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected shear tensor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a1ad3fc0b49dfed2a3c91abadfb315216}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a11536ae000cb0b5d1f572730d1de6549}\label{classrigid__cylinder_a11536ae000cb0b5d1f572730d1de6549}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_th\_shear\_ll@{exp\_th\_shear\_ll}}
+\index{exp\_th\_shear\_ll@{exp\_th\_shear\_ll}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_th\_shear\_ll()}{exp\_th\_shear\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+th\+\_\+shear\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected thermal shear 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a4a4bbfd88907764fc2497c013d6da384}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a92564c1076462c841c2affa91368f8a6}\label{classrigid__cylinder_a92564c1076462c841c2affa91368f8a6}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_th\_vorticity\_ll@{exp\_th\_vorticity\_ll}}
+\index{exp\_th\_vorticity\_ll@{exp\_th\_vorticity\_ll}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_th\_vorticity\_ll()}{exp\_th\_vorticity\_ll()}}
+{\footnotesize\ttfamily utils\+::r2\+\_\+tensor rigid\+\_\+cylinder\+::exp\+\_\+th\+\_\+vorticity\+\_\+ll (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected thermal vorticity 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a62636e9ea07b6ae07519f76bc4e99f2f}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_ad2eeb211fc77e412c5914c124a7b3196}\label{classrigid__cylinder_ad2eeb211fc77e412c5914c124a7b3196}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!exp\_theta@{exp\_theta}}
+\index{exp\_theta@{exp\_theta}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{exp\_theta()}{exp\_theta()}}
+{\footnotesize\ttfamily double rigid\+\_\+cylinder\+::exp\+\_\+theta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhydro_1_1fcell}{hydro\+::fcell}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+expected expansion scalar (divergence of u) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$br$>$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a20af2d5e715fa885c94f1105db199f16}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_ad647e2bcb212dba645c2c267041f6f31}\label{classrigid__cylinder_ad647e2bcb212dba645c2c267041f6f31}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!populate@{populate}}
+\index{populate@{populate}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{populate()}{populate()}}
+{\footnotesize\ttfamily void rigid\+\_\+cylinder\+::populate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+generate and store the hypersuface 
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution_a682a47ecf830d68a20404793c2dba03f}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+\mbox{\Hypertarget{classrigid__cylinder_a20dcd655418676e66c3e7e38582e7fa6}\label{classrigid__cylinder_a20dcd655418676e66c3e7e38582e7fa6}} 
+\index{rigid\_cylinder@{rigid\_cylinder}!write@{write}}
+\index{write@{write}!rigid\_cylinder@{rigid\_cylinder}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void rigid\+\_\+cylinder\+::write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhydro_1_1_i__solution}{hydro\+::\+I\+\_\+solution$<$ hydro\+::fcell, ug\+::four\+\_\+vector, utils\+::r2\+\_\+tensor $>$}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+test/rigidcylinder.\+h\item 
+test/rigidcylinder.\+cpp\end{DoxyCompactItemize}

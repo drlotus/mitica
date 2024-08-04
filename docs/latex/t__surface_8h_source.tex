@@ -1,0 +1,84 @@
+\hypertarget{t__surface_8h_source}{}\doxysection{t\+\_\+surface.\+h}
+\label{t__surface_8h_source}\index{src/t\_surface.h@{src/t\_surface.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ T\_SURFACE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ T\_SURFACE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}utils.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}fcell.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }hydro}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structhydro_1_1t__surface__info}{t\_surface\_info}}}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ min\_T,\ max\_T;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ min\_mub,\ max\_mub;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ min\_coords;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ max\_coords;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ avg\_T;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ avg\_mub;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structhydro_1_1t__surface__info}{t\_surface\_info}}\ \&info)}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ utils::MILNE[i]\ <<\ \textcolor{stringliteral}{"{}\ in\ ["{}}\ <<\ info.min\_coords[i]\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ info.max\_coords[i]\ <<\ \textcolor{stringliteral}{"{}]\(\backslash\)t"{}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ std::endl;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min\ T\ =\ "{}}\ <<\ info.min\_T.T()\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.min\_T\ <<\ std::endl;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max\ T\ =\ "{}}\ <<\ info.max\_T.T()\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.max\_T\ <<\ std::endl;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}min\ mu\_B\ =\ "{}}\ <<\ info.min\_mub.mub()\ <<\ \textcolor{stringliteral}{"{}\ @\ "{}}\ <<\ info.min\_mub\ <<\ std::endl;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}max\ mu\_B\ =\ "{}}\ <<\ info.max\_mub.mub()\ <<\ \textcolor{stringliteral}{"{}\ @"{}}\ <<\ info.max\_mub\ <<\ std::endl;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhydro_1_1fsurface}{fsurface}}}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ skipped()\ \{\ \textcolor{keywordflow}{return}\ \_skipped;\ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rejected()\ \{\ \textcolor{keywordflow}{return}\ \_rejected;\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ timelikes()\ \{\ \textcolor{keywordflow}{return}\ \_timelikes;\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ total()\ \{\ \textcolor{keywordflow}{return}\ \_total;\ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ failed()\ \{\ \textcolor{keywordflow}{return}\ \_failed;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lines()\ \{\ \textcolor{keywordflow}{return}\ \_lines;\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ operator[](\textcolor{keywordtype}{size\_t}\ i)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_cells[i];\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ \&operator[](\textcolor{keywordtype}{size\_t}\ i)\ \{\ \textcolor{keywordflow}{return}\ \_cells[i];\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ read(std::ifstream\ \&file,\ utils::accept\_modes\ mode);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhydro_1_1t__surface__info}{t\_surface\_info}}\ readinfo();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ add(\mbox{\hyperlink{classhydro_1_1fcell}{fcell}}\ \&cell,\ utils::accept\_modes\ mode);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::vector<fcell>\ \&\mbox{\hyperlink{classhydro_1_1hypersurface}{hypersurface}}()\ \{\ \textcolor{keywordflow}{return}\ \_cells;\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ clear()}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \_failed\ =\ 0;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \_lines\ =\ 0;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \_rejected\ =\ 0;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \_skipped\ =\ 0;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \_timelikes\ =\ 0;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \_total\ =\ 0;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \_cells.clear();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ checksize()}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ r\ =\ \_cells.size()\ ==\ \_total;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \_total\ =\ \_cells.size();}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::vector<fcell>\ \_cells;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_skipped;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_rejected;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_timelikes;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_total;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_failed;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_lines;}
+\DoxyCodeLine{00075\ \ \ \ \ \};}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

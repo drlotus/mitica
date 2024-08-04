@@ -1,0 +1,77 @@
+\hypertarget{classhydro_1_1fsurface}{}\doxysection{hydro\+::fsurface Class Reference}
+\label{classhydro_1_1fsurface}\index{hydro::fsurface@{hydro::fsurface}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a45bda1b0425679ca789fcc3267b4695e}\label{classhydro_1_1fsurface_a45bda1b0425679ca789fcc3267b4695e}} 
+int {\bfseries skipped} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a7a20408b937e78e368215b9f62a3baf7}\label{classhydro_1_1fsurface_a7a20408b937e78e368215b9f62a3baf7}} 
+int {\bfseries rejected} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a2a2937148b636e66eff9d81e38148e5a}\label{classhydro_1_1fsurface_a2a2937148b636e66eff9d81e38148e5a}} 
+int {\bfseries timelikes} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a8461ab54e86f7343b57ff07be2abaf0f}\label{classhydro_1_1fsurface_a8461ab54e86f7343b57ff07be2abaf0f}} 
+int {\bfseries total} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a7246ec38fab7c9a53b388db21331ec96}\label{classhydro_1_1fsurface_a7246ec38fab7c9a53b388db21331ec96}} 
+int {\bfseries failed} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a9f1875cd6cce1e3b35616d10b276c989}\label{classhydro_1_1fsurface_a9f1875cd6cce1e3b35616d10b276c989}} 
+int {\bfseries lines} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a24aa468f601357a2ecee178e1089ec16}\label{classhydro_1_1fsurface_a24aa468f601357a2ecee178e1089ec16}} 
+\mbox{\hyperlink{classhydro_1_1fcell}{fcell}} {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t i) const
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a47e80fd34911f6e1156e495e9878c5c5}\label{classhydro_1_1fsurface_a47e80fd34911f6e1156e495e9878c5c5}} 
+\mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t i)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_ae35270591dc5c58b834fe560429fbfd8}\label{classhydro_1_1fsurface_ae35270591dc5c58b834fe560429fbfd8}} 
+void {\bfseries read} (std\+::ifstream \&file, utils\+::accept\+\_\+modes mode)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a0a91521623c6f77d55859574bf29555d}\label{classhydro_1_1fsurface_a0a91521623c6f77d55859574bf29555d}} 
+\mbox{\hyperlink{structhydro_1_1t__surface__info}{t\+\_\+surface\+\_\+info}} {\bfseries readinfo} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a919bf6139c3949618fc4ba1e21daad44}\label{classhydro_1_1fsurface_a919bf6139c3949618fc4ba1e21daad44}} 
+void {\bfseries add} (\mbox{\hyperlink{classhydro_1_1fcell}{fcell}} \&cell, utils\+::accept\+\_\+modes mode)
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a37a57cb63cefcdad9365cb3867eae9f5}\label{classhydro_1_1fsurface_a37a57cb63cefcdad9365cb3867eae9f5}} 
+std\+::vector$<$ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} $>$ \& {\bfseries hypersurface} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_ad639cdced7fa1b4279ca3d5dbbfa683a}\label{classhydro_1_1fsurface_ad639cdced7fa1b4279ca3d5dbbfa683a}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_ae8f08fc48ef44613819f45f07818e35b}\label{classhydro_1_1fsurface_ae8f08fc48ef44613819f45f07818e35b}} 
+bool {\bfseries checksize} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a3ec8cf11d8df47d0d0d2f8e21835690e}\label{classhydro_1_1fsurface_a3ec8cf11d8df47d0d0d2f8e21835690e}} 
+std\+::vector$<$ \mbox{\hyperlink{classhydro_1_1fcell}{fcell}} $>$ {\bfseries \+\_\+cells}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a26e2f362213aeb69542d2d18b814ed50}\label{classhydro_1_1fsurface_a26e2f362213aeb69542d2d18b814ed50}} 
+int {\bfseries \+\_\+skipped}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_aa992e8c9eadf0742b8fda0537ccfa848}\label{classhydro_1_1fsurface_aa992e8c9eadf0742b8fda0537ccfa848}} 
+int {\bfseries \+\_\+rejected}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_acc22d7b25d2d164b6494402ecbf375eb}\label{classhydro_1_1fsurface_acc22d7b25d2d164b6494402ecbf375eb}} 
+int {\bfseries \+\_\+timelikes}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a9d5cc2ab51f931fe727b3e60c8da89e4}\label{classhydro_1_1fsurface_a9d5cc2ab51f931fe727b3e60c8da89e4}} 
+int {\bfseries \+\_\+total}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a51b019a61f3e38ae4019c52a10662a1b}\label{classhydro_1_1fsurface_a51b019a61f3e38ae4019c52a10662a1b}} 
+int {\bfseries \+\_\+failed}
+\item 
+\mbox{\Hypertarget{classhydro_1_1fsurface_a905a46dcc62a90863663706c90095bd2}\label{classhydro_1_1fsurface_a905a46dcc62a90863663706c90095bd2}} 
+int {\bfseries \+\_\+lines}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/t\+\_\+surface.\+h\item 
+src/t\+\_\+surface.\+cpp\end{DoxyCompactItemize}

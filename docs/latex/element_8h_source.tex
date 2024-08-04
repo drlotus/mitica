@@ -1,0 +1,147 @@
+\hypertarget{element_8h_source}{}\doxysection{element.\+h}
+\label{element_8h_source}\index{src/element.h@{src/element.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ELEMENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ELEMENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}utils.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}geometry.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }hydro}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structhydro_1_1element}{element}}}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ shear\_legacy;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tau,\ x,\ y,\ eta;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ u[4];}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dsigma[4];}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T,\ mub,\ muq,\ mus;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dbeta[4][4];}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dmuCart[4][4];\ \textcolor{comment}{//\ derivatives\ of\ the\ 4-\/velocity\ in\ Cartesian\ coordinates}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ utils::four\_vec\ milne\_coords()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ utils::four\_vec\{tau,\ x,\ y,\ eta\};\ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ utils::four\_vec\ thermodynamics()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ utils::four\_vec\{T,\ mub,\ muq,\ mus\};\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ du\_ll();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ dbeta\_ll();}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ print();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ utils::four\_vec\ u\_u();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ utils::four\_vec\ u\_l();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ t();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ z();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ get\_normal\_size\_sq();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ utils::four\_vec\ get\_pos();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ utils::four\_vec\ get\_pos\_mink();}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structhydro_1_1element_a524c02afef5f7e3baec1fdb943e09f95}{delta\_uu}}(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ delta\_ul(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ delta\_ll();}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ delta\_ll(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gradu\_ll(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structhydro_1_1element_accab3d277b9218a860421f6d62710d7d}{dd\_uu\_ll}}(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ utils::four\_vec\ acc\_u();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ shear\_ll();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ utils::four\_vec\ f\_vorticity\_u();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ f\_vorticity\_ll();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ th\_vorticity\_ll();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ th\_shear\_ll();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ theta();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ b\_theta();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::istream\ \&operator>>(std::istream\ \&stream,\ \mbox{\hyperlink{structhydro_1_1element}{element}}\ \&cell)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ cell.tau\ >>\ cell.x\ >>\ cell.y\ >>\ cell.eta;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ mu\ =\ 0;\ mu\ <\ 4;\ mu++)}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ cell.dsigma[mu];}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ mu\ =\ 0;\ mu\ <\ 4;\ mu++)}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ cell.u[mu];}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ cell.T\ >>\ cell.mub\ >>\ cell.muq\ >>\ cell.mus;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ cell.dbeta[i][j];}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stream\ >>\ cell.dmuCart[i][j];}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structhydro_1_1element}{element}}\ \&cell)}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}("{}}\ <<\ cell.tau\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.x\ <<\ \textcolor{stringliteral}{"{},"{}}\ <<\ cell.y\ <<\ \textcolor{stringliteral}{"{},"{}}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ cell.eta\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)t"{}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}T\ =\ "{}}\ <<\ cell.T\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t\ mu\_B\ =\ "{}}\ <<\ cell.mub\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t\ mu\_Q\ =\ "{}}\ <<\ cell.muq\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t\ mu\_S\ =\ "{}}\ <<\ cell.mus;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_spacelike()}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ get\_normal\_size\_sq()\ >\ 0;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ old\_shear(\textcolor{keywordtype}{int}\ mu,\ \textcolor{keywordtype}{int}\ nu);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sigma\_norm();}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ fvort\_norm();}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tvort\_norm();}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tshear\_norm();}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dbdu\_diff\_norm();}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ acc\_norm();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_normal\_size\ =\ 0;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_theta\ =\ 0.0;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_b\_theta\ =\ 0.0;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_delta\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_delta\_ll\ =\ \{0\};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_dul\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_dul\ =\ \{0\};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_dbl\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_dbl\ =\ \{0\};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_acc\_caclulated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ utils::four\_vec\ \_acc\ =\ \{0\};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_th\_vorticity\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_th\_vorticity\ =\ \{0\};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_th\_shear\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_th\_shear\ =\ \{0\};}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_shear\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_shear\ =\ \{0\};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_\_f\_vorticity\_vec\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ utils::four\_vec\ \_f\_vorticity\_vec\ =\ \{0\};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_\_f\_vorticity\_calculated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ utils::r2\_tensor\ \_f\_vorticity\ =\ \{0\};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ calculate\_shear();}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ calculate\_fvorticity\_vec();}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ calculate\_fvorticity();}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ calculate\_th\_vorticity();}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ calculate\_th\_shear();}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ calculte\_ac();}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_sigma\_norm\ =\ 0;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_fvort\_norm\ =\ 0;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_tvort\_norm\ =\ 0;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_tshear\_norm\ =\ 0;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_dbdu\_norm\ =\ 0;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_acc\_norm\ =\ 0;}
+\DoxyCodeLine{00149\ \ \ \ \ \};}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

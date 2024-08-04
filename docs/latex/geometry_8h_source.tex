@@ -1,0 +1,92 @@
+\hypertarget{geometry_8h_source}{}\doxysection{geometry.\+h}
+\label{geometry_8h_source}\index{src/geometry.h@{src/geometry.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GEOMETRY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GEOMETRY\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}utils.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }utils::geometry}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}}
+\DoxyCodeLine{00014\ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}()\ :\ \_data(\{0\}),\ \_lower(\textcolor{keyword}{false})\ \{\}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(\textcolor{keywordtype}{bool}\ lower)\ :\ \_data(\{0\}),\ \_lower(lower)\ \{\}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(four\_vec\ vec,\ \textcolor{keywordtype}{bool}\ is\_lower\ =\ \textcolor{keyword}{false})\ :\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(vec[0],\ vec[1],\ vec[2],\ vec[3],\ is\_lower)\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(\textcolor{keywordtype}{double}\ arr[],\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{bool}\ is\_lower\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&other);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ four\_vector(double\ \&v0,\ double\ \&v1,\ double\ \&v2,\ double\ \&v3,\ bool\ \&lower)\ :\ \_data(\{v0,\ v1,\ v2,\ v3\}),\ \_lower(lower)\{\};}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&v0,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&v1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&v2,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&v3,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&lower)\ :\ \_data(\{v0,\ v1,\ v2,\ v3\}),\ \_lower(lower)\{\};}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ four\_vec\ vec()\ \{\ \textcolor{keywordflow}{return}\ \_data;\ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_lower()\ \{\ \textcolor{keywordflow}{return}\ \_lower;\ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *to\_array()\ \{\ \textcolor{keywordflow}{return}\ \_data.data();\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ operator[](\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ i)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_data[i];\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \&operator[](\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ i)\ \{\ \textcolor{keywordflow}{return}\ \_data[i];\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a45db4c705cb1904997b8d735a626ffc4}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&rhs);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a3c9dbe412f7f71da1cb7b3f9eda5802f}{operator+}}(\mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&vec2)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ assert(vec2.\_lower\ ==\ \_lower);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\_data[0]\ +\ vec2.\_data[0],}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_data[1]\ +\ vec2.\_data[1],}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_data[2]\ +\ vec2.\_data[2],}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_data[3]\ +\ vec2.\_data[3]\},}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_lower);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a55f3fa3ddc92fd44b4d67da8e62f482e}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&vec2)}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ assert(vec2.\_lower\ ==\ \_lower);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\_data[0]\ -\/\ vec2.\_data[0],}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_data[1]\ -\/\ vec2.\_data[1],}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_data[2]\ -\/\ vec2.\_data[2],}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_data[3]\ -\/\ vec2.\_data[3]\},}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_lower);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&operator-\/=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&rhs);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ operator*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ \&vec2);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ operator*(\textcolor{keyword}{const}\ r2\_tensor\ \&tensor);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}\ operator*(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector}{four\_vector}}(\{x\ *\ \_data[0],\ x\ *\ \_data[1],\ x\ *\ \_data[2],\ x\ *\ \_data[3]\},\ \_lower);\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ four\_vector\ \&other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ r2\_tensor\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a12e9be15f7387e91ed5f25017db82e1a}{operator\&}}(\textcolor{keyword}{const}\ four\_vector\ \&vec2);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ four\_vector\ add\_vectors(std::vector<four\_vector>\ vecs);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ norm\_sq();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ four\_vector\ to\_lower();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ lower();}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ four\_vector\ to\_upper();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ raise();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ four\_vector\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a58f71b4638f2e26ecff3f349e81577f8}{boost}}(\textcolor{keyword}{const}\ four\_vector\ \&four\_velocity);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ four\_vector\ operator/(\textcolor{keyword}{const}\ four\_vector\ \&four\_velocity)}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classutils_1_1geometry_1_1four__vector_a58f71b4638f2e26ecff3f349e81577f8}{boost}}(four\_velocity);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::istream\ \&operator>>(std::istream\ \&stream,\ four\_vector\ \&vector);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&stream,\ \textcolor{keyword}{const}\ four\_vector\ \&vector);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::array<double,\ 4>\ \_data;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_lower;}
+\DoxyCodeLine{00093\ \ \ \ \ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classutils_1_1geometry_1_1t__r2__tensor}{t\_r2\_tensor}}}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ std::array<std::array<double,\ 4>,\ 4>\ \_matrix;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ std::array<bool,\ 2>\ \_lower;}
+\DoxyCodeLine{00100\ \ \ \ \ \};}
+\DoxyCodeLine{00101\ \}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,42 @@
+ODIR           = obj
+UNAME_S := $(shell uname -s) 
+ifeq ($(UNAME_S),Darwin)
+	@echo "Mac OS"
+	CXX           = /opt/homebrew/Cellar/llvm/18.1.5/bin/clang++
+	CXXFLAGS      = -fPIC -O3 -fopenmp -Xpreprocessor # Add -fopenmp for OpenMP support
+	CXXFLAGS 	  += -stdlib=libc++ -pthread -std=c++17 -m64
+	LD            = /opt/homebrew/Cellar/llvm/18.1.5/bin/clang++
+	LDFLAGS       = -O3 -fopenmp -lomp  # Add -fopenmp for OpenMP support
+endif
+ifeq ($(UNAME_S),Linux)
+	CXX = g++
+	CXXFLAGS      = -fPIC -O3 -fopenmp -Xpreprocessor # Add -fopenmp for OpenMP support
+	CXXFLAGS 	+= -std=c++17 -m64
+	LD            = g++
+	LDFLAGS       = -O3 -fopenmp -lpthread  # Add -fopenmp for OpenMP support
+	FFLAGS        = -fPIC -O3
+endif
+FFLAGS        = -fPIC -O3
+
+LIBS          = $(SYSLIBS)
+GLIBS         = $(SYSLIBS)
+
+# _HYDROO        = DecayChannel.o ParticlePDG2.o DatabasePDG2.o UKUtility.o gen.o \
+#                 particle.o main.o interpolation.o utils.o elements.o
+_HYDROO        =  main.o utils.o element.o engine.o pdg_particle.o surface.o analytical_sol.o bjorken.o geometry.o 
+ 
+# VPATH = src:../UKW
+HYDROO = $(patsubst %,$(ODIR)/%,$(_HYDROO))
+
+TARGET = calc
+#------------------------------------------------------------------------------
+
+$(TARGET): $(HYDROO)
+	$(LD) $(LDFLAGS) $^ -o $@ $(LIBS)
+		@echo "$@ done"
+
+clean:
+		@rm -f $(ODIR)/*.o $(TARGET)
+
+$(ODIR)/%.o: src/%.cpp 
+		$(CXX) $(CXXFLAGS) -c $< -o $@ 
