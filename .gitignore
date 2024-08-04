@@ -131,8 +131,6 @@ googlemock/gtest
 /backup
 *.pdf
 *.txt
-*.csv
-
 *.cmake
 *.png
 /benchmark
