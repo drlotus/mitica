@@ -1,8 +1,8 @@
-# Particlization Calc
+# Multi formalism polarization calculator (Codename: mitica)
 
 ## Overview
 
-This is an extensive modification of Iuri Karpenko's particlization code, specialized for calculating the final hadrons polarization. The modifications aim to simplify the code and add the required flexibility for implementing different frameworks.
+This is an extensive modification of Iuri Karpenko's particlization code that follows Andrea Palermo's hydrofoil, specialized for calculating the final hadrons polarization. The modifications aim to simplify the code and add the required flexibility for implementing different frameworks.
 
 ## Key Features
 
