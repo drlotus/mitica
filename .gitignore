@@ -122,7 +122,6 @@ googlemock/gtest
 /ALL_BUILD.vcxproj.filters
 /ALL_BUILD.vcxproj
 
-/test_build
 /figs
 /input
 /obj

@@ -1,15 +1,18 @@
-# Multi formalism polarization calculator (Codename: mitica)
+# Mitica - Flexible Hadron Polarization Analysis Code
 
-## Overview
+## Description
 
-This is an extensive modification of Iuri Karpenko's particlization code that follows Andrea Palermo's hydrofoil, specialized for calculating the final hadrons polarization. The modifications aim to simplify the code and add the required flexibility for implementing different frameworks.
+Mitica is a specialized code designed to implement and compare various hadron polarization formulas, including a novel approach based on quantum kinetic theory. This code builds upon and extensively adapts algorithms from existing particlization frameworks, maintaining the use of OpenMP for optimized performance and faster execution.
+
+Mitica enables direct comparisons between the quantum kinetic theory-based formula and existing models, particularly those based on the local thermal equilibrium approximation. The quantum kinetic theory component of Mitica is based on the work presented in *Phys. Rev. D 106 (2022) 9, L091901* by Nora Weickgenannt, David Wagner, Enrico Speranza, and Dirk H. Rischke. This comparative analysis will assess the alignment of the quantum kinetic theory with experimental data relative to established models, with findings to be detailed in an upcoming publication.
 
 ## Key Features
 
-- **Validation Interface**: Provides a structured interface for testing computed results against expected analytical solutions.
-- **Automated Testing and Benchmarking**: Comprehensive unit tests using Google Test, as well as benchmarking using Google Benchmarks, to ensure the correctness and efficiency of computations.
-- **Flexible Structure**: Provides interfaces for different parts of the process such that each part can be reimplemented without too much effort. Additionally, by using templates, most of the code is independent of how the fluid's cells are implemented.
-- **Separation of Calculator**: Using the factory pattern, the program's main engine accepts different calculators for various purposes and formalisms.
+- **Flexible Framework**: Supports easy switching between different hadron polarization formulas, enabling comprehensive comparative studies.
+- **Optimized Performance**: Continues to use OpenMP to enhance performance, ensuring efficient execution while adapting existing algorithms.
+- **Modular Design**: The code is structured to facilitate seamless integration with different hydrodynamic simulations, enhancing versatility and applicability in various research contexts.
+- **Modern Development Tools**: Implements modern software development practices, including unit testing with Google Test and performance benchmarking, to ensure reliability and efficiency.
+
 
 
 ## Installation
