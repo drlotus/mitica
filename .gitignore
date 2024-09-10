@@ -134,4 +134,6 @@ googlemock/gtest
 *.png
 /benchmark
 /mathematica
+/output
+/.vscode
 *.nb
