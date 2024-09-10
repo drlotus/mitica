@@ -8,9 +8,22 @@
 #include "my_test.h"
 #include "../src/vhll_engine_helper.h"
 #include <omp.h>
+#include <unordered_map>
+#include <tuple>
 
 namespace
 {
+    struct tuple_hash
+    {
+        template <class T>
+        std::size_t operator()(const T &tuple) const
+        {
+            auto hash1 = std::hash<double>{}(std::get<0>(tuple));
+            auto hash2 = std::hash<double>{}(std::get<1>(tuple));
+            auto hash3 = std::hash<double>{}(std::get<2>(tuple));
+            return hash1 ^ hash2 ^ hash3; // Combine the hash values
+        }
+    };
     namespace ug = utils::geometry;
     using yout = powerhouse::yield_output<vhlle::fcell>;
     class YieldTest : public my_test
@@ -531,4 +544,276 @@ namespace
 
         write();
     }
+
+    // TEST_F(YieldTest, log_p)
+    // {
+    //     int fails = 0;
+    //     logger << "----------------------" << std::endl;
+    //     logger << "log_p begins" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    //     create_phase_space();
+
+    //     for (const auto &row : _output)
+    //     {
+    //         logger << row.p << std::endl;
+    //     }
+
+    //     logger << "----------------------" << std::endl;
+    //     logger << "log_p ends" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    // }
+
+    // TEST_F(YieldTest, log_p_dot_u)
+    // {
+    //     int fails = 0;
+    //     logger << "----------------------" << std::endl;
+    //     logger << "log_p_dot_u begins" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    //     create_phase_space();
+
+    //     _hypersurface.read(short_file_txt, utils::accept_modes::AcceptAll, true, hydro::file_format::Text);
+
+    //     std::map<std::pair<double, double>, std::vector<yout>> bins;
+    //     for (const auto &row : _output)
+    //     {
+    //         if (row.pT > 1)
+    //         {
+    //             std::pair<double, double> key = {row.pT, row.y_p};
+    //             bins[key].push_back(row);
+    //         }
+    //     }
+
+    //     auto it = bins.begin();
+    //     int changes = 0;
+    //     if (it != bins.end())
+    //     {
+    //         auto loop_result = 0.0;
+    //         auto &bin = it->second;
+    //         for (size_t i = 0; i < bin.size(); i++)
+    //         {
+    //             logger << "----------------------" << std::endl;
+    //             logger << "row[" << i << "].p = "
+    //                    << bin[i].p << std::endl;
+    //             auto &&local_output = bin[i];
+    //             local_output.dNd3p = 0;
+
+    //             for (auto &cell : _hypersurface.data())
+    //             {
+    //                 // pdotu += bin[i].p * cell.four_vel();
+    //                 _calculator->perform_step(cell, local_output);
+    //             }
+    //             if (loop_result != local_output.dNd3p && i > 0)
+    //             {
+    //                 changes++;
+    //             }
+
+    //             loop_result = local_output.dNd3p;
+    //             logger << local_output.dNd3p << std::endl;
+    //             logger << "----------------------" << std::endl;
+    //         }
+    //     }
+    //     ASSERT_TRUE(changes > 0);
+
+    //     logger << "----------------------" << std::endl;
+    //     logger << "log_p_dot_u ends" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    // }
+
+    //  @brief Testing if dNd3p is phi_p depdenent
+    TEST_F(YieldTest, test_phi_dependecy)
+    {
+        int fails = 0;
+        logger << "----------------------" << std::endl;
+        logger << "test_phi_dependecy begins" << std::endl;
+        logger << "----------------------" << std::endl;
+        std::cout << "Reading from text file ..." << std::endl;
+        _hypersurface.read(short_file_txt, utils::accept_modes::AcceptAll, true, hydro::file_format::Text);
+        print(_hypersurface);
+        if (_hypersurface.data().empty())
+        {
+            throw std::runtime_error("Surface data is empty!");
+        }
+
+        std::cout << "Yield calculation using omp ..." << std::endl;
+        calculate_yield_omp();
+        std::map<std::pair<double, double>, std::vector<yout>> bins;
+        for (const auto &row : _output)
+        {
+            if (row.pT > 1.0)
+            {
+                std::pair<double, double> key = {row.pT, row.y_p};
+                bins[key].push_back(row);
+            }
+        }
+        int failures = 0;
+
+        for (auto &bin : bins)
+        {
+            auto &ref_row = bin.second[0];
+            auto &entries = bin.second;
+            logger << "---------REF ROW -----------" << std::endl;
+            logger << ref_row << std::endl;
+            for (size_t i = 1; i < entries.size(); i++)
+            {
+                auto change = 100.0 * utils::relative_error(ref_row.dNd3p, entries[i].dNd3p);
+                auto failure = (ref_row.phi_p != entries[i].phi_p) && change == 0;
+
+                if (failure)
+                {
+                    logger << "#" << failures << " phi-indepdent rows:" << std::endl;
+                    logger << " phi_p = "
+                           << entries[i].phi_p / M_PI << "\u03C0 " << "dnd3p = " << entries[i].dNd3p << std::endl;
+                    failures++;
+                }
+                else
+                {
+                    logger << "phi_p = "
+                           << entries[i].phi_p / M_PI << "\u03C0 " << "change = " << change << "%" << std::endl;
+                }
+            }
+             logger << "----------------------" << std::endl;
+        }
+
+        ASSERT_TRUE(failures == 0) << failures << "  phi-indepdent rows" << std::endl;
+
+        logger << "----------------------" << std::endl;
+        logger << "test_phi_dependecy ends" << std::endl;
+        logger << "----------------------" << std::endl;
+    }
+
+    // /// @brief Testing if dNd3p is y depdenent
+    // /// @param
+    // /// @param
+    // TEST_F(YieldTest, test_y_dependecy)
+    // {
+    //     int fails = 0;
+    //     logger << "----------------------" << std::endl;
+    //     logger << "test_y_dependecy begins" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    //     std::cout << "Reading from text file ..." << std::endl;
+    //     _hypersurface.read(short_file_txt, utils::accept_modes::AcceptAll, true, hydro::file_format::Text);
+    //     print(_hypersurface);
+    //     if (_hypersurface.data().empty())
+    //     {
+    //         throw std::runtime_error("Surface data is empty!");
+    //     }
+    //     calculate_yield_sgt();
+
+    //     std::cout << "Yield calculation using omp ..." << std::endl;
+    //     calculate_yield_omp();
+    //     std::map<std::pair<double, double>, std::vector<std::pair<double, double>>> bins;
+    //     for (const auto &row : _output)
+    //     {
+    //         std::pair<double, double> key = {row.pT, row.phi_p};
+    //         bins[key].push_back({row.y_p, row.dNd3p});
+    //     }
+    //     int failures = 0;
+
+    //     for (const auto &bin : bins)
+    //     {
+    //         const auto &entries = bin.second;
+    //         for (size_t i = 0; i < entries.size(); i++)
+    //         {
+    //             for (size_t j = 0; j < entries.size(); j++)
+    //             {
+    //                 auto failure = entries[i].first != entries[j].first && abs(entries[i].second - entries[j].second) < abs_error;
+    //                 if (failure)
+    //                 {
+    //                     yout _1;
+    //                     _1.pT = bin.first.first;
+    //                     _1.phi_p = bin.first.second;
+    //                     _1.y_p = entries[i].first;
+    //                     _1.dNd3p = entries[i].second;
+
+    //                     yout _2;
+    //                     _2.pT = bin.first.first;
+    //                     _2.phi_p = bin.first.second;
+    //                     _2.y_p = entries[j].first;
+    //                     _2.dNd3p = entries[j].second;
+
+    //                     logger << "----------------------" << std::endl;
+    //                     logger << "y-indepdent rows:" << std::endl;
+    //                     logger << "row 1:" << std::endl
+    //                            << _1 << std::endl;
+    //                     logger << "row 2:" << std::endl
+    //                            << _2 << std::endl;
+    //                     failures++;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     ASSERT_TRUE(failures == 0);
+
+    //     logger << "----------------------" << std::endl;
+    //     logger << "test_y_dependecy ends" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    // }
+
+    // /// @brief Testing if dNd3p is pt depdenent
+    // /// @param
+    // /// @param
+    // TEST_F(YieldTest, test_pt_dependecy)
+    // {
+    //     int fails = 0;
+    //     logger << "----------------------" << std::endl;
+    //     logger << "test_pt_dependecy begins" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    //     std::cout << "Reading from text file ..." << std::endl;
+    //     _hypersurface.read(short_file_txt, utils::accept_modes::AcceptAll, true, hydro::file_format::Text);
+    //     print(_hypersurface);
+    //     if (_hypersurface.data().empty())
+    //     {
+    //         throw std::runtime_error("Surface data is empty!");
+    //     }
+    //     calculate_yield_sgt();
+
+    //     std::cout << "Yield calculation using omp ..." << std::endl;
+    //     calculate_yield_omp();
+    //     std::map<std::pair<double, double>, std::vector<std::pair<double, double>>> bins;
+    //     for (const auto &row : _output)
+    //     {
+    //         std::pair<double, double> key = {row.y_p, row.phi_p};
+    //         bins[key].push_back({row.pT, row.dNd3p});
+    //     }
+    //     int failures = 0;
+
+    //     for (const auto &bin : bins)
+    //     {
+    //         const auto &entries = bin.second;
+    //         for (size_t i = 0; i < entries.size(); i++)
+    //         {
+    //             for (size_t j = 0; j < entries.size(); j++)
+    //             {
+    //                 auto failure = abs(entries[i].first - entries[j].first) >= 1e-10 && abs(entries[i].second - entries[j].second) < 1e-10;
+    //                 if (failure)
+    //                 {
+    //                     yout _1;
+    //                     _1.y_p = bin.first.first;
+    //                     _1.phi_p = bin.first.second;
+    //                     _1.pT = entries[i].first;
+    //                     _1.dNd3p = entries[i].second;
+
+    //                     yout _2;
+    //                     _2.y_p = bin.first.first;
+    //                     _2.phi_p = bin.first.second;
+    //                     _2.pT = entries[j].first;
+    //                     _2.dNd3p = entries[j].second;
+
+    //                     logger << "----------------------" << std::endl;
+    //                     logger << "pT-indepdent rows:" << std::endl;
+    //                     logger << "row 1:" << std::endl
+    //                            << _1 << std::endl;
+    //                     logger << "row 2:" << std::endl
+    //                            << _2 << std::endl;
+    //                     failures++;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     ASSERT_TRUE(failures == 0);
+
+    //     logger << "----------------------" << std::endl;
+    //     logger << "test_pt_dependecy ends" << std::endl;
+    //     logger << "----------------------" << std::endl;
+    // }
 }
