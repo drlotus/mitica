@@ -15,6 +15,7 @@
 #include "../src/factories.h"
 #include "my_test.h"
 #include <omp.h>
+#include <boost/random/normal_distribution.hpp>
 
 namespace
 {
@@ -30,7 +31,61 @@ namespace
         void TearDown() override
         {
         }
+        void gaussian_sampled_rows(const std::string &input_filename, const std::string &output_filename, int num_samples)
+        {
+            std::ifstream file(input_filename);
+            std::string line;
+            std::vector<std::string> lines;
+
+            // Read all lines into memory
+            while (getline(file, line))
+            {
+                lines.push_back(line);
+            }
+            file.close();
+
+            int num_lines = lines.size();
+            int mean = num_lines / 2;
+            int stddev = num_lines / 10; // Adjust as necessary
+
+            // Setup random number generation
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            boost::random::normal_distribution<> d(mean, stddev);
+
+            std::vector<int> indices;
+            for (int i = 0; i < num_samples; ++i)
+            {
+                int idx = static_cast<int>(d(gen));
+                if (idx >= 0 && idx < num_lines)
+                {
+                    indices.push_back(idx);
+                }
+            }
+
+            // Optionally, remove duplicates and sort
+            std::sort(indices.begin(), indices.end());
+            indices.erase(unique(indices.begin(), indices.end()), indices.end());
+
+            // Write selected lines to the output file
+            std::ofstream output_file(output_filename);
+            for (auto idx : indices)
+            {
+                output_file << lines[idx] << std::endl;
+            }
+            output_file.close();
+        }
     };
+
+    // TEST_F(CellTest, PrepareFiles)
+    // {
+    //     gaussian_sampled_rows("./input/beta.dat", "./input/beta-1.dat", 1);
+    //     gaussian_sampled_rows("./input/beta.dat", "./input/beta-6.dat", 6);
+    //     gaussian_sampled_rows("./input/beta.dat", "./input/beta-7.dat", 7);
+    //     gaussian_sampled_rows("./input/beta.dat", "./input/beta-10.dat", 10);
+    //     gaussian_sampled_rows("./input/beta.dat", "./input/beta-60.dat", 60);
+    //     gaussian_sampled_rows("./input/beta.dat", "./input/beta-70.dat", 70);
+    // }
 
     TEST_F(CellTest, ReadOneCel)
     {
@@ -94,7 +149,7 @@ namespace
         EXPECT_EQ(surface.data().size(), 60);
         print(surface);
         std::vector<vhlle::fcell> original_cells;
-        original_cells.insert(original_cells.begin(),surface.data().begin(), surface.data().end());
+        original_cells.insert(original_cells.begin(), surface.data().begin(), surface.data().end());
         const std::string o_file = "./input/beta-60-copy.dat";
         surface.write(o_file, true, hydro::file_format::Text);
         surface.clear();
@@ -104,19 +159,15 @@ namespace
         for (size_t i = 0; i < surface.data().size(); i++)
         {
             const auto &cell = surface[i];
-            auto it = std::find_if(original_cells.begin(), original_cells.end(), [&cell](const auto& c)
-            {
-                return cell.milne_coords() == c.milne_coords();
-            });
+            auto it = std::find_if(original_cells.begin(), original_cells.end(), [&cell](const auto &c)
+                                   { return cell.milne_coords() == c.milne_coords(); });
             ASSERT_FALSE(it == original_cells.end());
             auto found_cell = *it;
             EXPECT_CELLS_NEAR(surface[i], found_cell);
         }
-        
-        
+
         print(surface);
     }
-
 
     TEST_F(CellTest, ReadWrite60Cells_Bin)
     {
@@ -126,25 +177,23 @@ namespace
         EXPECT_EQ(surface.data().size(), 60);
         print(surface);
         std::vector<vhlle::fcell> original_cells;
-        original_cells.insert(original_cells.begin(),surface.data().begin(), surface.data().end());
+        original_cells.insert(original_cells.begin(), surface.data().begin(), surface.data().end());
         const std::string o_file = "./input/beta-60.bin";
         surface.write(o_file, true, hydro::file_format::Binary);
         surface.clear();
         surface.read(o_file, utils::accept_modes::AcceptAll, true, hydro::file_format::Binary);
         EXPECT_EQ(surface.data().size(), 60);
 
-         for (size_t i = 0; i < surface.data().size(); i++)
+        for (size_t i = 0; i < surface.data().size(); i++)
         {
             const auto &cell = surface[i];
-            auto it = std::find_if(original_cells.begin(), original_cells.end(), [&cell](const auto& c)
-            {
-                return cell.milne_coords() == c.milne_coords();
-            });
+            auto it = std::find_if(original_cells.begin(), original_cells.end(), [&cell](const auto &c)
+                                   { return cell.milne_coords() == c.milne_coords(); });
             ASSERT_FALSE(it == original_cells.end());
             auto found_cell = *it;
             EXPECT_CELLS_NEAR(surface[i], found_cell);
         }
-        
+
         print(surface);
     }
 
@@ -156,536 +205,536 @@ namespace
         EXPECT_EQ(surface.total(), 751493);
     }
 
-// Old development codes
-    
-//     TEST_F(CellTest, Hypersurface_ReadCells_Single_Text)
-//     {
-//         std::vector<vhlle::fcell> _cells;
-//         const std::string i_file = "./input/beta-60.dat";
+    // Old development codes
 
-//         std::vector<std::streampos> file_positions;
-//         std::vector<std::streampos> failed_positions;
-//         std::ifstream file(i_file);
+    //     TEST_F(CellTest, Hypersurface_ReadCells_Single_Text)
+    //     {
+    //         std::vector<vhlle::fcell> _cells;
+    //         const std::string i_file = "./input/beta-60.dat";
 
-//         if (!file.is_open())
-//         {
-//             throw std::runtime_error("Input file cannot be opened!");
-//         }
+    //         std::vector<std::streampos> file_positions;
+    //         std::vector<std::streampos> failed_positions;
+    //         std::ifstream file(i_file);
 
-//         // Determine chunk positions
-//         file.seekg(0, std::ios::end);
-//         std::streampos file_size = file.tellg();
-//         file.seekg(0, std::ios::beg);
-//         int threads_count = 1;
+    //         if (!file.is_open())
+    //         {
+    //             throw std::runtime_error("Input file cannot be opened!");
+    //         }
 
-//         auto &&_lines = std::count(std::istreambuf_iterator<char>(file),
-//                                    std::istreambuf_iterator<char>(), '\n');
+    //         // Determine chunk positions
+    //         file.seekg(0, std::ios::end);
+    //         std::streampos file_size = file.tellg();
+    //         file.seekg(0, std::ios::beg);
+    //         int threads_count = 1;
 
-//         _cells.reserve(_lines);
-//         file.seekg(0, std::ios::beg);
+    //         auto &&_lines = std::count(std::istreambuf_iterator<char>(file),
+    //                                    std::istreambuf_iterator<char>(), '\n');
 
-//         const int step_size = (int)ceil((double)_lines / 100.0);
+    //         _cells.reserve(_lines);
+    //         file.seekg(0, std::ios::beg);
 
-//         int _total = 0;
-//         int _failed = 0;
-//         int _rejected = 0;
-//         int _timelikes = 0;
-//         int _skipped = 0;
-//         int perc = 0;
-//         int last_perc = -1;
-//         int counter = 0;
-//         std::ifstream local_file(i_file);
+    //         const int step_size = (int)ceil((double)_lines / 100.0);
 
-//         if (!local_file.is_open())
-//         {
-//             std::cerr << "Cannot open file " << i_file << "!" << std::endl;
-//         }
-//         else
-//         {
-//             std::string line;
-//             while (std::getline(local_file, line))
-//             {
+    //         int _total = 0;
+    //         int _failed = 0;
+    //         int _rejected = 0;
+    //         int _timelikes = 0;
+    //         int _skipped = 0;
+    //         int perc = 0;
+    //         int last_perc = -1;
+    //         int counter = 0;
+    //         std::ifstream local_file(i_file);
 
-//                 counter++;
-//                 bool reject = false;
+    //         if (!local_file.is_open())
+    //         {
+    //             std::cerr << "Cannot open file " << i_file << "!" << std::endl;
+    //         }
+    //         else
+    //         {
+    //             std::string line;
+    //             while (std::getline(local_file, line))
+    //             {
 
-//                 if (line.empty() || line[0] == '#')
-//                 {
-//                     _skipped++;
-//                     continue;
-//                 }
+    //                 counter++;
+    //                 bool reject = false;
 
-//                 std::istringstream iss(line);
-//                 vhlle::fcell cell;
-//                 iss >> cell;
-//                 if (iss.fail())
-//                 {
-//                     _failed++;
-//                     failed_positions.push_back(local_file.tellg());
-//                     continue;
-//                 }
+    //                 if (line.empty() || line[0] == '#')
+    //                 {
+    //                     _skipped++;
+    //                     continue;
+    //                 }
 
-//                 if (!cell.is_spacelike())
-//                 {
-//                     _timelikes++;
-//                 }
+    //                 std::istringstream iss(line);
+    //                 vhlle::fcell cell;
+    //                 iss >> cell;
+    //                 if (iss.fail())
+    //                 {
+    //                     _failed++;
+    //                     failed_positions.push_back(local_file.tellg());
+    //                     continue;
+    //                 }
 
-//                 if (!reject)
-//                 {
-//                     _cells.push_back(cell);
-//                     _total++;
-//                 }
-//                 else
-//                 {
-//                     _rejected++;
-//                 }
-//                 perc = 100 * ((double)counter) / ((double)_lines);
+    //                 if (!cell.is_spacelike())
+    //                 {
+    //                     _timelikes++;
+    //                 }
 
-//                 if (perc > last_perc)
-//                 {
-//                     last_perc = perc;
-//                     utils::show_progress((last_perc > 100) ? 100 : last_perc);
-//                 }
-//             }
-//         }
+    //                 if (!reject)
+    //                 {
+    //                     _cells.push_back(cell);
+    //                     _total++;
+    //                 }
+    //                 else
+    //                 {
+    //                     _rejected++;
+    //                 }
+    //                 perc = 100 * ((double)counter) / ((double)_lines);
 
-//         // retrying for the failed cells
-//         // the second condition is required to check if the failure was real
-//         if (_failed > 0)
-//         {
-//             if (_lines == _total + _rejected + _skipped)
-//             {
-//                 _total += _failed;
-//                 _failed = 0;
-//             }
-//             else
-//             {
-//                 std::string line;
-//                 for (auto &&pos : failed_positions)
-//                 {
-//                     file.seekg(pos);
-//                     std::getline(file, line);
-//                     std::istringstream iss(line);
-//                     vhlle::fcell cell;
-//                     iss >> cell;
-//                     if (!iss.fail())
-//                     {
-//                         _cells.push_back(cell);
-//                         _failed--;
-//                         _total++;
-//                     }
-//                 }
-//             }
-//         }
+    //                 if (perc > last_perc)
+    //                 {
+    //                     last_perc = perc;
+    //                     utils::show_progress((last_perc > 100) ? 100 : last_perc);
+    //                 }
+    //             }
+    //         }
 
-//         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
-//         std::cout << std::endl
-//                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
-//     }
+    //         // retrying for the failed cells
+    //         // the second condition is required to check if the failure was real
+    //         if (_failed > 0)
+    //         {
+    //             if (_lines == _total + _rejected + _skipped)
+    //             {
+    //                 _total += _failed;
+    //                 _failed = 0;
+    //             }
+    //             else
+    //             {
+    //                 std::string line;
+    //                 for (auto &&pos : failed_positions)
+    //                 {
+    //                     file.seekg(pos);
+    //                     std::getline(file, line);
+    //                     std::istringstream iss(line);
+    //                     vhlle::fcell cell;
+    //                     iss >> cell;
+    //                     if (!iss.fail())
+    //                     {
+    //                         _cells.push_back(cell);
+    //                         _failed--;
+    //                         _total++;
+    //                     }
+    //                 }
+    //             }
+    //         }
 
-//     TEST_F(CellTest, Hypersurface_ReadCells_Text_omp)
-//     {
-//         std::vector<vhlle::fcell> _cells;
-//         const std::string i_file = "./input/beta-60.dat";
+    //         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
+    //         std::cout << std::endl
+    //                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
+    //     }
 
-//         std::vector<std::streampos> file_positions;
-//         std::vector<std::streampos> failed_positions;
-//         std::ifstream file(i_file);
+    //     TEST_F(CellTest, Hypersurface_ReadCells_Text_omp)
+    //     {
+    //         std::vector<vhlle::fcell> _cells;
+    //         const std::string i_file = "./input/beta-60.dat";
 
-//         if (!file.is_open())
-//         {
-//             throw std::runtime_error("Input file cannot be opened!");
-//         }
+    //         std::vector<std::streampos> file_positions;
+    //         std::vector<std::streampos> failed_positions;
+    //         std::ifstream file(i_file);
 
-//         // Determine chunk positions
-//         file.seekg(0, std::ios::end);
-//         std::streampos file_size = file.tellg();
-//         file.seekg(0, std::ios::beg);
-//         std::string test_line;
-//         std::getline(file, test_line);
-//         const int estimated_line_count = file_size / (sizeof(char) * test_line.length());
-//         file.seekg(0, std::ios::beg);
-//         const int step_size = (int)ceil((double)estimated_line_count / 100.0);
-//         int threads_count = omp_get_max_threads();
+    //         if (!file.is_open())
+    //         {
+    //             throw std::runtime_error("Input file cannot be opened!");
+    //         }
 
-//         std::streampos chunk_size = file_size / threads_count;
-//         std::cout << "chunk size = " << chunk_size << std::endl;
-//         for (int i = 0; i < threads_count; ++i)
-//         {
-//             std::streampos start = i * chunk_size;
-//             file_positions.push_back(start);
+    //         // Determine chunk positions
+    //         file.seekg(0, std::ios::end);
+    //         std::streampos file_size = file.tellg();
+    //         file.seekg(0, std::ios::beg);
+    //         std::string test_line;
+    //         std::getline(file, test_line);
+    //         const int estimated_line_count = file_size / (sizeof(char) * test_line.length());
+    //         file.seekg(0, std::ios::beg);
+    //         const int step_size = (int)ceil((double)estimated_line_count / 100.0);
+    //         int threads_count = omp_get_max_threads();
 
-//             std::cout << "thread [" << i << "] starts at " << start << std::endl;
-//         }
-//         file_positions.push_back(file_size);
+    //         std::streampos chunk_size = file_size / threads_count;
+    //         std::cout << "chunk size = " << chunk_size << std::endl;
+    //         for (int i = 0; i < threads_count; ++i)
+    //         {
+    //             std::streampos start = i * chunk_size;
+    //             file_positions.push_back(start);
 
-//         int _lines = 0;
-//         int _total = 0;
-//         int _failed = 0;
-//         int _rejected = 0;
-//         int _timelikes = 0;
-//         int _skipped = 0;
-//         int perc = 0;
-//         int last_perc = -1;
+    //             std::cout << "thread [" << i << "] starts at " << start << std::endl;
+    //         }
+    //         file_positions.push_back(file_size);
 
-// #pragma omp parallel
-//         {
-//             int tid = omp_get_thread_num();
+    //         int _lines = 0;
+    //         int _total = 0;
+    //         int _failed = 0;
+    //         int _rejected = 0;
+    //         int _timelikes = 0;
+    //         int _skipped = 0;
+    //         int perc = 0;
+    //         int last_perc = -1;
 
-//             int local_total = 0;
-//             int local_failed = 0;
-//             int local_rejected = 0;
-//             int local_timelikes = 0;
-//             int local_skipped = 0;
-//             int local_counter = 0;
-//             int local_perc = 0;
-//             int local_last_perc = -1;
-//             std::ifstream local_file(i_file);
-//             std::vector<vhlle::fcell> thread_cells;
+    // #pragma omp parallel
+    //         {
+    //             int tid = omp_get_thread_num();
 
-//             if (!local_file.is_open())
-//             {
-//                 std::cerr << "Cannot open file " << i_file << " in thread " << tid << std::endl;
-//             }
-//             else
-//             {
-//                 local_file.seekg(file_positions[tid]);
-//                 std::string line;
-//                 while (local_file.tellg() < file_positions[tid + 1] && std::getline(local_file, line))
-//                 {
+    //             int local_total = 0;
+    //             int local_failed = 0;
+    //             int local_rejected = 0;
+    //             int local_timelikes = 0;
+    //             int local_skipped = 0;
+    //             int local_counter = 0;
+    //             int local_perc = 0;
+    //             int local_last_perc = -1;
+    //             std::ifstream local_file(i_file);
+    //             std::vector<vhlle::fcell> thread_cells;
 
-//                     // Ensure we do not read beyond the chunk
-//                     if (local_file.tellg() > file_positions[tid + 1])
-//                     {
-//                         break;
-//                     }
+    //             if (!local_file.is_open())
+    //             {
+    //                 std::cerr << "Cannot open file " << i_file << " in thread " << tid << std::endl;
+    //             }
+    //             else
+    //             {
+    //                 local_file.seekg(file_positions[tid]);
+    //                 std::string line;
+    //                 while (local_file.tellg() < file_positions[tid + 1] && std::getline(local_file, line))
+    //                 {
 
-//                     local_counter++;
-//                     bool reject = false;
+    //                     // Ensure we do not read beyond the chunk
+    //                     if (local_file.tellg() > file_positions[tid + 1])
+    //                     {
+    //                         break;
+    //                     }
 
-//                     if (line.empty() || line[0] == '#')
-//                     {
-//                         local_skipped++;
-//                         continue;
-//                     }
+    //                     local_counter++;
+    //                     bool reject = false;
 
-//                     std::istringstream iss(line);
-//                     vhlle::fcell cell;
-//                     iss >> cell;
-//                     if (iss.fail())
-//                     {
-//                         local_failed++;
-// #pragma omp critical
-//                         failed_positions.push_back(local_file.tellg());
-//                         continue;
-//                     }
+    //                     if (line.empty() || line[0] == '#')
+    //                     {
+    //                         local_skipped++;
+    //                         continue;
+    //                     }
 
-//                     if (!cell.is_spacelike())
-//                     {
-//                         local_timelikes++;
-//                     }
+    //                     std::istringstream iss(line);
+    //                     vhlle::fcell cell;
+    //                     iss >> cell;
+    //                     if (iss.fail())
+    //                     {
+    //                         local_failed++;
+    // #pragma omp critical
+    //                         failed_positions.push_back(local_file.tellg());
+    //                         continue;
+    //                     }
 
-//                     if (!reject)
-//                     {
-//                         thread_cells.push_back(cell);
-//                         local_total++;
-//                     }
-//                     else
-//                     {
-//                         local_rejected++;
-//                     }
-//                     local_perc = 100 * ((double)local_counter) / ((double)estimated_line_count);
-// #pragma omp critical
-//                     {
-//                         perc = std::max(perc, local_perc);
-//                         if (perc > last_perc)
-//                         {
-//                             last_perc = perc;
-//                             utils::show_progress((last_perc > 100) ? 100 : last_perc);
-//                         }
-//                     }
-//                 }
-//             }
-// #pragma omp critical
-//             {
-//                 _cells.insert(_cells.end(), thread_cells.begin(), thread_cells.end());
-//                 _total += local_total;
-//                 _failed += local_failed;
-//                 _rejected += local_rejected;
-//                 _timelikes += local_timelikes;
-//                 _skipped += local_skipped;
-//                 _lines += local_counter;
-//                 utils::show_progress(100);
-//             }
-//         }
-//         // retrying for the failed cells
-//         // the second condition is required to check if the failure was real
-//         if (_failed > 0)
-//         {
-//             if (_lines == _total + _rejected + _skipped)
-//             {
-//                 _total += _failed;
-//                 _failed = 0;
-//             }
-//             else
-//             {
-//                 std::string line;
-//                 for (auto &&pos : failed_positions)
-//                 {
-//                     file.seekg(pos);
-//                     std::getline(file, line);
-//                     std::istringstream iss(line);
-//                     vhlle::fcell cell;
-//                     iss >> cell;
-//                     if (!iss.fail())
-//                     {
-//                         _cells.push_back(cell);
-//                         _failed--;
-//                         _total++;
-//                     }
-//                 }
-//             }
-//         }
+    //                     if (!cell.is_spacelike())
+    //                     {
+    //                         local_timelikes++;
+    //                     }
 
-//         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
-//         std::cout << std::endl
-//                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
-//     }
+    //                     if (!reject)
+    //                     {
+    //                         thread_cells.push_back(cell);
+    //                         local_total++;
+    //                     }
+    //                     else
+    //                     {
+    //                         local_rejected++;
+    //                     }
+    //                     local_perc = 100 * ((double)local_counter) / ((double)estimated_line_count);
+    // #pragma omp critical
+    //                     {
+    //                         perc = std::max(perc, local_perc);
+    //                         if (perc > last_perc)
+    //                         {
+    //                             last_perc = perc;
+    //                             utils::show_progress((last_perc > 100) ? 100 : last_perc);
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    // #pragma omp critical
+    //             {
+    //                 _cells.insert(_cells.end(), thread_cells.begin(), thread_cells.end());
+    //                 _total += local_total;
+    //                 _failed += local_failed;
+    //                 _rejected += local_rejected;
+    //                 _timelikes += local_timelikes;
+    //                 _skipped += local_skipped;
+    //                 _lines += local_counter;
+    //                 utils::show_progress(100);
+    //             }
+    //         }
+    //         // retrying for the failed cells
+    //         // the second condition is required to check if the failure was real
+    //         if (_failed > 0)
+    //         {
+    //             if (_lines == _total + _rejected + _skipped)
+    //             {
+    //                 _total += _failed;
+    //                 _failed = 0;
+    //             }
+    //             else
+    //             {
+    //                 std::string line;
+    //                 for (auto &&pos : failed_positions)
+    //                 {
+    //                     file.seekg(pos);
+    //                     std::getline(file, line);
+    //                     std::istringstream iss(line);
+    //                     vhlle::fcell cell;
+    //                     iss >> cell;
+    //                     if (!iss.fail())
+    //                     {
+    //                         _cells.push_back(cell);
+    //                         _failed--;
+    //                         _total++;
+    //                     }
+    //                 }
+    //             }
+    //         }
 
-//     TEST_F(CellTest, Hypersurface_ReadCells_Single_Bin)
-//     {
-//         std::vector<vhlle::fcell> _cells;
-//         const std::string i_file = "./input/beta-70.bin";
+    //         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
+    //         std::cout << std::endl
+    //                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
+    //     }
 
-//         std::ifstream file(i_file);
+    //     TEST_F(CellTest, Hypersurface_ReadCells_Single_Bin)
+    //     {
+    //         std::vector<vhlle::fcell> _cells;
+    //         const std::string i_file = "./input/beta-70.bin";
 
-//         if (!file.is_open())
-//         {
-//             throw std::runtime_error("Input file cannot be opened!");
-//         }
-//         vhlle::fcell cell;
-//         file.seekg(0, std::ios::end);
-//         std::streamsize file_size = file.tellg();
-//         file.seekg(0, std::ios::beg);
-//         int _lines = file_size / cell.size();
-//         _cells.reserve(_lines);
+    //         std::ifstream file(i_file);
 
-//         const int step_size = (int)ceil((double)_lines / 100.0);
+    //         if (!file.is_open())
+    //         {
+    //             throw std::runtime_error("Input file cannot be opened!");
+    //         }
+    //         vhlle::fcell cell;
+    //         file.seekg(0, std::ios::end);
+    //         std::streamsize file_size = file.tellg();
+    //         file.seekg(0, std::ios::beg);
+    //         int _lines = file_size / cell.size();
+    //         _cells.reserve(_lines);
 
-//         int _total = 0;
-//         int _failed = 0;
-//         int _rejected = 0;
-//         int _timelikes = 0;
-//         int _skipped = 0;
-//         int perc = 0;
-//         int last_perc = -1;
-//         int counter = 0;
+    //         const int step_size = (int)ceil((double)_lines / 100.0);
 
-//         while (file)
-//         {
-//             counter++;
-//             bool reject = false;
+    //         int _total = 0;
+    //         int _failed = 0;
+    //         int _rejected = 0;
+    //         int _timelikes = 0;
+    //         int _skipped = 0;
+    //         int perc = 0;
+    //         int last_perc = -1;
+    //         int counter = 0;
 
-//             cell.read(file, hydro::file_format::Binary);
-//             if (file)
-//             {
-//                 if (cell.T() == 0)
-//                 {
-//                     _skipped++;
-//                     continue;
-//                 }
-//                 if (!cell.is_spacelike())
-//                 {
-//                     _timelikes++;
-//                 }
-//                 if (!reject)
-//                 {
-//                     _cells.push_back(cell);
-//                     _total++;
-//                 }
-//                 else
-//                 {
-//                     _rejected++;
-//                 }
+    //         while (file)
+    //         {
+    //             counter++;
+    //             bool reject = false;
 
-//                 perc = 100 * ((double)counter) / ((double)_lines);
+    //             cell.read(file, hydro::file_format::Binary);
+    //             if (file)
+    //             {
+    //                 if (cell.T() == 0)
+    //                 {
+    //                     _skipped++;
+    //                     continue;
+    //                 }
+    //                 if (!cell.is_spacelike())
+    //                 {
+    //                     _timelikes++;
+    //                 }
+    //                 if (!reject)
+    //                 {
+    //                     _cells.push_back(cell);
+    //                     _total++;
+    //                 }
+    //                 else
+    //                 {
+    //                     _rejected++;
+    //                 }
 
-//                 if (perc > last_perc)
-//                 {
-//                     last_perc = perc;
-//                     utils::show_progress((last_perc > 100) ? 100 : last_perc);
-//                 }
-//             }
-//         }
+    //                 perc = 100 * ((double)counter) / ((double)_lines);
 
-//         EXPECT_EQ(_cells.size(), 70);
+    //                 if (perc > last_perc)
+    //                 {
+    //                     last_perc = perc;
+    //                     utils::show_progress((last_perc > 100) ? 100 : last_perc);
+    //                 }
+    //             }
+    //         }
 
-//         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
-//         std::cout << std::endl
-//                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
-//     }
+    //         EXPECT_EQ(_cells.size(), 70);
 
-//     TEST_F(CellTest, Hypersurface_ReadCells_Bin_omp)
-//     {
-//         std::vector<vhlle::fcell> _cells;
-//         const std::string i_file = "./input/beta-70.bin";
+    //         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
+    //         std::cout << std::endl
+    //                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
+    //     }
 
-//         std::vector<std::streampos> file_positions;
-//         std::vector<std::streampos> failed_positions;
-//         std::ifstream file(i_file);
+    //     TEST_F(CellTest, Hypersurface_ReadCells_Bin_omp)
+    //     {
+    //         std::vector<vhlle::fcell> _cells;
+    //         const std::string i_file = "./input/beta-70.bin";
 
-//         if (!file.is_open())
-//         {
-//             throw std::runtime_error("Input file cannot be opened!");
-//         }
+    //         std::vector<std::streampos> file_positions;
+    //         std::vector<std::streampos> failed_positions;
+    //         std::ifstream file(i_file);
 
-//         // Determine chunk positions
-//         file.seekg(0, std::ios::end);
-//         std::streampos file_size = file.tellg();
-//         file.seekg(0, std::ios::beg);
-//         vhlle::fcell empty_cell;
-//         const int estimated_line_count = file_size / empty_cell.size();
-//         const int step_size = (int)ceil((double)estimated_line_count / 100.0);
-//         int threads_count = omp_get_max_threads();
+    //         if (!file.is_open())
+    //         {
+    //             throw std::runtime_error("Input file cannot be opened!");
+    //         }
 
-//         std::streampos chunk_size = file_size / threads_count;
-//         // std::cout << "chunk size = " << chunk_size << std::endl;
-//         for (int i = 0; i < threads_count; ++i)
-//         {
-//             std::streampos start = i * chunk_size;
-//             file_positions.push_back(start);
-//         }
-//         file_positions.push_back(file_size);
+    //         // Determine chunk positions
+    //         file.seekg(0, std::ios::end);
+    //         std::streampos file_size = file.tellg();
+    //         file.seekg(0, std::ios::beg);
+    //         vhlle::fcell empty_cell;
+    //         const int estimated_line_count = file_size / empty_cell.size();
+    //         const int step_size = (int)ceil((double)estimated_line_count / 100.0);
+    //         int threads_count = omp_get_max_threads();
 
-//         int _lines = 0;
-//         int _total = 0;
-//         int _failed = 0;
-//         int _rejected = 0;
-//         int _timelikes = 0;
-//         int _skipped = 0;
-//         int perc = 0;
-//         int last_perc = -1;
+    //         std::streampos chunk_size = file_size / threads_count;
+    //         // std::cout << "chunk size = " << chunk_size << std::endl;
+    //         for (int i = 0; i < threads_count; ++i)
+    //         {
+    //             std::streampos start = i * chunk_size;
+    //             file_positions.push_back(start);
+    //         }
+    //         file_positions.push_back(file_size);
 
-// #pragma omp parallel
-//         {
-//             int tid = omp_get_thread_num();
+    //         int _lines = 0;
+    //         int _total = 0;
+    //         int _failed = 0;
+    //         int _rejected = 0;
+    //         int _timelikes = 0;
+    //         int _skipped = 0;
+    //         int perc = 0;
+    //         int last_perc = -1;
 
-//             int local_total = 0;
-//             int local_failed = 0;
-//             int local_rejected = 0;
-//             int local_timelikes = 0;
-//             int local_skipped = 0;
-//             int local_counter = 0;
-//             int local_perc = 0;
-//             int local_last_perc = -1;
-//             std::ifstream local_file(i_file);
-//             std::vector<vhlle::fcell> thread_cells;
+    // #pragma omp parallel
+    //         {
+    //             int tid = omp_get_thread_num();
 
-//             if (!local_file.is_open())
-//             {
-//                 std::cerr << "Cannot open file " << i_file << " in thread " << tid << std::endl;
-//             }
-//             else
-//             {
-//                 local_file.seekg(file_positions[tid]);
-//                 while (local_file && local_file.tellg() < file_positions[tid + 1])
-//                 {
-//                     // Ensure we do not read beyond the chunk
-//                     if (local_file.tellg() > file_positions[tid + 1])
-//                     {
-//                         break;
-//                     }
+    //             int local_total = 0;
+    //             int local_failed = 0;
+    //             int local_rejected = 0;
+    //             int local_timelikes = 0;
+    //             int local_skipped = 0;
+    //             int local_counter = 0;
+    //             int local_perc = 0;
+    //             int local_last_perc = -1;
+    //             std::ifstream local_file(i_file);
+    //             std::vector<vhlle::fcell> thread_cells;
 
-//                     vhlle::fcell cell;
-//                     cell.read(local_file, hydro::file_format::Binary);
-//                     if (local_file)
-//                     {
-//                         local_counter++;
-//                         bool reject = false;
+    //             if (!local_file.is_open())
+    //             {
+    //                 std::cerr << "Cannot open file " << i_file << " in thread " << tid << std::endl;
+    //             }
+    //             else
+    //             {
+    //                 local_file.seekg(file_positions[tid]);
+    //                 while (local_file && local_file.tellg() < file_positions[tid + 1])
+    //                 {
+    //                     // Ensure we do not read beyond the chunk
+    //                     if (local_file.tellg() > file_positions[tid + 1])
+    //                     {
+    //                         break;
+    //                     }
 
-//                         if (local_file.fail())
-//                         {
-//                             local_failed++;
-// #pragma omp critical
-//                             failed_positions.push_back(local_file.tellg());
-//                             continue;
-//                         }
+    //                     vhlle::fcell cell;
+    //                     cell.read(local_file, hydro::file_format::Binary);
+    //                     if (local_file)
+    //                     {
+    //                         local_counter++;
+    //                         bool reject = false;
 
-//                         if (cell.T() == 0)
-//                         {
-//                             local_skipped++;
-//                             continue;
-//                         }
+    //                         if (local_file.fail())
+    //                         {
+    //                             local_failed++;
+    // #pragma omp critical
+    //                             failed_positions.push_back(local_file.tellg());
+    //                             continue;
+    //                         }
 
-//                         if (!cell.is_spacelike())
-//                         {
-//                             local_timelikes++;
-//                         }
+    //                         if (cell.T() == 0)
+    //                         {
+    //                             local_skipped++;
+    //                             continue;
+    //                         }
 
-//                         if (!reject)
-//                         {
-//                             thread_cells.push_back(cell);
-//                             local_total++;
-//                         }
-//                         else
-//                         {
-//                             local_rejected++;
-//                         }
-//                         local_perc = 100 * ((double)local_counter) / ((double)estimated_line_count);
-// #pragma omp critical
-//                         {
-//                             perc = std::max(perc, local_perc);
-//                             if (perc > last_perc)
-//                             {
-//                                 last_perc = perc;
-//                                 utils::show_progress((last_perc > 100) ? 100 : last_perc);
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-// #pragma omp critical
-//             {
-//                 _cells.insert(_cells.end(), thread_cells.begin(), thread_cells.end());
-//                 _total += local_total;
-//                 _failed += local_failed;
-//                 _rejected += local_rejected;
-//                 _timelikes += local_timelikes;
-//                 _skipped += local_skipped;
-//                 _lines += local_counter;
-//                 utils::show_progress(100);
-//             }
-//         }
-//         // retrying for the failed cells
-//         // the second condition is required to check if the failure was real
-//         if (_failed > 0)
-//         {
-//             if (_lines == _total + _rejected + _skipped)
-//             {
-//                 _total += _failed;
-//                 _failed = 0;
-//             }
-//             else
-//             {
-//                 std::string line;
-//                 for (auto &&pos : failed_positions)
-//                 {
-//                     file.seekg(pos);
-//                     vhlle::fcell cell;
-//                     cell.read(file, hydro::file_format::Binary);
-//                     if (!file.fail())
-//                     {
-//                         _cells.push_back(cell);
-//                         _failed--;
-//                         _total++;
-//                     }
-//                 }
-//             }
-//         }
+    //                         if (!cell.is_spacelike())
+    //                         {
+    //                             local_timelikes++;
+    //                         }
 
-//         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
-//         std::cout << std::endl
-//                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
-//     }
+    //                         if (!reject)
+    //                         {
+    //                             thread_cells.push_back(cell);
+    //                             local_total++;
+    //                         }
+    //                         else
+    //                         {
+    //                             local_rejected++;
+    //                         }
+    //                         local_perc = 100 * ((double)local_counter) / ((double)estimated_line_count);
+    // #pragma omp critical
+    //                         {
+    //                             perc = std::max(perc, local_perc);
+    //                             if (perc > last_perc)
+    //                             {
+    //                                 last_perc = perc;
+    //                                 utils::show_progress((last_perc > 100) ? 100 : last_perc);
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    // #pragma omp critical
+    //             {
+    //                 _cells.insert(_cells.end(), thread_cells.begin(), thread_cells.end());
+    //                 _total += local_total;
+    //                 _failed += local_failed;
+    //                 _rejected += local_rejected;
+    //                 _timelikes += local_timelikes;
+    //                 _skipped += local_skipped;
+    //                 _lines += local_counter;
+    //                 utils::show_progress(100);
+    //             }
+    //         }
+    //         // retrying for the failed cells
+    //         // the second condition is required to check if the failure was real
+    //         if (_failed > 0)
+    //         {
+    //             if (_lines == _total + _rejected + _skipped)
+    //             {
+    //                 _total += _failed;
+    //                 _failed = 0;
+    //             }
+    //             else
+    //             {
+    //                 std::string line;
+    //                 for (auto &&pos : failed_positions)
+    //                 {
+    //                     file.seekg(pos);
+    //                     vhlle::fcell cell;
+    //                     cell.read(file, hydro::file_format::Binary);
+    //                     if (!file.fail())
+    //                     {
+    //                         _cells.push_back(cell);
+    //                         _failed--;
+    //                         _total++;
+    //                     }
+    //                 }
+    //             }
+    //         }
+
+    //         EXPECT_EQ(_lines, _total + _failed + _skipped + _rejected);
+    //         std::cout << std::endl
+    //                   << _lines << " lines " << _total << " saved " << _skipped << " skipped " << _failed << " failed " << _rejected << " rejected." << std::endl;
+    //     }
 
 }

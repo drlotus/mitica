@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "(lldb) Launch",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/test_yield",
+        // "args": ["-i", "input/beta.dat", "-o", "output/test.dat", "-p", "-pn", "lambda"],
+        "cwd": "${workspaceFolder}",
+        "stopOnEntry": false,
+        "preLaunchTask": "build",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "lldb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "miDebuggerPath": "/usr/bin/lldb-mi",  // Adjust the path as needed
+        "logging": {
+          "engineLogging": true
+        }
+      }
+    ]
+  }
+  
