@@ -382,7 +382,7 @@ def v2(file_path, particle_number):
 # USAGE
 #######################
 
-file_path = '/Users/nils/Desktop/Projects/Polarization/Masoud_Integration_script/y_test_for_nils.dat'
+file_path = 'path_to_data_file'
 
 dNdy_histogram = dNdy(file_path)
 dNpTdpT_histogram = dNpTdpT(file_path)
