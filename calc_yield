@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Default input file path
+input_file="input/beta.dat"
+
+# Check if the date parameter is provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 <date_suffix> [input_file_path]"
+    exit 1
+fi
+
+date_suffix=$1
+
+# Check if an input file path is provided
+if [ $# -gt 1 ]; then
+    input_file=$2
+fi
+
+# Define an associative array for particle names with long names as keys
+declare -A particles=(
+    [LAMBDA]="lambda"
+    [LAMBDA_BAR]="lambdabar"
+    [PION_PLUS]="pi+"
+    [PION_MINUS]="pi-"
+    [PION_ZERO]="pi0"
+    [KAON_PLUS]="k+"
+    [KAON_MINUS]="k-"
+    [KAON_ZERO]="k0"
+    [ETA]="eta"
+    [PROTON]="p"
+    [NEUTRON]="n"
+)
+
+# Loop through the particle long names and run the calc program with appropriate arguments
+for particle_long_name in "${!particles[@]}"; do
+    particle_short_name=${particles["$particle_long_name"]}
+    # Use the short names safely as arguments
+    ./build/calc -i "$input_file" -o "output/yield_${particle_long_name}_${date_suffix}.dat" -y -pn "$particle_short_name"
+done
