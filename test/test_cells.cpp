@@ -205,6 +205,29 @@ namespace
         EXPECT_EQ(surface.total(), 751493);
     }
 
+
+
+    TEST_F(CellTest, Test_Test_Surface_du)
+    {
+        hydro::hypersurface<vhlle::fcell> surface;
+        surface.read("./input/beta-60.dat", utils::accept_modes::AcceptAll, false, hydro::file_format::Text);
+        print(surface);
+        for (auto &cell : surface.data())
+        {
+            auto rel_error = 0.0;
+            for (size_t i = 0; i < 4; i++)
+            {
+                for (size_t j = 0; j < 4; j++)
+                {
+                    rel_error += utils::relative_error(cell.dbeta_ll()[i][j] * cell.T(), cell.du_ll()[i][j]);
+                }
+            }
+            rel_error = rel_error / 16.0;
+            ASSERT_TRUE(rel_error < abs_error) << "error: " << rel_error * 100.0 << "%" << std::endl;
+        }
+        
+    }
+
     // Old development codes
 
     //     TEST_F(CellTest, Hypersurface_ReadCells_Single_Text)
