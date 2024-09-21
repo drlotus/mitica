@@ -124,6 +124,7 @@ googlemock/gtest
 
 /figs
 /input
+/output
 /obj
 /Tb
 /_deps
@@ -137,3 +138,4 @@ googlemock/gtest
 /output
 /.vscode
 *.nb
+/myvenv

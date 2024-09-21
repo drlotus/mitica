@@ -5,11 +5,12 @@
 #pragma once
 namespace powerhouse
 {
-    class examiner : public powerhouse::I_calculator<vhlle::fcell, powerhouse::pdg_particle,  powerhouse::exam_output<vhlle::fcell>>
+    class examiner : public powerhouse::I_calculator<vhlle::fcell, powerhouse::pdg_particle, powerhouse::exam_output<vhlle::fcell>>
     {
-        private :
+    private:
         int _count;
-       public:
+
+    public:
         examiner() {}
 
         ~examiner() override {}
@@ -76,6 +77,9 @@ namespace powerhouse
 
             previous_step.th_shear_2_sum += cell.tshear_norm();
 
+            auto udotn = cell.four_vel() * cell.dsigma() / sqrt(abs(cell.normal_sq()));
+            previous_step.u_dot_n += udotn * udotn;
+
             // check decomposition
 
             auto rhs = utils::add_tensors({cell.four_vel().to_lower() & cell.acceleration().to_lower(),
@@ -98,35 +102,65 @@ namespace powerhouse
             std::cout << std::endl
                       << "Report:" << std::endl;
 
-            std::cout << "shear tensor\t sqrt(<sigma^2>) = " << utils::sign(data.sigma2_sum) * utils::hbarC * sqrt(abs(data.sigma2_sum) / _count)
-                      << "GeV\tnonzero trace = " << data.tr_sigma << "\tnot transverse = " << data.longi_sigma << std::endl;
-            std::cout << "expansion\t avg theta = " << utils::hbarC * data.theta_sum / _count
-                      << "GeV\t (theta < 0) count = " << data.neg_theta << std::endl;
-            std::cout << "acceleration\t sqrt(<a^2>) = " << utils::sign(data.a2_sum) * utils::hbarC * sqrt(abs(data.a2_sum) / _count)
+            std::cout << "sqrt(<(u.n)^2>) = "
+                      << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                      << data.u_dot_n / _count << std::endl;
+
+            std::cout << "shear tensor\t sqrt(<sigma^2>) = " << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                                                                                                    << utils::sign(data.sigma2_sum) * utils::hbarC * sqrt(abs(data.sigma2_sum) / _count)
+                                                                                                    << "GeV\tnonzero trace = " << data.tr_sigma << "\tnot transverse = " << data.longi_sigma << std::endl;
+            std::cout << "expansion\t avg theta = " << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                      << utils::hbarC * data.theta_sum / _count
+                      << "GeV\t (theta < 0) count = " << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                      << data.neg_theta << std::endl;
+            std::cout << "acceleration\t sqrt(<a^2>) = " << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                      << utils::sign(data.a2_sum) * utils::hbarC * sqrt(abs(data.a2_sum) / _count)
                       << "GeV\t timelike a count = " << data.timelike_a << std::endl;
-            std::cout << "fluid vorticity\t sqrt(<omega^2>) = " << utils::sign(data.fvort2_sum) * utils::hbarC * sqrt(abs(data.fvort2_sum) / _count)
+            std::cout << "fluid vorticity\t sqrt(<omega^2>) = "
+                      << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << utils::sign(data.fvort2_sum) * utils::hbarC * sqrt(abs(data.fvort2_sum) / _count)
                       << "GeV\t timelike omega count = " << data.timelike_omega << std::endl;
-            std::cout << "thermal vorticity\t sqrt(<varpi^2>) = " << utils::sign(data.th_vort_2_sum) * sqrt(abs(data.th_vort_2_sum / _count))
+            std::cout << "thermal vorticity\t sqrt(<varpi^2>) = "
+                      << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << utils::sign(data.th_vort_2_sum) * sqrt(abs(data.th_vort_2_sum / _count))
                       << std::endl;
-            std::cout << "thermal shear\t sqrt(<xi^2>) = " << utils::sign(data.th_shear_2_sum) * sqrt(data.th_shear_2_sum / _count)
+            std::cout << "thermal shear\t sqrt(<xi^2>) = " << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                      << utils::sign(data.th_shear_2_sum) * sqrt(data.th_shear_2_sum / _count)
                       << std::endl;
-            std::cout << "div.beta\t avg = " << data.btheta_sum / _count << std::endl;
+            std::cout << "div.beta\t avg = " << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed
+                      << data.btheta_sum / _count << std::endl;
             std::cout << "failed du decomp = " << data.decomp_failed << std::endl;
         }
 
         void pre_write(std::ostream &output) override
         {
-            output
-                << "# tau,x,y,eta,theta,sqrt(sigma^2),sqrt(-omega^2),div.beta,sqrt(-varpi^2),sqrt(xi^2),sqrt(-a^2)" << std::endl;
+            output << "#" << std::setw(utils::DOUBLE_WIDTH) << "tau"
+                   << std::setw(utils::DOUBLE_WIDTH) << "x"
+                   << std::setw(utils::DOUBLE_WIDTH) << "y"
+                   << std::setw(utils::DOUBLE_WIDTH) << "eta"
+                   << std::setw(utils::DOUBLE_WIDTH) << "u.n"
+                   << std::setw(utils::DOUBLE_WIDTH) << "|theta|"
+                   << std::setw(utils::DOUBLE_WIDTH) << "|sigma|"
+                   << std::setw(utils::DOUBLE_WIDTH) << "|tvort|"
+                   << std::setw(utils::DOUBLE_WIDTH) << "|tshear|"
+                   << std::setw(utils::DOUBLE_WIDTH) << "|acc|"
+                   << std::endl;
         }
 
         void write(std::ostream &output, vhlle::fcell *cell_ptr, powerhouse::exam_output<vhlle::fcell> *final_output) override
         {
+
             auto cell = *cell_ptr;
-            output << cell.tau() << "," << cell.x() << "," << cell.y() << "," << cell.eta()
-                   << "," << cell.theta()
-                   << "," << cell.sigma_norm() << "," << cell.fvort_norm() << "," << cell.b_theta()
-                   << "," << cell.tvort_norm() << "," << cell.tshear_norm() << "," << cell.acc_norm()
+            auto udotn = cell.four_vel() * cell.dsigma() / sqrt(abs(cell.normal_sq()));
+
+            output << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.tau() << " "
+                   << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.x() << " "
+                   << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.y() << " "
+                   << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.eta() << " "
+                   << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << udotn << " "
+                   << std::setw(utils::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.theta() << " "
+                   << std::setw(utils ::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.sigma_norm() << " "
+                   << std::setw(utils ::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.tvort_norm() << " "
+                   << std::setw(utils ::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.tshear_norm() << " "
+                   << std::setw(utils ::DOUBLE_WIDTH) << std::setprecision(utils::DOUBLE_PRECISION) << std::fixed << cell.acc_norm() << " "
                    << std::endl;
         }
     };
