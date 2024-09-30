@@ -23,7 +23,7 @@ namespace powerhouse
 
     public:
         leq_du_polarization_calculator() {}
-
+        
         void prepare_cell(vhlle::fcell &cell) override
         {
             auto _1 = cell.asym_du_ll();
