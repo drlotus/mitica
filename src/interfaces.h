@@ -1111,6 +1111,7 @@ namespace powerhouse
         int timelike_omega = 0;
         double th_shear_2_sum = 0.0;
         double th_vort_2_sum = 0.0;
+        double u_dot_n = 0.0;
         int decomp_failed = 0;
         ~exam_output() override {}
         void accumulate(powerhouse::I_output<C> *output)
@@ -1132,6 +1133,7 @@ namespace powerhouse
                 th_shear_2_sum += other->th_shear_2_sum;
                 th_vort_2_sum += other->th_vort_2_sum;
                 decomp_failed += other->decomp_failed;
+                u_dot_n += other->u_dot_n;
             }
             else
             {
@@ -1154,6 +1156,7 @@ namespace powerhouse
             th_shear_2_sum += rhs.th_shear_2_sum;
             th_vort_2_sum += rhs.th_vort_2_sum;
             decomp_failed += rhs.decomp_failed;
+            u_dot_n += rhs.u_dot_n;
             return *this;
         }
     };
