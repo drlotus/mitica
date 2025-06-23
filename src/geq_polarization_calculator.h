@@ -77,7 +77,7 @@ namespace powerhouse
             const auto p = previous_step.p;
             const auto p_l = p.to_lower();
 
-            const static auto one_over_two_m = 1.0 / (2.0 * mass);
+            const static auto one_over_8_m = utils::hbarC / (8.0 * mass);
 
             for (const auto &index_set : utils::non_zero_levi_indices())
             {
@@ -88,8 +88,6 @@ namespace powerhouse
                 int levi = index_set[4];
                 theta_vector[mu] += levi * p_l[sig] * cell.thermal_vort_ll()[nu][rho];
             }
-
-            const auto theta_sqrt = sqrt(-theta_vector.norm_sq());
 
             const auto T = cell.T();
 
@@ -104,7 +102,7 @@ namespace powerhouse
 
             previous_step.dNd3p += den;
 
-            auto scalar_factor = den / theta_sqrt * aux(spin, pdotu, T, total_mu, theta_sqrt);
+            auto scalar_factor =  one_over_8_m * f * (1.- stat * f);
 
             previous_step.vorticity_term += theta_vector * scalar_factor;
         }

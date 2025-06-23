@@ -394,7 +394,7 @@ if __name__ == "__main__":
     print(f"N={n}")
     v1_pT_histogram = v1(data, n)
 
-    # nils_flow(data, n, 2)
+    # ngit log --oneline --graphils_flow(data, n, 2)
 
     v2_pT_histogram = v2(data, n)
 

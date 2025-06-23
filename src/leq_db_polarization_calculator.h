@@ -78,6 +78,9 @@ namespace powerhouse
             const auto p = previous_step.p;
             const auto p_l = p.to_lower();
 
+            const static auto one_over_8_m = utils::hbarC / (8.0 * mass);
+            const static auto one_over_4_m = 2 * one_over_8_m;
+
             const auto T = cell.T();
 
             const auto pdotdsigma = p * cell.dsigma();
@@ -87,11 +90,8 @@ namespace powerhouse
 
             const double f = 1.0 / (exp(exponent) + stat);
 
-            static const auto dim_factor = 1.0; //  if utils::hbarC  already taken into account
-
-            const auto den_factor = phase_space * pdotdsigma * f;
-            const static auto theta_factor = dim_factor / (2.0 * mass);
-            const auto shear_factor = -den_factor * (spin / 3) * (spin + 1) * (1. - stat * f) * dim_factor / (2.0 * mass * p[0]);
+            const auto den_factor = pdotdsigma * f;
+            const auto shear_factor = -den_factor * (spin / 3) * (spin + 1) * (1. - stat * f) / (2.0 * mass * p[0]);
             const auto tvort = cell.thermal_vort_ll();
             const auto tshear = cell.thermal_shear_ll();
             for (const auto &index_set : utils::non_zero_levi_indices())
@@ -101,7 +101,7 @@ namespace powerhouse
                 int rho = index_set[2];
                 int sig = index_set[3];
                 int levi = index_set[4];
-                theta_vector[mu] += levi * p_l[sig] * tvort[nu][rho] * theta_factor;
+                theta_vector[mu] += levi * p_l[sig] * tvort[nu][rho];
                 if (nu == 0)
                 {
                     for (size_t tau = 0; tau < 4; tau++)
@@ -111,11 +111,9 @@ namespace powerhouse
                 }
             }
 
-            const auto theta_sqrt = sqrt(-theta_vector.norm_sq());
-
             previous_step.dNd3p += den_factor;
 
-            auto vorticity_factor = den_factor / theta_sqrt * aux(spin, pdotu, T, total_mu, theta_sqrt);
+            auto vorticity_factor = one_over_8_m * f * (1. - stat * f);
 
             previous_step.vorticity_term += theta_vector * vorticity_factor;
             previous_step.shear_term += shear_vector;

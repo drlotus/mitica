@@ -23,7 +23,7 @@ namespace powerhouse
 
     public:
         leq_du_polarization_calculator() {}
-        
+
         void prepare_cell(vhlle::fcell &cell) override
         {
             auto _1 = cell.asym_du_ll();
@@ -78,7 +78,11 @@ namespace powerhouse
             const auto p = previous_step.p;
             const auto p_l = p.to_lower();
 
+            const static auto one_over_8_m = utils::hbarC / (8.0 * mass);
+            const static auto one_over_4_m = 2 * one_over_8_m;
+
             const auto T = cell.T();
+            const auto beta = 1. / T;
 
             const auto pdotdsigma = p * cell.dsigma();
             const auto pdotu = p * cell.four_vel();
@@ -87,13 +91,10 @@ namespace powerhouse
 
             const double f = 1.0 / (exp(exponent) + stat);
 
-            static const auto dim_factor = 1.0; //  if utils::hbarC  already taken into account
-
-            const auto den_factor = phase_space * pdotdsigma * f;
-            const static auto theta_factor = dim_factor / (2.0 * mass);
-            const auto shear_factor = -den_factor * (spin / 3) * (spin + 1) * (1. - stat * f) * dim_factor / (2.0 * mass * p[0]);
-            const auto tvort = utils::s_product(cell.asym_du_ll(), - utils::hbarC / T);
-            const auto tshear = utils::s_product(cell.sym_du_ll(), utils::hbarC / T);
+            const auto den_factor = pdotdsigma * f;
+            const auto shear_factor = -den_factor * (spin / 3) * (spin + 1) * (1. - stat * f) / (2.0 * mass * p[0]);
+            const auto vort = cell.asym_du_ll();
+            const auto shear = cell.sym_du_ll();
             for (const auto &index_set : utils::non_zero_levi_indices())
             {
                 int mu = index_set[0];
@@ -101,21 +102,19 @@ namespace powerhouse
                 int rho = index_set[2];
                 int sig = index_set[3];
                 int levi = index_set[4];
-                theta_vector[mu] += levi * p_l[sig] * tvort[nu][rho] * theta_factor;
+                theta_vector[mu] += levi * p_l[sig] * beta * vort[nu][rho];
                 if (nu == 0)
                 {
                     for (size_t tau = 0; tau < 4; tau++)
                     {
-                        shear_vector[mu] += levi * shear_factor * p_l[sig] * p[tau] * tshear[tau][rho];
+                        shear_vector[mu] += levi * shear_factor * p_l[sig] * p[tau] * beta * shear[tau][rho];
                     }
                 }
             }
 
-            const auto theta_sqrt = sqrt(-theta_vector.norm_sq());
-
             previous_step.dNd3p += den_factor;
 
-            auto vorticity_factor = den_factor / theta_sqrt * aux(spin, pdotu, T, total_mu, theta_sqrt);
+            auto vorticity_factor = one_over_8_m * f * (1. - stat * f);
 
             previous_step.vorticity_term += theta_vector * vorticity_factor;
             previous_step.shear_term += shear_vector;
@@ -148,27 +147,24 @@ namespace powerhouse
             output << row->vorticity_term << row->shear_term << std::endl;
         }
 
-
-
-    constexpr double aux(double spin, double pu, double T, double mutot, double abs_theta)
-    {
-        double num = 0;
-        double den = 1e-20;
-
-        for (double k = -spin; k <= spin; k++)
+        constexpr double aux(double spin, double pu, double T, double mutot, double abs_theta)
         {
-            num += k / (exp((pu - mutot) / T - k * abs_theta) + stat);
-            den += 1 / (exp((pu - mutot) / T - k * abs_theta) + stat);
+            double num = 0;
+            double den = 1e-20;
+
+            for (double k = -spin; k <= spin; k++)
+            {
+                num += k / (exp((pu - mutot) / T - k * abs_theta) + stat);
+                den += 1 / (exp((pu - mutot) / T - k * abs_theta) + stat);
+            }
+
+            if (num / den != num / den)
+            {
+                throw std::runtime_error("NaN in aux_exact_polarization!");
+            }
+
+            return num / den;
         }
-
-        if (num / den != num / den)
-        {
-            throw std::runtime_error("NaN in aux_exact_polarization!");
-        }
-
-        return num / den;
-    }
-
     };
 
     double leq_du_polarization_calculator::mass;
