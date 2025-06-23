@@ -1,0 +1,202 @@
+const int estimated_line_count = t_estimated_line_count;
+        const int step_size = estimated_line_count / 100 - 1;
+
+        std::vector<std::streampos> file_positions;
+        std::vector<std::streampos> failed_positions;
+        std::ifstream file(i_file);
+
+        if (!file.is_open())
+        {
+            throw std::runtime_error("Input file cannot be opened!");
+        }
+
+        // Determine chunk positions
+        file.seekg(0, std::ios::end);
+        std::streampos file_size = file.tellg();
+        file.seekg(0, std::ios::beg);
+
+#ifdef _OPENMP
+        int threads_count = omp_get_max_threads();
+#else
+        int threads_count = 1;
+        _lines = std::count(std::istreambuf_iterator<char>(file),
+                            std::istreambuf_iterator<char>(), '\n');
+        file_size = _lines;
+        file.seekg(0, std::ios::beg);
+#endif
+
+        std::streampos chunk_size = file_size / threads_count;
+        for (int i = 0; i < threads_count; ++i)
+        {
+            std::streampos start = i * chunk_size;
+            file_positions.push_back(start);
+        }
+        file_positions.push_back(file_size);
+
+        _total = 0;
+        _failed = 0;
+        _rejected = 0;
+        _timelikes = 0;
+        _skipped = 0;
+        int perc = 0;
+        int last_perc = -1;
+
+#ifdef _OPENMP
+#pragma omp parallel
+        {
+            int tid = omp_get_thread_num();
+#else
+        int tid = 0;
+#endif
+
+            int local_total = 0;
+            int local_failed = 0;
+            int local_rejected = 0;
+            int local_timelikes = 0;
+            int local_skipped = 0;
+            int local_counter = 0;
+            int local_perc = 0;
+            int local_last_perc = -1;
+            std::ifstream local_file(i_file);
+            std::vector<C> thread_cells;
+
+            if (!local_file.is_open())
+            {
+                std::cerr << "Cannot open file " << i_file << " in thread " << tid << std::endl;
+            }
+            else
+            {
+#ifdef _OPENMP
+                local_file.seekg(file_positions[tid]);
+#endif
+#ifdef _OPENMP
+                while (local_file.tellg() < file_positions[tid + 1] && std::getline(local_file, line))
+                {
+                    // Ensure we do not read beyond the chunk
+                    if (local_file.tellg() > file_positions[tid + 1])
+                    {
+                        break;
+                    }
+#else
+            while (std::getline(local_file, line))
+            {
+#endif
+
+                    local_counter++;
+                    bool reject = false;
+                    if (format == file_format::Text)
+                    {
+
+                        std::string line;
+
+                        if (line.empty() || line[0] == '#')
+                        {
+                            local_skipped++;
+                            continue;
+                        }
+
+                        std::istringstream iss(line);
+                        C cell;
+                        iss >> cell;
+                        if (iss.fail())
+                        {
+                            local_failed++;
+#ifdef _OPENMP
+#pragma omp critical
+#endif
+                            failed_positions.push_back(local_file.tellg());
+                            continue;
+                        }
+                    }
+
+                    if (!cell.is_spacelike())
+                    {
+                        if (mode == utils::accept_modes::RejectTimelike)
+                        {
+                            reject = true;
+                        }
+                        local_timelikes++;
+                    }
+
+                    if (mode == utils::accept_modes::RejectNegativeDuDSigma && (cell.u_dot_n() < 0))
+                    {
+                        reject = true;
+                    }
+                    if (!reject)
+                    {
+                        thread_cells.push_back(cell);
+                        local_total++;
+                    }
+                    else
+                    {
+                        local_rejected++;
+                    }
+                    local_perc = 100 * ((double)local_counter) / ((double)estimated_line_count);
+
+#ifdef _OPENMP
+#pragma omp critical
+                    {
+#endif
+                        if (!quiet)
+                        {
+                            perc = std::max(perc, local_perc);
+                            if (perc > last_perc)
+                            {
+                                last_perc = perc;
+                                utils::show_progress((last_perc > 100) ? 100 : last_perc);
+                            }
+                        }
+#ifdef _OPENMP
+                    }
+#endif
+                }
+            }
+
+#ifdef _OPENMP
+#pragma omp critical
+#endif
+            {
+                _cells.insert(_cells.end(), thread_cells.begin(), thread_cells.end());
+                _total += local_total;
+                _failed += local_failed;
+                _rejected += local_rejected;
+                _timelikes += local_timelikes;
+                _skipped += local_skipped;
+                _lines += local_counter;
+                if (!quiet)
+                    utils::show_progress(100);
+            }
+
+#ifdef _OPENMP
+        }
+#endif
+        // retrying for the failed cells
+        // the second condition is required to check if the failure was real
+        if (_failed > 0)
+        {
+            if (_lines == _total + _rejected + _skipped)
+            {
+                _total += _failed;
+                _failed = 0;
+            }
+            else
+            {
+                std::string line;
+                for (auto &&pos : failed_positions)
+                {
+                    file.seekg(pos);
+                    std::getline(file, line);
+                    std::istringstream iss(line);
+                    C cell;
+                    iss >> cell;
+                    if (!iss.fail())
+                    {
+                        _cells.push_back(cell);
+                        _failed--;
+                        _total++;
+                    }
+                }
+            }
+        }
+        if (!quiet)
+            std::cout << std::endl;
